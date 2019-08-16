@@ -9,11 +9,13 @@ namespace Player
         [Header("Movement")]
         [SerializeField] private float _movementSpeed = 250;
         [SerializeField] private float _linearDrag = 50;
+        [SerializeField] private float _linearDragThreasholdVelocity = 0.5f;
 
         [Header("Jump")]
         [SerializeField] private float _jumpVelocity = 7;
         [SerializeField] private float _fallMultiplier = 5f;
         [SerializeField] private float _lowJumpMultiplier = 2;
+        [SerializeField] private float _jumpDecelearationRate = 10;
 
         [Header("Dash")]
         [SerializeField] private float _dashSpeed = 500f;
@@ -77,9 +79,11 @@ namespace Player
 
         private void HandleJump()
         {
-            if (Input.GetKeyDown(ControlConstants.Jump) && !_jumped)
+            if (Input.GetButtonDown(ControlConstants.JumpButton) && !_jumped && _playerCollision.IsOnGround)
             {
+                _playerRb.drag = 0;
                 _playerRb.velocity = new Vector2(_playerRb.velocity.x, _jumpVelocity);
+
                 _jumped = true;
 
                 OnPlayerJumped?.Invoke();
@@ -87,11 +91,28 @@ namespace Player
 
             if (_playerRb.velocity.y < 0)
             {
+                if (_playerRb.velocity.y < _linearDragThreasholdVelocity)
+                {
+                    _playerRb.drag = 0;
+                }
+
                 _playerRb.velocity += Time.deltaTime * Physics2D.gravity.y * (_fallMultiplier - 1) * Vector2.up;
             }
-            else if (_playerRb.velocity.y > 0 && !Input.GetKey(ControlConstants.Jump))
+            else if (_playerRb.velocity.y > 0)
             {
-                _playerRb.velocity += Time.deltaTime * Physics2D.gravity.y * (_lowJumpMultiplier - 1) * Vector2.up;
+                if (_playerRb.velocity.y > _linearDragThreasholdVelocity)
+                {
+                    _playerRb.drag = 0;
+                }
+
+                if (!Input.GetButton(ControlConstants.JumpButton))
+                {
+                    _playerRb.velocity += Time.deltaTime * Physics2D.gravity.y * (_lowJumpMultiplier - 1) * Vector2.up;
+                }
+                else
+                {
+                    _playerRb.velocity -= Time.deltaTime * _jumpDecelearationRate * Vector2.up;
+                }
             }
         }
 
@@ -99,7 +120,7 @@ namespace Player
 
         private void HandleDash()
         {
-            if (_dashUsed || !Input.GetKeyDown(ControlConstants.Dash))
+            if (_dashUsed || !Input.GetButtonDown(ControlConstants.DashButton))
             {
                 return;
             }

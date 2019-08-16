@@ -610,9 +610,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movementSpeed: 500
   _linearDrag: 50
-  _jumpVelocity: 7
-  _fallMultiplier: 7
-  _lowJumpMultiplier: 3
+  _linearDragThreasholdVelocity: 0.1
+  _jumpVelocity: 14
+  _fallMultiplier: 10
+  _lowJumpMultiplier: 8
+  _jumpDecelearationRate: 20
   _dashSpeed: 50
   _dashEffectTime: 0.1
 --- !u!114 &1527598181
