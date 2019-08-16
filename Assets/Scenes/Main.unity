@@ -611,6 +611,7 @@ MonoBehaviour:
   _movementSpeed: 500
   _linearDrag: 50
   _linearDragThreasholdVelocity: 0.1
+  _playerSprite: {fileID: 854505168}
   _jumpVelocity: 14
   _fallMultiplier: 10
   _lowJumpMultiplier: 8
