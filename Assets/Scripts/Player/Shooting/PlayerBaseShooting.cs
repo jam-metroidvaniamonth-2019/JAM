@@ -18,6 +18,7 @@ namespace Player.Shooting
         [SerializeField] private float _timeSlowAmount = 0.3f;
 
         [Header("Bullet")]
+        [SerializeField] private float _shotWaitTime = 0.5f;
         [SerializeField] private GameObject _bulletObject;
         [SerializeField] private Transform _bulletHolder;
         [SerializeField] private Transform _shootingPoint;
@@ -26,11 +27,17 @@ namespace Player.Shooting
         private Transform _shootDirectionDisplay;
         private SpriteRenderer _shootDirectionDisplayRenderer;
 
-        // Controls
+        // Shooting Status Controls
+        private float _timeBeforeLastShot;
         private float _timeSlowTimer;
         private bool _timeSlowFired;
         private float _autoShootTimer;
         private bool _triggerHeldDown;
+
+        // These are required as the Right Trigger is detected
+        // as an axis and we need to convert it into a button
+        private float _currentRightTriggerState;
+        private bool _rightTriggerStateChanged;
 
         public delegate void TimeSlowActive();
         public TimeSlowActive OnTimeSlowActive;
@@ -47,12 +54,16 @@ namespace Player.Shooting
 
         private void Update()
         {
-            if (Input.GetButtonDown(ControlConstants.Shoot) || Input.GetMouseButtonDown(0))
+            _timeBeforeLastShot += Time.deltaTime;
+
+            UpdateRightTriggerState();
+
+            if ((_currentRightTriggerState == -1 && _rightTriggerStateChanged) || Input.GetMouseButtonDown(0))
             {
                 SetupBulletShooting();
             }
 
-            if ((Input.GetButtonUp(ControlConstants.Shoot) || Input.GetMouseButtonUp(0)) && _triggerHeldDown)
+            if (((_currentRightTriggerState == 0 && _rightTriggerStateChanged) || Input.GetMouseButtonUp(0)) && _triggerHeldDown)
             {
                 ShootBullet();
             }
@@ -62,7 +73,7 @@ namespace Player.Shooting
             {
 
                 _timeSlowTimer -= Time.deltaTime;
-                _autoShootTimer -= Time.deltaTime;
+                _autoShootTimer -= Time.deltaTime / Time.timeScale;
 
                 if (_timeSlowTimer <= 0)
                 {
@@ -131,6 +142,11 @@ namespace Player.Shooting
 
         private void SetupBulletShooting()
         {
+            if (_timeBeforeLastShot < _shotWaitTime)
+            {
+                return;
+            }
+
             _triggerHeldDown = true;
             _timeSlowTimer = _timeSlowActiveWait;
             _autoShootTimer = _autoShootWait;
@@ -140,6 +156,7 @@ namespace Player.Shooting
         {
             _triggerHeldDown = false;
             _timeSlowFired = false;
+            _timeBeforeLastShot = 0;
 
             GameObject bulletInstance = Instantiate(_bulletObject, _shootingPoint.position, Quaternion.identity);
 
@@ -152,6 +169,28 @@ namespace Player.Shooting
             bulletInstance.transform.SetParent(_bulletHolder);
 
             Time.timeScale = 1;
+        }
+
+        #endregion
+
+        #region Trigger To Button Conversion
+
+        // Only Handle Right Trigger
+        private void UpdateRightTriggerState()
+        {
+            _rightTriggerStateChanged = false;
+            float triggerActiveState = Input.GetAxis(ControlConstants.Shoot);
+
+            if (triggerActiveState != 0 && triggerActiveState != -1)
+            {
+                return;
+            }
+
+            if (_currentRightTriggerState != triggerActiveState)
+            {
+                _currentRightTriggerState = triggerActiveState;
+                _rightTriggerStateChanged = true;
+            }
         }
 
         #endregion
