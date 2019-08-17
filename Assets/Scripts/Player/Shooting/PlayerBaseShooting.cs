@@ -142,11 +142,6 @@ namespace Player.Shooting
 
         private void SetupBulletShooting()
         {
-            if (_timeBeforeLastShot < _shotWaitTime)
-            {
-                return;
-            }
-
             _triggerHeldDown = true;
             _timeSlowTimer = _timeSlowActiveWait;
             _autoShootTimer = _autoShootWait;
@@ -156,6 +151,13 @@ namespace Player.Shooting
         {
             _triggerHeldDown = false;
             _timeSlowFired = false;
+            Time.timeScale = 1;
+
+            if (_timeBeforeLastShot < _shotWaitTime)
+            {
+                return;
+            }
+
             _timeBeforeLastShot = 0;
 
             GameObject bulletInstance = Instantiate(_bulletObject, _shootingPoint.position, Quaternion.identity);
@@ -167,8 +169,6 @@ namespace Player.Shooting
 
             bulletInstance.GetComponent<Rigidbody2D>().velocity = launchSpeed * launchDirection.normalized;
             bulletInstance.transform.SetParent(_bulletHolder);
-
-            Time.timeScale = 1;
         }
 
         #endregion
