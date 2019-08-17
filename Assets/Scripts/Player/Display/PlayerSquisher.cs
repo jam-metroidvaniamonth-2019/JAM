@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Player.Movement;
+using UnityEngine;
 
-namespace Player
+namespace Player.Display
 {
     public class PlayerSquisher : MonoBehaviour
     {

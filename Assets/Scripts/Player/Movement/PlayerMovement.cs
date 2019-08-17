@@ -2,7 +2,7 @@
 using UnityEngine;
 using Utils;
 
-namespace Player
+namespace Player.Movement
 {
     public class PlayerMovement : MonoBehaviour
     {
@@ -10,6 +10,7 @@ namespace Player
         [SerializeField] private float _movementSpeed = 250;
         [SerializeField] private float _linearDrag = 50;
         [SerializeField] private float _linearDragThreasholdVelocity = 0.5f;
+        [SerializeField] private SpriteRenderer _playerSprite;
 
         [Header("Jump")]
         [SerializeField] private float _jumpVelocity = 7;
@@ -60,6 +61,8 @@ namespace Player
 
         #region Movement
 
+        #region Horizontal Movement
+
         private void HandleHorizontalMovement()
         {
             float moveX = Input.GetAxis(ControlConstants.HorizontalAxis);
@@ -75,7 +78,26 @@ namespace Player
             }
 
             _playerRb.velocity = new Vector2(_movementSpeed * moveX * Time.deltaTime, _playerRb.velocity.y);
+            UpdateSpriteBasedOnVelocity();
         }
+
+        private void UpdateSpriteBasedOnVelocity()
+        {
+            // Switch Direction based on Movement
+            // Can be moved into a separate script
+            if (_playerRb.velocity.x < 0)
+            {
+                _playerSprite.flipX = true;
+            }
+            else if (_playerRb.velocity.x > 0)
+            {
+                _playerSprite.flipX = false;
+            }
+        }
+
+        #endregion
+
+        #region Jump
 
         private void HandleJump()
         {
@@ -116,6 +138,8 @@ namespace Player
             }
         }
 
+        #endregion
+
         #region Dash Movement
 
         private void HandleDash()
@@ -133,6 +157,11 @@ namespace Player
 
         private void Dash(float xDirection, float yDirection)
         {
+            if (xDirection == 0 && yDirection == 0)
+            {
+                xDirection = _playerSprite.flipX ? -1 : 1;
+            }
+
             _playerRb.velocity = Vector2.zero;
             Vector2 direction = new Vector2(xDirection, yDirection);
 
