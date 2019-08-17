@@ -13,8 +13,9 @@ namespace Player.Shooting
 
         [Header("Extra Controls")]
         [SerializeField] private float _rotationOffset = 90;
-        [SerializeField] private float _timeSlowActiveWait = 0.5f;
+        [SerializeField] private float _timeSlowActiveWait = 0.2f;
         [SerializeField] private float _autoShootWait = 3f;
+        [SerializeField] private float _timeSlowAmount = 0.3f;
 
         [Header("Bullet")]
         [SerializeField] private GameObject _bulletObject;
@@ -123,7 +124,9 @@ namespace Player.Shooting
             }
 
             OnTimeSlowActive?.Invoke();
+
             _timeSlowFired = true;
+            Time.timeScale = _timeSlowAmount;
         }
 
         private void SetupBulletShooting()
@@ -146,8 +149,9 @@ namespace Player.Shooting
             Vector2 launchDirection = new Vector2(xVelocity, yVelocity);
 
             bulletInstance.GetComponent<Rigidbody2D>().velocity = launchSpeed * launchDirection.normalized;
-
             bulletInstance.transform.SetParent(_bulletHolder);
+
+            Time.timeScale = 1;
         }
 
         #endregion

@@ -662,8 +662,9 @@ MonoBehaviour:
   _playerTransform: {fileID: 1527598177}
   _mainCamera: {fileID: 519420031}
   _rotationOffset: 90
-  _timeSlowActiveWait: 0.5
+  _timeSlowActiveWait: 0.3
   _autoShootWait: 3
+  _timeSlowAmount: 0.3
   _bulletObject: {fileID: 9094691206825400465, guid: c18700d619899f745ae7e54f996f7905,
     type: 3}
   _bulletHolder: {fileID: 2139584492}
