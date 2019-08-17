@@ -7,6 +7,12 @@ namespace Utils
         // Axis
         public const string HorizontalAxis = "Horizontal";
         public const string VerticalAxis = "Vertical";
+        public const string HorizontalShootAxis = "HorizontalShoot";
+        public const string VerticalShootAxis = "VerticalShoot";
+
+        // Mouse Controls
+        public const string MouseX = "Mouse X";
+        public const string MouseY = "Mouse Y";
 
         // Buttons
         public const string JumpButton = "Jump";

@@ -2,7 +2,7 @@
 using UnityEngine;
 using Utils;
 
-namespace Player
+namespace Player.Movement
 {
     public class PlayerMovement : MonoBehaviour
     {
