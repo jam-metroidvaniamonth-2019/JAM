@@ -253,6 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0af3530c29f66f0448adf13dc709a444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerCollision: {fileID: 1621930639}
   _playerMovement: {fileID: 1621930638}
   _playerRb: {fileID: 1621930640}
   _movementThreshold: 0.1
