@@ -6,6 +6,9 @@ using JamSpace;
 
 public class EnemyBase : MonoBehaviour
 {
+    // Considering all enemies have waypoints
+
+
     [SerializeField]
     private EEnemyState currentEnemyState;
     public EEnemyState CurrentEnemyState
