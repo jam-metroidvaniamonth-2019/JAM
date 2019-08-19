@@ -6,7 +6,7 @@ namespace Projectiles
     {
         [SerializeField] private float _launchSpeed = 20;
         [SerializeField] private float _lifetime;
-
+        
         public float LaunchSpeed => _launchSpeed;
 
         private float _currentLifeTime;
