@@ -30,6 +30,15 @@ namespace Player.Display
         {
             _playerAnimator.SetBool(MoveParam, _playerRb.velocity.x != 0);
 
+            // This extra check is added as sometimes
+            // when colliding with walls and then falling
+            // the player can have an incorrect animation state
+            if (_playerRb.velocity.y > -_movementThreshold && _playerRb.velocity.y < _movementThreshold)
+            {
+                _playerAnimator.SetBool(JumpParam, false);
+                _playerAnimator.SetBool(FallParam, false);
+            }
+
             if (_playerCollision.IsOnGround)
             {
                 _playerAnimator.SetBool(FallParam, false);
