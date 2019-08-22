@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace WorldDisplay
@@ -22,8 +21,13 @@ namespace WorldDisplay
         {
             _screenBounds = _mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, _mainCamera.transform.position.z));
 
-            _children = gameObject.GetComponentsInChildren<Transform>().ToList();
-            _children.RemoveAt(0); // Remove the Parent Component
+            SpriteRenderer[] childRenderers = gameObject.GetComponentsInChildren<SpriteRenderer>();
+            _children = new List<Transform>();
+            foreach (SpriteRenderer spriteRenderer in childRenderers)
+            {
+                _children.Add(spriteRenderer.transform);
+            }
+
 
             _halfObjectWidth = _children[1].GetComponent<SpriteRenderer>().bounds.extents.x;
             _halfObjectWidth -= _chokeAmount;

@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Main Parallax.unity
+    path: Assets/Scenes/Prototype/Main Parallax.unity
     guid: cdf7fddc0c475e7498602a0a4e6b5acf
   m_configObjects: {}
