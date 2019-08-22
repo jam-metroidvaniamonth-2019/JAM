@@ -184,7 +184,7 @@ namespace Player.Movement
 
         private void UpdateMovementVariables()
         {
-            if (_playerCollision.IsOnGround)
+            if (_playerCollision.IsOnGround && _playerRb.velocity.y == 0)
             {
                 _jumped = false;
                 _dashUsed = false;
