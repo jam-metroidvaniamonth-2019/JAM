@@ -17,10 +17,7 @@ namespace Common
 
         #region Unity Functions
 
-        private void Start()
-        {
-            _currentHealth = _maxHealth;
-        }
+        private void Start() => _currentHealth = _maxHealth;
 
         #endregion
 

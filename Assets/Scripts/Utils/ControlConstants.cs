@@ -18,5 +18,6 @@ namespace Utils
         public const string JumpButton = "Jump";
         public const string DashButton = "Dash";
         public const string Shoot = "ShootJoystick";
+        public const string StartButton = "Start";
     }
 }
