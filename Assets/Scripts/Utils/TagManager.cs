@@ -6,5 +6,6 @@ namespace Utils
     {
         public const string Player = "Player";
         public const string TargetCamera = "TargetCamera";
+        public const string TargetFollowerModifier = "TargetFollowerModifier";
     }
 }
