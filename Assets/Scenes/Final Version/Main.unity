@@ -6064,7 +6064,7 @@ Camera:
     height: 1
   near clip plane: 15
   far clip plane: 5000
-  field of view: 39.999996
+  field of view: 40
   orthographic: 0
   orthographic size: 3.2875001
   m_Depth: -1
@@ -11316,6 +11316,7 @@ MonoBehaviour:
   _targetStopMinYDistance: 0.1
   _lerpSpeed: 7
   _playerFollowOffset: {x: 0, y: 2.2, z: 0}
+  _targetYModifierLerp: 0.5
   _player: {fileID: 1621930642}
   _playerWeight: 5
   _mainTargetGroup: {fileID: 12235505}
@@ -11334,7 +11335,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 7
 --- !u!1 &1544350159
 GameObject:
   m_ObjectHideFlags: 0

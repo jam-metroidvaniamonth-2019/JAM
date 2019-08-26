@@ -1,5 +1,4 @@
-﻿using System;
-using Cinemachine;
+﻿using Cinemachine;
 using UnityEngine;
 using Utils;
 
@@ -12,6 +11,7 @@ namespace Player.Movement
         [SerializeField] private float _targetStopMinYDistance;
         [SerializeField] private float _lerpSpeed;
         [SerializeField] private Vector3 _playerFollowOffset;
+        [SerializeField] private float _targetYModifierLerp;
 
         [Header("Player")]
         [SerializeField] private Transform _player;
@@ -63,7 +63,7 @@ namespace Player.Movement
             if (_targetYModifier)
             {
                 _targetPosition.y = Mathf.Lerp(_targetPosition.y, _targetYModifier.position.y,
-                    _lerpSpeed * Time.deltaTime);
+                    _targetYModifierLerp * Time.deltaTime);
             }
             else if (_targetingStarted)
             {
@@ -71,7 +71,14 @@ namespace Player.Movement
             }
 
 
-            transform.position = _targetPosition + _playerFollowOffset;
+            if (!_targetYModifier)
+            {
+                transform.position = _targetPosition + _playerFollowOffset;
+            }
+            else
+            {
+                transform.position = _targetPosition;
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D other)
