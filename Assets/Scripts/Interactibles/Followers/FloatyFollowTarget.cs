@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Interactibles.Followers
@@ -16,8 +15,16 @@ namespace Interactibles.Followers
         [SerializeField] private float _targetLerpSpeed;
         [SerializeField] private Transform _target;
 
+        [Header("Floaty")]
+        [SerializeField] private float _amplitude;
+        [SerializeField] private float _frequency;
+
         private float _currentClosePointTimer;
         private Vector3 _currentClosePointOffset;
+
+        private Vector3 _lerpPosition;
+        private Vector3 _finalPosition;
+
 
         #region Unity Functions
 
@@ -31,7 +38,13 @@ namespace Interactibles.Followers
                 ResetTargetFollowing();
             }
 
-            transform.position = Vector3.Lerp(transform.position, _currentClosePointOffset + _target.position, _targetLerpSpeed * Time.deltaTime);
+            _lerpPosition = Vector3.Lerp(_lerpPosition, _currentClosePointOffset + _target.position, _targetLerpSpeed * Time.deltaTime);
+
+            float yOffset = Mathf.Sin(Time.time * _frequency) * _amplitude;
+            _finalPosition = _lerpPosition;
+            _finalPosition.y += yOffset;
+
+            transform.position = _finalPosition;
         }
 
         private void OnDrawGizmos()
@@ -44,6 +57,14 @@ namespace Interactibles.Followers
 
         #endregion
 
+        #region External Functions
+
+        public void UpdateTarget(Transform target) => _target = target;
+
+        public bool TargetReachedPosition() => Vector3.Distance(transform.position, _target.position) <= _maxFollowTargetRadius;
+
+        #endregion
+
         #region Utility Functions
 
         private void ResetTargetFollowing()
@@ -51,6 +72,8 @@ namespace Interactibles.Followers
             _currentClosePointTimer = _targetCLosePointChangeRate;
             _currentClosePointOffset =
                 _followTargetOffset * Random.Range(_minFollowTargetRadius, _maxFollowTargetRadius);
+
+            _lerpPosition = transform.position;
         }
 
         #endregion
