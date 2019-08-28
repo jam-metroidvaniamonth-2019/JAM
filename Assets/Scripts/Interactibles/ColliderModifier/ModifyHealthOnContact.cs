@@ -4,6 +4,7 @@ using Utils;
 
 namespace Interactibles.ColliderModifier
 {
+    [RequireComponent(typeof(AffectorAmount))]
     public class ModifyHealthOnContact : MonoBehaviour
     {
         [SerializeField] private bool _increaseHealth;
