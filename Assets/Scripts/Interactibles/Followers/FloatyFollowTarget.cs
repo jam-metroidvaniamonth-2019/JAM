@@ -11,7 +11,7 @@ namespace Interactibles.Followers
         [SerializeField] private Vector3 _followTargetOffset;
 
         [Header("Target")]
-        [SerializeField] private float _targetCLosePointChangeRate;
+        [SerializeField] private float _targetClosePointChangeRate;
         [SerializeField] private float _targetLerpSpeed;
         [SerializeField] private Transform _target;
 
@@ -28,7 +28,11 @@ namespace Interactibles.Followers
 
         #region Unity Functions
 
-        private void Start() => ResetTargetFollowing();
+        private void Start()
+        {
+            ResetTargetFollowing();
+            _lerpPosition = transform.position;
+        }
 
         private void Update()
         {
@@ -36,6 +40,7 @@ namespace Interactibles.Followers
             if (_currentClosePointTimer <= 0)
             {
                 ResetTargetFollowing();
+                return;
             }
 
             _lerpPosition = Vector3.Lerp(_lerpPosition, _currentClosePointOffset + _target.position, _targetLerpSpeed * Time.deltaTime);
@@ -69,11 +74,9 @@ namespace Interactibles.Followers
 
         private void ResetTargetFollowing()
         {
-            _currentClosePointTimer = _targetCLosePointChangeRate;
+            _currentClosePointTimer = _targetClosePointChangeRate;
             _currentClosePointOffset =
                 _followTargetOffset * Random.Range(_minFollowTargetRadius, _maxFollowTargetRadius);
-
-            _lerpPosition = transform.position;
         }
 
         #endregion
