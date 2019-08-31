@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 9094691206825400470}
   - component: {fileID: 9094691206825400469}
   - component: {fileID: 9094691206825400468}
+  - component: {fileID: 5933047179482118506}
+  - component: {fileID: 2353033154868181364}
   m_Layer: 11
   m_Name: Player Bullet
   m_TagString: Untagged
@@ -132,5 +134,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 193fa3964fc3e564eb5d225bae66521a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _projectileLaunchEffect: {fileID: 0}
+  _projectileDestroyEffect: {fileID: 0}
   _launchSpeed: 20
   _lifetime: 3
+--- !u!114 &5933047179482118506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9094691206825400465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e262b8c49f8e324db129b1b5299d0ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _amount: 10
+--- !u!114 &2353033154868181364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9094691206825400465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92936b55908f4454687b1e715a7c5ff7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _increaseHealth: 0
+  _targetPlayer: 0

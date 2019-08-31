@@ -6,7 +6,7 @@ namespace Utils
     {
         public static int GetClosestMultiple(float number, int? multiple = 5)
         {
-            int a = (int) (number / 5) * 5;
+            int a = (int)(number / 5) * 5;
             int b;
 
             if (number < 0)
@@ -47,5 +47,7 @@ namespace Utils
 
             return to;
         }
+
+        public static bool IsVectorZero(Vector3 vector) => vector.x == 0 && vector.y == 0 && vector.z == 0;
     }
 }
