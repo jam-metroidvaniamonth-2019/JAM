@@ -1,9 +1,38 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace Common
 {
     public class HealthSetter : MonoBehaviour
     {
+        public void AllowDamage()
+        {
+            StartCoroutine(AllowDamageCoroutine(1f));
+        }
+
+        public IEnumerator AllowDamageCoroutine(float _time)
+        {
+            bCanDealDamage = false;
+            yield return new WaitForSeconds(_time);
+            bCanDealDamage = true;
+        } 
+
+        [SerializeField]
+        private bool _canDealDamage;
+
+        public bool bCanDealDamage
+        {
+            get
+            {
+                return _canDealDamage;
+            }
+
+            set
+            {
+                _canDealDamage = value;
+            }
+        }
+
         [SerializeField] private float _maxHealth;
 
         public delegate void HealthZero();
@@ -13,6 +42,7 @@ namespace Common
         public HealthChanged OnHealthChanged;
 
         private bool _zeroHealthNotified;
+        [SerializeField]
         private float _currentHealth;
 
         #region Unity Functions
