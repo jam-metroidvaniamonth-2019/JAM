@@ -36,8 +36,22 @@ public class Enemy1 : BaseNPC
     // Call on enemy activation event
     public override void Init()
     {
-        ExecuteState(JamSpace.EState.IDLE);
+        CurrentState = JamSpace.EState.IDLE;
     }
+
+    public JamSpace.EState CurrentState
+    {
+        get
+        {
+            return currentEState;
+        }
+        set
+        {
+            currentEState = value;
+            ExecuteState(currentEState);
+        }
+    }
+
     // experimental
     [SerializeField]
     float moveSpeed;
@@ -57,7 +71,7 @@ public class Enemy1 : BaseNPC
         if (collisionScript)
         {
             InvestigatedTargetHealthSetter = collisionScript.GetComponent<Common.HealthSetter>();
-            ExecuteState(JamSpace.EState.MONITORING);
+            CurrentState = JamSpace.EState.MONITORING;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -103,7 +117,7 @@ public class Enemy1 : BaseNPC
         moveSpeed = 0;
         TriggerAnimation(JamSpace.AnimationTags.ANIMATION_COOLDOWN);
         yield return new WaitForSeconds(Wait_Cooldown);
-        ExecuteState(JamSpace.EState.IDLE);
+        CurrentState = JamSpace.EState.IDLE;
     }
     IEnumerator CallMonitoring()
     {
@@ -113,11 +127,11 @@ public class Enemy1 : BaseNPC
 
         if (InvestigatedTargetHealthSetter)
         {
-            ExecuteState(JamSpace.EState.ATTACKING);
+            CurrentState = JamSpace.EState.ATTACKING;
         }
         else
         {
-            ExecuteState(JamSpace.EState.IDLE);
+            CurrentState = JamSpace.EState.IDLE;
         }
     }
     void RotateCharacter()
@@ -142,7 +156,7 @@ public class Enemy1 : BaseNPC
 
         if (currentEState == JamSpace.EState.ATTACKING)
         {
-            ExecuteState(JamSpace.EState.COOLDOWN);
+            CurrentState = JamSpace.EState.COOLDOWN;
         }
     }
     void Update()
