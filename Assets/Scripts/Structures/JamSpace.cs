@@ -1,29 +1,59 @@
 ﻿namespace JamSpace
 {
+
+
+    public class AnimationTags
+    {
+        public static string ANIMATION_INVESTIGATE = "ANIMATION_INVESTIGATE";
+        public static string ANIMATION_IDLE = "ANIMATION_IDLE";
+        public static string ANIMATION_CHARGE = "ANIMATION_CHARGE";
+        public static string ANIMATION_BITE = "ANIMATION_BITE";
+        public static string ANIMATION_COOLDOWN = "ANIMATION_COOLDOWN";
+    }
+
+
+    [System.Serializable]
+    public enum EState
+    {
+        NONE,
+
+        IDLE,
+        MONITORING,
+        ATTACKING,
+        COOLDOWN,
+
+        MAX,
+    }
+
+
+    [System.Serializable]
+    public struct StructEnemyStats
+    {
+        public float damageValue;
+        public float cooldownValue;
+        public EEnemyAttackType enemyAttackType;
+    }
+
+    public enum EEnemyAttackType
+    {
+        NONE,
+        Ground_Leaping,
+        GrundC_harging,
+        Aerial_Droping,
+        Aerial_Charging,
+        MAX,
+    }
+
+    [System.Serializable]
     public enum EEnemyState
     {
         NONE,
 
-        // This is the state of the enemy when its unreachable by the player 
-        // and is thus inactive to optimize on performace
-        Resting,
-
-        // This is the inital state of the enemy
-        // that is when the enemy is guaring the platform or
-        // waiting for player to get around this platform
-        Patroling,
-
-        // this is the state of the enemy when it senses the player presence
-        // and is trying to find a way to attack the player
-        Investigate,
-
-        // this is the state of the enemy when it is charging or attacking player
+        Idle,
+        Investigation,
         Charging,
-
-        // this is the state of the enemy when it has finished its attack
-        // and will have to wait for certain amount of time before
-        // making another attempt at attacking the enemy
-        Cooldown,
+        Bite,
+        Cooldown_B,
 
         MAX,
     }
