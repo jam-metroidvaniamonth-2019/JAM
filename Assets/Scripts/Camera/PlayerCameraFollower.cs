@@ -12,7 +12,6 @@ namespace CustomCamera
 
         private Transform _player;
         private PlayerMovement _playerMovement;
-        private Rigidbody2D _playerRb;
 
         private float _catchUpCountDownTimer;
         private Vector3 _currentTargetPosition;
@@ -24,7 +23,6 @@ namespace CustomCamera
         {
             _player = GameObject.FindGameObjectWithTag(TagManager.Player).transform;
             _playerMovement = _player.GetComponent<PlayerMovement>();
-            _playerRb = _player.GetComponent<Rigidbody2D>();
 
             _currentTargetPosition = Vector3.zero;
 

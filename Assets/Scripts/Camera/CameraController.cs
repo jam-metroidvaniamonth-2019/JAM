@@ -54,5 +54,24 @@ namespace CustomCamera
         }
 
         #endregion
+
+        #region Singleton
+
+        public static CameraController instance;
+
+        private void Awake()
+        {
+            if (instance == null)
+            {
+                instance = this;
+            }
+
+            if (instance != this)
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        #endregion
     }
 }
