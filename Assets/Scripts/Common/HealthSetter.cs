@@ -38,8 +38,8 @@ namespace Common
         public delegate void HealthZero();
         public HealthZero OnHealthZero;
 
-        public delegate void HealthChanged(float maxHealth, float currentHealth);
-        public HealthChanged OnHaChanged;
+        public delegate void HealthChanged(float currentHealth, float maxHealth);
+        public HealthChanged OnHealthChanged;
 
         private bool _zeroHealthNotified;
         [SerializeField]
@@ -47,10 +47,7 @@ namespace Common
 
         #region Unity Functions
 
-        private void Start()
-        {
-            _currentHealth = _maxHealth;
-        }
+        private void Start() => _currentHealth = _maxHealth;
 
         #endregion
 
@@ -83,7 +80,7 @@ namespace Common
 
         #region Utility Functions
 
-        private void NotifyHealthChanged() => OnHaChanged?.Invoke(_maxHealth, _currentHealth);
+        private void NotifyHealthChanged() => OnHealthChanged?.Invoke(_currentHealth, _maxHealth);
 
         #endregion
     }
