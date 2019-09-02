@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a64e5b0e436d4bed9780211ae245f7b, type: 3}
+  m_Name: Idle_Data
+  m_EditorClassIdentifier: 
+  dataName: Idle
+  dragonBonesJSON: {fileID: 4900000, guid: 54019dc4ad803a74984e0128528238de, type: 3}
+  textureAtlas:
+  - textureAtlasJSON: {fileID: 4900000, guid: 58b9f7ffd8bccf147ae8a867e1071806, type: 3}
+    texture: {fileID: 2800000, guid: eeb7d2e9d31ad2c43a7a2751c98f7e75, type: 3}
+    material: {fileID: 2100000, guid: e29b566f1c42dc249ab8e9a6335c860e, type: 2}
+    uiMaterial: {fileID: 0}
