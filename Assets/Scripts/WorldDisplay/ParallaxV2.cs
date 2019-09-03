@@ -9,7 +9,7 @@ namespace WorldDisplay
         [SerializeField] private float _parallaxRate;
         [SerializeField] private float _chokeAmount;
 
-        private Vector2 _screenBounds;
+        private float _cameraWidth;
         private List<Transform> _children;
         private float _halfObjectWidth;
 
@@ -19,7 +19,7 @@ namespace WorldDisplay
 
         private void Start()
         {
-            _screenBounds = _mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, _mainCamera.transform.position.z));
+            _cameraWidth = _mainCamera.orthographicSize * Screen.width / Screen.height;
 
             SpriteRenderer[] childRenderers = gameObject.GetComponentsInChildren<SpriteRenderer>();
             _children = new List<Transform>();
@@ -27,7 +27,6 @@ namespace WorldDisplay
             {
                 _children.Add(spriteRenderer.transform);
             }
-
 
             _halfObjectWidth = _children[1].GetComponent<SpriteRenderer>().bounds.extents.x;
             _halfObjectWidth -= _chokeAmount;
@@ -56,7 +55,7 @@ namespace WorldDisplay
                 Transform firstChild = _children[0];
                 Transform lastChild = _children[_children.Count - 1];
 
-                if (_mainCamera.transform.position.x + _screenBounds.x > lastChild.position.x + _halfObjectWidth)
+                if (_mainCamera.transform.position.x + _cameraWidth > lastChild.position.x + _halfObjectWidth)
                 {
                     firstChild.SetAsLastSibling();
                     firstChild.position = new Vector3(lastChild.position.x + _halfObjectWidth * 2, lastChild.position.y, lastChild.position.z);
@@ -65,7 +64,7 @@ namespace WorldDisplay
                     _children.Add(firstChild);
 
                 }
-                else if (_mainCamera.transform.position.x - _screenBounds.x < firstChild.position.x - _halfObjectWidth)
+                else if (_mainCamera.transform.position.x - _cameraWidth < firstChild.position.x - _halfObjectWidth)
                 {
                     lastChild.SetAsFirstSibling();
                     lastChild.position = new Vector3(firstChild.position.x - _halfObjectWidth * 2, firstChild.position.y, firstChild.position.z);
