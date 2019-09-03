@@ -563,13 +563,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 100
-  m_Sprite: {fileID: 21300000, guid: 72de0c64f2c6a498096698322c976a67, type: 3}
+  m_SortingOrder: 5
+  m_Sprite: {fileID: 21300000, guid: 974f508b2fbecd64c9f14da14ecebf5f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.28, y: 1.28}
+  m_Size: {x: 12.54, y: 18.03}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -591,7 +591,7 @@ MonoBehaviour:
   _playerMovement: {fileID: 1621930638}
   _stretchScale: {x: 0.8, y: 1.2, z: 1}
   _squashScale: {x: 1.2, y: 0.9, z: 1}
-  _defaultSpriteScale: {x: 5, y: 5, z: 5}
+  _defaultSpriteScale: {x: 0.1, y: 0.1, z: 0.1}
   _morphIntoRate: 7
   _morphOutRate: 7
 --- !u!4 &40024240
@@ -603,7 +603,7 @@ Transform:
   m_GameObject: {fileID: 40024237}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.64, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 1621930642}
   m_RootOrder: 0
@@ -6301,8 +6301,8 @@ MonoBehaviour:
   _groundMask:
     serializedVersion: 2
     m_Bits: 256
-  _collisionCheckRadius: 0.5
-  _bottomOffset: {x: 0, y: -0.15}
+  _collisionCheckRadius: 0.31
+  _bottomOffset: {x: 0.25, y: -1.24}
   _isOnGround: 0
 --- !u!50 &1621930640
 Rigidbody2D:
@@ -6316,7 +6316,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 0.80484504
+  m_Mass: 0.9754467
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -6338,8 +6338,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.7, y: 1.3}
+  m_Offset: {x: 0.24, y: -0.67}
+  m_Size: {x: 0.61, y: 1.73}
   m_Direction: 0
 --- !u!4 &1621930642
 Transform:
@@ -6349,7 +6349,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1621930636}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.86, y: -2.31, z: 0}
+  m_LocalPosition: {x: -3.1, y: -1.68, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 40024240}

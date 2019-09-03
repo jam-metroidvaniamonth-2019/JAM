@@ -1104,7 +1104,6 @@ GameObject:
   m_Component:
   - component: {fileID: 786907392}
   - component: {fileID: 786907393}
-  - component: {fileID: 786907394}
   m_Layer: 0
   m_Name: EnemyBase
   m_TagString: Untagged
@@ -1136,31 +1135,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 786907391}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11d4aeff0cef83f498e4e9c63d1979e6, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e8c39b6abf5f3a499de81105fe8ea6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentEnemyState: 0
---- !u!114 &786907394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 786907391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 693e5e339e24af84cb4f83b9d7ffb190, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 1803796502}
-  - {fileID: 1174841837}
-  - {fileID: 151141942}
-  - {fileID: 1696585566}
-  - {fileID: 1085930590}
-  - {fileID: 1374475409}
-  moveSpeed: 5
-  wayPointIndex: 0
+  detectionDelay: 1
+  damageOnTouch: 20
+  speed: 100
+  groundMask: Ground
+  Wait_Cooldown: 5
+  Wait_Monitoring: 1
+  currentEState: 0
+  myAnimator: {fileID: 0}
+  boxCollider2d: {fileID: 0}
+  moveSpeed: 0
+  platformEndDetector: {fileID: 0}
+  chargeSpeed: 0
+  normalSpeed: 0
+  rayCastDistance: 0
+  InvestigatedTargetHealthSetter: {fileID: 0}
 --- !u!1 &853077982
 GameObject:
   m_ObjectHideFlags: 0
