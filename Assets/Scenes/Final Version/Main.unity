@@ -602,7 +602,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 40024237}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.234, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 1621930642}
@@ -6302,7 +6302,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   _collisionCheckRadius: 0.31
-  _bottomOffset: {x: 0.25, y: -0.65}
+  _bottomOffset: {x: 0.25, y: -0.74}
   _isOnGround: 0
 --- !u!50 &1621930640
 Rigidbody2D:
@@ -6338,7 +6338,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.24, y: -0.1}
+  m_Offset: {x: 0.24, y: -0.04}
   m_Size: {x: 0.61, y: 1.73}
   m_Direction: 0
 --- !u!4 &1621930642
@@ -149245,7 +149245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainCamera: {fileID: 786850328}
-  _parallaxRate: 0.3
+  _parallaxRate: 0.7
   _chokeAmount: 10
 --- !u!1 &2078655731
 GameObject:
