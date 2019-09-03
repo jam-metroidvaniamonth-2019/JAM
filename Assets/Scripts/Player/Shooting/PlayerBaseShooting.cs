@@ -108,7 +108,7 @@ namespace Player.Shooting
 
             bool isMouseMoving = Input.GetAxis(ControlConstants.MouseX) != 0 || Input.GetAxis(ControlConstants.MouseY) != 0;
 
-            Vector3 worldPoint = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 worldPoint = _mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, _mainCamera.nearClipPlane));
 
             if (xMovement == 0 && yMovement == 0 && !isMouseMoving)
             {
@@ -163,9 +163,11 @@ namespace Player.Shooting
             GameObject bulletInstance = Instantiate(_bulletObject, _shootingPoint.position, Quaternion.identity);
 
             float launchSpeed = bulletInstance.GetComponent<BaseProjectile>().LaunchSpeed;
-            float xVelocity = -Mathf.Sin(_shootDirectionDisplay.rotation.eulerAngles.z * Mathf.Deg2Rad);
-            float yVelocity = Mathf.Cos(_shootDirectionDisplay.rotation.eulerAngles.z * Mathf.Deg2Rad);
+            float xVelocity = Mathf.Cos(_shootDirectionDisplay.rotation.eulerAngles.z * Mathf.Deg2Rad);
+            float yVelocity = Mathf.Sin(_shootDirectionDisplay.rotation.eulerAngles.z * Mathf.Deg2Rad);
             Vector2 launchDirection = new Vector2(xVelocity, yVelocity);
+
+            bulletInstance.transform.rotation = _shootDirectionDisplay.rotation;
 
             bulletInstance.GetComponent<Rigidbody2D>().velocity = launchSpeed * launchDirection.normalized;
             bulletInstance.transform.SetParent(_bulletHolder);
