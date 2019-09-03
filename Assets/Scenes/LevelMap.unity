@@ -148450,7 +148450,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shootDirectionDisplayGameObject: {fileID: 58110062}
   _playerTransform: {fileID: 1869669588}
-  _mainCamera: {fileID: 0}
+  _mainCamera: {fileID: 627135789}
   _rotationOffset: 0
   _timeSlowActiveWait: 0.3
   _autoShootWait: 3
@@ -148458,7 +148458,7 @@ MonoBehaviour:
   _shotWaitTime: 0.5
   _bulletObject: {fileID: 9094691206825400465, guid: c18700d619899f745ae7e54f996f7905,
     type: 3}
-  _bulletHolder: {fileID: 0}
+  _bulletHolder: {fileID: 1226091844}
   _shootingPoint: {fileID: 898851962}
 --- !u!114 &1869669584
 MonoBehaviour:
