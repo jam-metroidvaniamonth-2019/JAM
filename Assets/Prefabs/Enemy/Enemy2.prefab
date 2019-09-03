@@ -50,9 +50,11 @@ MonoBehaviour:
   detectionDelay: 0
   damageOnTouch: 0
   speed: 2
+  point1: {fileID: 0}
+  point2: {fileID: 0}
+  targetPoint: {x: 0, y: 0}
   thetaRange: 35
   maxHeight: 4
-  maxDistance: 5
   groundMask: Ground
   Wait_Cooldown: 0
   Wait_Monitoring: 0
@@ -171,7 +173,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8528289995728197405}
   - component: {fileID: 8528289995728197404}
-  - component: {fileID: 8528289995728197407}
+  - component: {fileID: 6949576057770567264}
   m_Layer: 9
   m_Name: DealDamage
   m_TagString: Untagged
@@ -219,7 +221,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3038597, y: 0.20368737}
   m_EdgeRadius: 0
---- !u!114 &8528289995728197407
+--- !u!114 &6949576057770567264
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -228,7 +230,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8528289995728197378}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73ed8b8ab17b89445b102dd8a13b2a92, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b6cef994bb350c47a790ad598d04e90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageValue: 0
+  damageValue: 10
