@@ -32,11 +32,16 @@ namespace Player.Movement
         // Jump
         private bool _jumped;
 
+        // Movement Controls
+        private bool _movementEnabled;
+
         // Delegates
         public delegate void PlayerJumped();
         public PlayerJumped OnPlayerJumped;
 
         #region Unity Functions
+
+        private void Awake() => _movementEnabled = true;
 
         private void Start()
         {
@@ -48,12 +53,16 @@ namespace Player.Movement
         {
             UpdateMovementVariables();
 
-            HandleDash();
-
-            if (!_dashActive)
+            // TODO: Find a better way to enable and disable movements
+            if (_movementEnabled)
             {
-                HandleHorizontalMovement();
-                HandleJump();
+                HandleDash();
+
+                if (!_dashActive)
+                {
+                    HandleHorizontalMovement();
+                    HandleJump();
+                }
             }
         }
 
@@ -190,6 +199,14 @@ namespace Player.Movement
                 _dashUsed = false;
             }
         }
+
+        #endregion
+
+        #region External Functions
+
+        public void EnableMovement() => _movementEnabled = true;
+
+        public void DisableMovement() => _movementEnabled = false;
 
         #endregion
     }

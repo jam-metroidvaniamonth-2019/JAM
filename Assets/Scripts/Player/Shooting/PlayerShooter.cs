@@ -1,10 +1,11 @@
-﻿using Projectiles;
+﻿using Player.Movement;
+using Projectiles;
 using UnityEngine;
 using Utils;
 
 namespace Player.Shooting
 {
-    public class PlayerBaseShooting : MonoBehaviour
+    public class PlayerShooter : MonoBehaviour
     {
         [Header("Display Objects")]
         [SerializeField] private GameObject _shootDirectionDisplayGameObject;
@@ -23,6 +24,12 @@ namespace Player.Shooting
         [SerializeField] private Transform _bulletHolder;
         [SerializeField] private Transform _shootingPoint;
 
+        [Header("Shooting Angle Limits")]
+        [SerializeField] [Range(10, 30)] private float _bowAngleRestriction;
+        [SerializeField] [Range(10, 30)] private float _slingShotAngleRestriction;
+        [SerializeField] private SpriteRenderer _playerSprite;
+        [SerializeField] private PlayerMovement _playerMovement;
+
         public delegate void PlayerShot();
         public PlayerShot OnPlayerShot;
 
@@ -36,6 +43,7 @@ namespace Player.Shooting
         private bool _timeSlowFired;
         private float _autoShootTimer;
         private bool _triggerHeldDown;
+        private float _directionLockedAngle;
 
         // These are required as the Right Trigger is detected
         // as an axis and we need to convert it into a button
@@ -43,6 +51,7 @@ namespace Player.Shooting
         private bool _rightTriggerStateChanged;
 
         public delegate void TimeSlowActive();
+
         public TimeSlowActive OnTimeSlowActive;
 
         #region Unity Event Functions
@@ -57,6 +66,9 @@ namespace Player.Shooting
 
         private void Update()
         {
+            // Lock Direction based on Sprite Flip Methods
+            _directionLockedAngle = _playerSprite.flipX ? 180 : 0;
+
             _timeBeforeLastShot += Time.deltaTime;
 
             UpdateRightTriggerState();
@@ -66,7 +78,8 @@ namespace Player.Shooting
                 SetupBulletShooting();
             }
 
-            if (((_currentRightTriggerState == 0 && _rightTriggerStateChanged) || Input.GetMouseButtonUp(0)) && _triggerHeldDown)
+            if (((_currentRightTriggerState == 0 && _rightTriggerStateChanged) || Input.GetMouseButtonUp(0)) &&
+                _triggerHeldDown)
             {
                 ShootBullet();
             }
@@ -74,7 +87,6 @@ namespace Player.Shooting
             // Update Timers and Fire Events
             if (_triggerHeldDown)
             {
-
                 _timeSlowTimer -= Time.deltaTime;
                 _autoShootTimer -= Time.deltaTime / Time.timeScale;
 
@@ -109,9 +121,11 @@ namespace Player.Shooting
             float xMovement = Input.GetAxis(ControlConstants.HorizontalShootAxis);
             float yMovement = Input.GetAxis(ControlConstants.VerticalShootAxis);
 
-            bool isMouseMoving = Input.GetAxis(ControlConstants.MouseX) != 0 || Input.GetAxis(ControlConstants.MouseY) != 0;
+            bool isMouseMoving = Input.GetAxis(ControlConstants.MouseX) != 0 ||
+                                 Input.GetAxis(ControlConstants.MouseY) != 0;
 
-            Vector3 worldPoint = _mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, _mainCamera.nearClipPlane));
+            Vector3 worldPoint = _mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,
+                Input.mousePosition.y, _mainCamera.nearClipPlane));
 
             if (xMovement == 0 && yMovement == 0 && !isMouseMoving)
             {
@@ -126,6 +140,13 @@ namespace Player.Shooting
             }
 
             rotationAngle -= _rotationOffset;
+            // This is a hack to lock angles going from 
+            // -180 to 180
+            if (rotationAngle < -90)
+            {
+                rotationAngle = ExtensionFunctions.To360Angle(rotationAngle);
+            }
+            rotationAngle = Mathf.Clamp(rotationAngle, _directionLockedAngle - _bowAngleRestriction, _directionLockedAngle + _bowAngleRestriction);
 
             _shootDirectionDisplay.rotation = Quaternion.Euler(0, 0, rotationAngle);
         }
@@ -148,13 +169,12 @@ namespace Player.Shooting
             _triggerHeldDown = true;
             _timeSlowTimer = _timeSlowActiveWait;
             _autoShootTimer = _autoShootWait;
+
+            _playerMovement.DisableMovement();
         }
 
         private void ShootBullet()
         {
-            // TODO: Change Sound Based on Whether SlingShot or Arrow is Equipped
-            OnPlayerShot?.Invoke();
-            
             _triggerHeldDown = false;
             _timeSlowFired = false;
             Time.timeScale = 1;
@@ -163,6 +183,9 @@ namespace Player.Shooting
             {
                 return;
             }
+
+            // TODO: Change Sound Based on Whether SlingShot or Arrow is Equipped
+            OnPlayerShot?.Invoke();
 
             _timeBeforeLastShot = 0;
 
@@ -177,6 +200,8 @@ namespace Player.Shooting
 
             bulletInstance.GetComponent<Rigidbody2D>().velocity = launchSpeed * launchDirection.normalized;
             bulletInstance.transform.SetParent(_bulletHolder);
+
+            _playerMovement.EnableMovement();
         }
 
         #endregion

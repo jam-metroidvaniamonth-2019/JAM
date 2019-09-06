@@ -11,7 +11,7 @@ namespace Player.Display
         [Header("Event Emitters")]
         [SerializeField] private PlayerMovement _playerMovement;
         [SerializeField] private PlayerCollision _playerCollision;
-        [SerializeField] private PlayerBaseShooting _playerShooting;
+        [SerializeField] private PlayerShooter _playerShooting;
         [SerializeField] private Rigidbody2D _playerRb;
 
         [Header("Audio")]
