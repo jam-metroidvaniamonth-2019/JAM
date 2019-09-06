@@ -23,6 +23,9 @@ namespace Player.Shooting
         [SerializeField] private Transform _bulletHolder;
         [SerializeField] private Transform _shootingPoint;
 
+        public delegate void PlayerShot();
+        public PlayerShot OnPlayerShot;
+
         // Display State Objects
         private Transform _shootDirectionDisplay;
         private SpriteRenderer _shootDirectionDisplayRenderer;
@@ -149,6 +152,9 @@ namespace Player.Shooting
 
         private void ShootBullet()
         {
+            // TODO: Change Sound Based on Whether SlingShot or Arrow is Equipped
+            OnPlayerShot?.Invoke();
+            
             _triggerHeldDown = false;
             _timeSlowFired = false;
             Time.timeScale = 1;
