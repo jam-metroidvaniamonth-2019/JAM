@@ -1,23 +1,21 @@
-﻿using System;
-using Cinemachine;
-using ScriptableObjects;
+﻿using ScriptableObjects;
 using UnityEngine;
 
 namespace CustomCamera
 {
     public class CameraShaker : MonoBehaviour
     {
-        [Header("CameraTarget")]
-        [SerializeField] private CinemachineVirtualCamera _virtualCamera;
+        [SerializeField] private Transform _mainCamera;
 
-        private CinemachineBasicMultiChannelPerlin _cinemachineNoise;
+        private Vector3 _shakePosition;
+        private float _shakeMultiplier;
 
         private bool _isShakeActive;
         private float _shakeTimer;
 
         #region Unity Functions
 
-        private void Start() => _cinemachineNoise = _virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        private void Start() => _shakePosition = Vector3.zero;
 
         private void Update()
         {
@@ -31,6 +29,20 @@ namespace CustomCamera
             {
                 StopShaking();
             }
+            else
+            {
+                UpdateShaking();
+            }
+        }
+
+        private void UpdateShaking()
+        {
+            _shakePosition.Set(
+                Random.Range(-_shakeMultiplier, _shakeMultiplier),
+                Random.Range(-_shakeMultiplier, _shakeMultiplier),
+                Random.Range(-_shakeMultiplier, _shakeMultiplier)
+            );
+            _mainCamera.position = _shakePosition;
         }
 
         #endregion
@@ -41,22 +53,20 @@ namespace CustomCamera
         {
             _isShakeActive = true;
             _shakeTimer = cameraShakeModifiers.shakeTimer;
-
-            _cinemachineNoise.m_AmplitudeGain = cameraShakeModifiers.shakeAmplitude;
-            _cinemachineNoise.m_FrequencyGain = cameraShakeModifiers.shakeFrequency;
+            _shakeMultiplier = cameraShakeModifiers.shakeMultiplier;
         }
 
         public void StopShaking()
         {
             _isShakeActive = false;
-            _cinemachineNoise.m_AmplitudeGain = 0;
-            _cinemachineNoise.m_FrequencyGain = 0;
+
+            _shakePosition.Set(0, 0, 0);
+            _mainCamera.position = _shakePosition;
         }
 
         #endregion
 
         #region Singleton
-
 
         private static CameraShaker _instance;
         public static CameraShaker Instance => _instance;

@@ -581,7 +581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8cf1d34e08d2504e80317f85a2234ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainCamera: {fileID: 0}
+  _mainCamera: {fileID: 627135789}
   _parallaxRate: 0.4
   _chokeAmount: 0
   _children:
@@ -152977,7 +152977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8cf1d34e08d2504e80317f85a2234ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainCamera: {fileID: 0}
+  _mainCamera: {fileID: 627135789}
   _parallaxRate: 0.7
   _chokeAmount: 10
   _children:
@@ -153406,7 +153406,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1869669580}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.1, y: -2.3, z: 0}
+  m_LocalPosition: {x: -7.56, y: -1.52, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1332491362}
@@ -154039,7 +154039,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8cf1d34e08d2504e80317f85a2234ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainCamera: {fileID: 0}
+  _mainCamera: {fileID: 627135789}
   _parallaxRate: 0.5
   _chokeAmount: 0
   _children:
