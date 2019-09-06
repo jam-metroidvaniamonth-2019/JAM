@@ -10,7 +10,7 @@ namespace Audio
 
         #region Unity Functions
 
-        private void Start()
+        private void Awake()
         {
             _audioSource = GetComponent<AudioSource>();
         }
