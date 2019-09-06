@@ -6,7 +6,7 @@ namespace Audio
     {
         [SerializeField] private GameObject _audioPrefab;
         [SerializeField] private Transform _audioHolder;
-        
+
         #region External Functions
 
         public void PlaySound(AudioClip audioClip, float playDelay)
@@ -16,6 +16,16 @@ namespace Audio
 
             SfxObject sfxObject = audioInstance.GetComponent<SfxObject>();
             sfxObject.PlayAudio(audioClip, playDelay);
+        }
+
+        public void PlaySound(AudioClip audioClip, float playDelay, Vector3 worldPosition)
+        {
+            GameObject audioInstance = Instantiate(_audioPrefab, _audioHolder.position, Quaternion.identity);
+            audioInstance.transform.SetParent(_audioHolder);
+            audioInstance.transform.position = worldPosition;
+
+            SfxObject sfxObject = audioInstance.GetComponent<SfxObject>();
+            sfxObject.PlayAudio(audioClip, playDelay, true);
         }
 
         #endregion
