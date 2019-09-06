@@ -8,10 +8,9 @@ namespace WorldDisplay
         [SerializeField] private Camera _mainCamera;
         [SerializeField] private float _parallaxRate;
         [SerializeField] private float _chokeAmount;
+        [SerializeField] private List<SpriteRenderer> _children;
 
         private float _cameraWidth;
-        private List<Transform> _children;
-        private float _halfObjectWidth;
 
         private Vector3 _lastScreenPosition;
 
@@ -20,17 +19,6 @@ namespace WorldDisplay
         private void Start()
         {
             _cameraWidth = _mainCamera.orthographicSize * Screen.width / Screen.height;
-
-            SpriteRenderer[] childRenderers = gameObject.GetComponentsInChildren<SpriteRenderer>();
-            _children = new List<Transform>();
-            foreach (SpriteRenderer spriteRenderer in childRenderers)
-            {
-                _children.Add(spriteRenderer.transform);
-            }
-
-            _halfObjectWidth = _children[1].GetComponent<SpriteRenderer>().bounds.extents.x;
-            _halfObjectWidth -= _chokeAmount;
-
             _lastScreenPosition = _mainCamera.transform.position;
         }
 
@@ -52,27 +40,33 @@ namespace WorldDisplay
         {
             if (_children.Count > 2)
             {
-                Transform firstChild = _children[0];
-                Transform lastChild = _children[_children.Count - 1];
+                SpriteRenderer firstChildRenderer = _children[0];
+                SpriteRenderer lastChildRenderer = _children[_children.Count - 1];
 
-                if (_mainCamera.transform.position.x + _cameraWidth > lastChild.position.x + _halfObjectWidth)
+                Transform firstChild = _children[0].transform;
+                Transform lastChild = _children[_children.Count - 1].transform;
+
+                float firstChildHalfWidth = _children[0].bounds.extents.x;
+                float lastChildHalfWidth = _children[_children.Count - 1].bounds.extents.x;
+
+                if (_mainCamera.transform.position.x + _cameraWidth > lastChild.position.x + lastChildHalfWidth)
                 {
                     firstChild.SetAsLastSibling();
-                    firstChild.position = new Vector3(lastChild.position.x + _halfObjectWidth * 2, lastChild.position.y, lastChild.position.z);
+                    firstChild.position = new Vector3(lastChild.position.x + firstChildHalfWidth * 2,
+                        firstChild.position.y, firstChild.position.z);
 
                     _children.RemoveAt(0);
-                    _children.Add(firstChild);
-
+                    _children.Add(firstChildRenderer);
                 }
-                else if (_mainCamera.transform.position.x - _cameraWidth < firstChild.position.x - _halfObjectWidth)
+                else if (_mainCamera.transform.position.x - _cameraWidth < firstChild.position.x - firstChildHalfWidth)
                 {
                     lastChild.SetAsFirstSibling();
-                    lastChild.position = new Vector3(firstChild.position.x - _halfObjectWidth * 2, firstChild.position.y, firstChild.position.z);
+                    lastChild.position = new Vector3(firstChild.position.x - lastChildHalfWidth * 2,
+                        lastChild.position.y, lastChild.position.z);
 
                     _children.RemoveAt(_children.Count - 1);
-                    _children.Insert(0, lastChild);
+                    _children.Insert(0, lastChildRenderer);
                 }
-
             }
         }
 
