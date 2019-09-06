@@ -155899,13 +155899,9 @@ PrefabInstance:
       objectReference: {fileID: 864256353}
     - target: {fileID: 490690758219448576, guid: 543c6793679c7e34cbae9c5f003405c4,
         type: 3}
-      propertyPath: _bowAngleRestriction
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 490690758219448576, guid: 543c6793679c7e34cbae9c5f003405c4,
+      propertyPath: _weaponDisplayEffectPrefab
+      value: 
+      objectReference: {fileID: 6905591882997995792, guid: 9f392c392f3a12143bcdc2e1a4aa0c08,
         type: 3}
-      propertyPath: _slingShotAngleRestriction
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 543c6793679c7e34cbae9c5f003405c4, type: 3}

@@ -140,8 +140,8 @@ MonoBehaviour:
     type: 3}
   _bulletHolder: {fileID: 0}
   _shootingPoint: {fileID: 490690759652174684}
-  _bowRestriction: 30
-  _slingShotRestriction: 20
+  _bowAngleRestriction: 30
+  _slingShotAngleRestriction: 20
   _playerSprite: {fileID: 490690759808437027}
   _playerMovement: {fileID: 490690758219448579}
 --- !u!114 &490690758219448606

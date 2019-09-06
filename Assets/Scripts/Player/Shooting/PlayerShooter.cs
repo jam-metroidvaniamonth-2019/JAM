@@ -11,6 +11,7 @@ namespace Player.Shooting
         [SerializeField] private GameObject _shootDirectionDisplayGameObject;
         [SerializeField] private Transform _playerTransform;
         [SerializeField] private Camera _mainCamera;
+        [SerializeField] private GameObject _weaponDisplayEffectPrefab;
 
         [Header("Extra Controls")]
         [SerializeField] private float _rotationOffset = 90;
@@ -170,6 +171,8 @@ namespace Player.Shooting
             _timeSlowTimer = _timeSlowActiveWait;
             _autoShootTimer = _autoShootWait;
 
+            Instantiate(_weaponDisplayEffectPrefab, _shootDirectionDisplay.position, Quaternion.identity);
+
             _playerMovement.DisableMovement();
         }
 
@@ -184,7 +187,7 @@ namespace Player.Shooting
                 return;
             }
 
-            // TODO: Change Sound Based on Whether SlingShot or Arrow is Equipped
+            // TODO: Invoke Value Based On SlingShot and Bow/Arrow
             OnPlayerShot?.Invoke();
 
             _timeBeforeLastShot = 0;
