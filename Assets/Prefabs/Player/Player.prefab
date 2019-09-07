@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 490690758219448578}
   - component: {fileID: 490690758219448579}
   - component: {fileID: 490690758219448576}
-  - component: {fileID: 490690758219448606}
+  - component: {fileID: 894115945694319411}
+  - component: {fileID: 4985062292742912031}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -131,6 +132,8 @@ MonoBehaviour:
   _shootDirectionDisplayGameObject: {fileID: 490690759645175123}
   _playerTransform: {fileID: 490690758219448607}
   _mainCamera: {fileID: 0}
+  _weaponDisplayEffectPrefab: {fileID: 6905591882997995792, guid: 9f392c392f3a12143bcdc2e1a4aa0c08,
+    type: 3}
   _rotationOffset: 0
   _timeSlowActiveWait: 0.3
   _autoShootWait: 3
@@ -144,7 +147,24 @@ MonoBehaviour:
   _slingShotAngleRestriction: 20
   _playerSprite: {fileID: 490690759808437027}
   _playerMovement: {fileID: 490690758219448579}
---- !u!114 &490690758219448606
+--- !u!114 &894115945694319411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490690758219448577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f67a61948cfaa34b8c78f8817f6645e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minHealthColor: {r: 1, g: 0, b: 0, a: 1}
+  _halfHealthColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _maxHealthColor: {r: 0, g: 1, b: 0, a: 1}
+  _healthSlider: {fileID: 0}
+  _healthFiller: {fileID: 0}
+--- !u!114 &4985062292742912031
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,7 +178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canDealDamage: 0
   _maxHealth: 100
-  _currentHealth: 0
+  _currentHealth: 30
 --- !u!1 &490690758999993684
 GameObject:
   m_ObjectHideFlags: 0
