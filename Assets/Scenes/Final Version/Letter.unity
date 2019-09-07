@@ -380,11 +380,11 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: bcea27306799f4844b972ed7cd2a19ef, type: 3}
-    m_FontSize: 36
+    m_FontSize: 45
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_MinSize: 4
+    m_MaxSize: 45
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -412,17 +412,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 896925868f2449fdbbe3c633d77711ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _displayText: "Dear mom,\r\n\r\nI still remember the day when I saw Yu-Jin [Korean
-    meaning valuable] for the first time. It was my best birthday gift and you gave
-    me my best friend. It's been 2 years and I still remember all the beautiful time
-    we spent together.\r\n\r\nWhen we first heard about the virus spreading in the
-    animals and you decided to abandon Yu-jin, I didn't dare to oppose you because
-    I was scared about the virus. I cried that night and many more nights when you
-    abandoned him. But now I have heard that the antidote has been discovered and
-    everyone is buying it to cure their pet. It might be too late but still, I have
-    decided to buy the antidote and bring back Yu-jin. I miss him mom and have a bad
-    dream yesterday about Yu-jin that he is dead. So I have decided to go to Hunan
-    in the forest where we left him."
+  _displayText: "Dear Mom,\r\n\r\n It is been 5 months and i'm missing YuJin. I do
+    not understand why we can't find and cure him back? \r\n\nMom, I found that all
+    the infected pets are abandoned in the Hunai forest and I have decided to go after
+    him. I took some money from you and bought antidote to cure him.\r\n\nPlease don't
+    worry about me. I will be alright.Love you Mom.\r\n\r\nYours,\r\nKwan."
   _characterDelay: 0.05
   _displayObject: {fileID: 484459164}
 --- !u!1 &1033031575
