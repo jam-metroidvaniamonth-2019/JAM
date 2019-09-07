@@ -23,7 +23,9 @@ namespace Player.Movement
         [SerializeField] private float _dashSpeed = 500f;
         [SerializeField] private float _dashEffectTime = 0.3f;
         [SerializeField] private ParticleSystem _playerDashEffect;
-        [SerializeField] private AudioClip _dashClip;
+
+        public delegate void PlayerDashed();
+        public PlayerDashed OnPlayerDashed;
 
         private Rigidbody2D _playerRb;
         private PlayerCollision _playerCollision;
@@ -184,8 +186,8 @@ namespace Player.Movement
             _playerDashEffect.Play();
             ParticleSystemRenderer renderer = _playerDashEffect.GetComponent<ParticleSystemRenderer>();
             renderer.flip = _playerSprite.flipX ? new Vector3(1, 0, 0) : new Vector3(-1, 0, 0);
-
-            SfxAudioManager.Instance.PlaySound(_dashClip, 0);
+            
+            OnPlayerDashed?.Invoke();
 
             StartCoroutine(DashWait());
         }

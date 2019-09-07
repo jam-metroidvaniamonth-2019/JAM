@@ -1,5 +1,4 @@
-﻿using System;
-using Audio;
+﻿using Audio;
 using Player.Movement;
 using Player.Shooting;
 using UnityEngine;
@@ -15,13 +14,11 @@ namespace Player.Display
         [SerializeField] private Rigidbody2D _playerRb;
 
         [Header("Audio")]
-        [SerializeField] private AudioClip _playerLandedClip;
+        [SerializeField] private GameObject _playerLandedClip;
         [SerializeField] private GameObject _playJumpAudioPrefab;
-        [SerializeField] private AudioClip _playerShotBowArrowClip;
-        [SerializeField] private AudioClip _playerSlingShotClip;
-        [SerializeField] private AudioSource _playerRunning;
-
-        private float _previousVelocityState;
+        [SerializeField] private GameObject _playerDashClip;
+        [SerializeField] private GameObject _playerShotBowArrowClip;
+        [SerializeField] private GameObject _playerSlingShotClip;
 
         #region Unity Functions
 
@@ -29,21 +26,9 @@ namespace Player.Display
         {
             _playerShooting.OnPlayerShot += HandlePlayShooting;
             _playerCollision.OnGroundStatusChanged += HandlePlayerLanded;
+
             _playerMovement.OnPlayerJumped += HandlePlayerJumped;
-        }
-
-        private void Update()
-        {
-            if (_playerRb.velocity.x != 0 && _previousVelocityState == 0)
-            {
-                _playerRunning.Play();
-            }
-            else if (_playerRb.velocity.x == 0 && _previousVelocityState != 0)
-            {
-                _playerRunning.Stop();
-            }
-
-            _previousVelocityState = _playerRb.velocity.x;
+            _playerMovement.OnPlayerDashed += HandlePlayerDashed;
         }
 
         #endregion
@@ -68,6 +53,11 @@ namespace Player.Display
             {
                 SfxAudioManager.Instance.PlaySound(_playerLandedClip);
             }
+        }
+
+        private void HandlePlayerDashed()
+        {
+            SfxAudioManager.Instance.PlaySound(_playerDashClip);
         }
 
         #endregion

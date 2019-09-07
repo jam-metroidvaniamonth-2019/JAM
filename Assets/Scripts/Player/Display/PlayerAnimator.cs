@@ -1,4 +1,6 @@
-﻿using Player.Movement;
+﻿using System.Collections.Generic;
+using Audio;
+using Player.Movement;
 using UnityEngine;
 
 namespace Player.Display
@@ -15,6 +17,9 @@ namespace Player.Display
         [SerializeField] private PlayerMovement _playerMovement;
         [SerializeField] private Rigidbody2D _playerRb;
         [SerializeField] private float _movementThreshold;
+
+        [Header("Player Animation Audio")]
+        [SerializeField] private List<GameObject> _runningSounds;
 
         private Animator _playerAnimator;
 
@@ -59,6 +64,12 @@ namespace Player.Display
         {
             _playerAnimator.SetBool(JumpParam, true);
             _playerAnimator.SetBool(FallParam, false);
+        }
+
+        private void PlayRandomRunningSound()
+        {
+            GameObject audioPrefab = _runningSounds[Mathf.FloorToInt(Random.value * _runningSounds.Count)];
+            SfxAudioManager.Instance.PlaySound(audioPrefab);
         }
 
         #endregion
