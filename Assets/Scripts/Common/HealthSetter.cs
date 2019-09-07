@@ -15,7 +15,7 @@ namespace Common
             bCanDealDamage = false;
             yield return new WaitForSeconds(_time);
             bCanDealDamage = true;
-        } 
+        }
 
         [SerializeField]
         private bool _canDealDamage;
@@ -47,7 +47,11 @@ namespace Common
 
         #region Unity Functions
 
-        private void Start() => _currentHealth = _maxHealth;
+        private void Start()
+        {
+            // _currentHealth = _maxHealth;
+            NotifyHealthChanged();
+        }
 
         #endregion
 

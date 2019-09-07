@@ -9,7 +9,7 @@ namespace Player.Movement
         [Header("Movement")]
         [SerializeField] private float _movementSpeed = 250;
         [SerializeField] private float _linearDrag = 50;
-        [SerializeField] private float _linearDragThreasholdVelocity = 0.5f;
+        [SerializeField] private float _linearDragThresholdVelocity = 0.5f;
         [SerializeField] private SpriteRenderer _playerSprite;
 
         [Header("Jump")]
@@ -21,6 +21,7 @@ namespace Player.Movement
         [Header("Dash")]
         [SerializeField] private float _dashSpeed = 500f;
         [SerializeField] private float _dashEffectTime = 0.3f;
+        [SerializeField] private ParticleSystem _playerDashEffect;
 
         private Rigidbody2D _playerRb;
         private PlayerCollision _playerCollision;
@@ -32,11 +33,16 @@ namespace Player.Movement
         // Jump
         private bool _jumped;
 
+        // Movement Controls
+        private bool _movementEnabled;
+
         // Delegates
         public delegate void PlayerJumped();
         public PlayerJumped OnPlayerJumped;
 
         #region Unity Functions
+
+        private void Awake() => _movementEnabled = true;
 
         private void Start()
         {
@@ -48,12 +54,16 @@ namespace Player.Movement
         {
             UpdateMovementVariables();
 
-            HandleDash();
-
-            if (!_dashActive)
+            // TODO: Find a better way to enable and disable movements
+            if (_movementEnabled)
             {
-                HandleHorizontalMovement();
-                HandleJump();
+                HandleDash();
+
+                if (!_dashActive)
+                {
+                    HandleHorizontalMovement();
+                    HandleJump();
+                }
             }
         }
 
@@ -113,7 +123,7 @@ namespace Player.Movement
 
             if (_playerRb.velocity.y < 0)
             {
-                if (_playerRb.velocity.y < _linearDragThreasholdVelocity)
+                if (_playerRb.velocity.y < _linearDragThresholdVelocity)
                 {
                     _playerRb.drag = 0;
                 }
@@ -122,7 +132,7 @@ namespace Player.Movement
             }
             else if (_playerRb.velocity.y > 0)
             {
-                if (_playerRb.velocity.y > _linearDragThreasholdVelocity)
+                if (_playerRb.velocity.y > _linearDragThresholdVelocity)
                 {
                     _playerRb.drag = 0;
                 }
@@ -169,6 +179,10 @@ namespace Player.Movement
             _dashActive = true;
             _dashUsed = true;
 
+            _playerDashEffect.Play();
+            ParticleSystemRenderer renderer = _playerDashEffect.GetComponent<ParticleSystemRenderer>();
+            renderer.flip = _playerSprite.flipX ? new Vector3(1, 0, 0) : new Vector3(-1, 0, 0);
+
             StartCoroutine(DashWait());
         }
 
@@ -178,6 +192,8 @@ namespace Player.Movement
 
             _dashActive = false;
             _playerRb.velocity = Vector2.zero;
+
+            _playerDashEffect.Stop();
         }
 
         #endregion
@@ -190,6 +206,14 @@ namespace Player.Movement
                 _dashUsed = false;
             }
         }
+
+        #endregion
+
+        #region External Functions
+
+        public void EnableMovement() => _movementEnabled = true;
+
+        public void DisableMovement() => _movementEnabled = false;
 
         #endregion
     }
