@@ -156331,6 +156331,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 490690758219448576, guid: 543c6793679c7e34cbae9c5f003405c4,
+        type: 3}
+      propertyPath: _mainCamera
+      value: 
+      objectReference: {fileID: 786850328}
+    - target: {fileID: 490690758219448576, guid: 543c6793679c7e34cbae9c5f003405c4,
+        type: 3}
+      propertyPath: _bulletHolder
+      value: 
+      objectReference: {fileID: 864256353}
     - target: {fileID: 490690758219448577, guid: 543c6793679c7e34cbae9c5f003405c4,
         type: 3}
       propertyPath: m_Name
@@ -156339,12 +156349,12 @@ PrefabInstance:
     - target: {fileID: 490690758219448607, guid: 543c6793679c7e34cbae9c5f003405c4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.91
+      value: -6.18
       objectReference: {fileID: 0}
     - target: {fileID: 490690758219448607, guid: 543c6793679c7e34cbae9c5f003405c4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.03
+      value: -2.07
       objectReference: {fileID: 0}
     - target: {fileID: 490690758219448607, guid: 543c6793679c7e34cbae9c5f003405c4,
         type: 3}
@@ -156391,22 +156401,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 490690758219448576, guid: 543c6793679c7e34cbae9c5f003405c4,
-        type: 3}
-      propertyPath: _mainCamera
-      value: 
-      objectReference: {fileID: 786850328}
-    - target: {fileID: 490690758219448576, guid: 543c6793679c7e34cbae9c5f003405c4,
-        type: 3}
-      propertyPath: _bulletHolder
-      value: 
-      objectReference: {fileID: 864256353}
-    - target: {fileID: 894115945694319411, guid: 543c6793679c7e34cbae9c5f003405c4,
+    - target: {fileID: 7472292008653589118, guid: 543c6793679c7e34cbae9c5f003405c4,
         type: 3}
       propertyPath: _healthSlider
       value: 
       objectReference: {fileID: 1585414807}
-    - target: {fileID: 894115945694319411, guid: 543c6793679c7e34cbae9c5f003405c4,
+    - target: {fileID: 7472292008653589118, guid: 543c6793679c7e34cbae9c5f003405c4,
         type: 3}
       propertyPath: _healthFiller
       value: 

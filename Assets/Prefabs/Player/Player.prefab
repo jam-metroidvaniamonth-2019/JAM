@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 490690758219448578}
   - component: {fileID: 490690758219448579}
   - component: {fileID: 490690758219448576}
-  - component: {fileID: 894115945694319411}
   - component: {fileID: 4985062292742912031}
   m_Layer: 9
   m_Name: Player
@@ -38,6 +37,7 @@ Transform:
   - {fileID: 490690759645175122}
   - {fileID: 490690758999993687}
   - {fileID: 295026337205259124}
+  - {fileID: 2891079303665970269}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -150,23 +150,6 @@ MonoBehaviour:
   _slingShotAngleRestriction: 20
   _playerSprite: {fileID: 490690759808437027}
   _playerMovement: {fileID: 490690758219448579}
---- !u!114 &894115945694319411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 490690758219448577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f67a61948cfaa34b8c78f8817f6645e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _minHealthColor: {r: 1, g: 0, b: 0, a: 1}
-  _halfHealthColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _maxHealthColor: {r: 0, g: 1, b: 0, a: 1}
-  _healthSlider: {fileID: 0}
-  _healthFiller: {fileID: 0}
 --- !u!114 &4985062292742912031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,7 +310,8 @@ MonoBehaviour:
   _playerShooting: {fileID: 490690758219448576}
   _playerRb: {fileID: 490690758219448605}
   _playerLandedClip: {fileID: 8300000, guid: 8d42a36d5da1f3543acabfb83b53089c, type: 3}
-  _playerJumpedClip: {fileID: 8300000, guid: 5e36f6c4cf7195243921803ee47aa4c1, type: 3}
+  _playJumpAudioPrefab: {fileID: 7917904661819864452, guid: 0ad7e491441c8794c9476714c383d91a,
+    type: 3}
   _playerShotBowArrowClip: {fileID: 8300000, guid: 013df577c3369684f9d2b336c3a135a8,
     type: 3}
   _playerSlingShotClip: {fileID: 8300000, guid: c46625159075baa45b4eca84cc45cb69,
@@ -581,6 +565,55 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &8543343560352069846
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2891079303665970269}
+  - component: {fileID: 7472292008653589118}
+  m_Layer: 9
+  m_Name: Player Health Display
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2891079303665970269
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8543343560352069846}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 490690758219448607}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7472292008653589118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8543343560352069846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f67a61948cfaa34b8c78f8817f6645e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minHealthColor: {r: 1, g: 0, b: 0, a: 1}
+  _halfHealthColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _maxHealthColor: {r: 0, g: 1, b: 0, a: 1}
+  _healthSlider: {fileID: 0}
+  _healthFiller: {fileID: 0}
+  _healthSetter: {fileID: 4985062292742912031}
 --- !u!1001 &7892718996996018972
 PrefabInstance:
   m_ObjectHideFlags: 0

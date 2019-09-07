@@ -9,7 +9,7 @@ namespace Audio
 
         #region External Functions
 
-        public void PlaySound(AudioClip audioClip, float playDelay)
+        public void PlaySound(AudioClip audioClip, float playDelay = 0)
         {
             GameObject audioInstance = Instantiate(_audioPrefab, _audioHolder.position, Quaternion.identity);
             audioInstance.transform.SetParent(_audioHolder);
@@ -18,14 +18,31 @@ namespace Audio
             sfxObject.PlayAudio(audioClip, playDelay);
         }
 
-        public void PlaySound(AudioClip audioClip, float playDelay, Vector3 worldPosition)
+        public void PlaySound(AudioClip audioClip, Vector3 worldPosition, float playDelay = 0)
         {
-            GameObject audioInstance = Instantiate(_audioPrefab, _audioHolder.position, Quaternion.identity);
+            GameObject audioInstance = Instantiate(_audioPrefab, worldPosition, Quaternion.identity);
             audioInstance.transform.SetParent(_audioHolder);
-            audioInstance.transform.position = worldPosition;
 
             SfxObject sfxObject = audioInstance.GetComponent<SfxObject>();
             sfxObject.PlayAudio(audioClip, playDelay, true);
+        }
+
+        public void PlaySound(GameObject audioPrefab, float playDelay = 0)
+        {
+            GameObject audioInstance = Instantiate(audioPrefab, _audioHolder.position, Quaternion.identity);
+            audioInstance.transform.SetParent(_audioHolder);
+
+            SfxObject sfxObject = audioInstance.GetComponent<SfxObject>();
+            sfxObject.PlayAudio(playDelay);
+        }
+
+        public void PlaySound(GameObject audioPrefab, Vector3 worldPosition, float playDelay = 0)
+        {
+            GameObject audioInstance = Instantiate(audioPrefab, worldPosition, Quaternion.identity);
+            audioInstance.transform.SetParent(_audioHolder);
+
+            SfxObject sfxObject = audioInstance.GetComponent<SfxObject>();
+            sfxObject.PlayAudio(playDelay, true);
         }
 
         #endregion

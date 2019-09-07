@@ -16,7 +16,7 @@ namespace Player.Display
 
         [Header("Audio")]
         [SerializeField] private AudioClip _playerLandedClip;
-        [SerializeField] private AudioClip _playerJumpedClip;
+        [SerializeField] private GameObject _playJumpAudioPrefab;
         [SerializeField] private AudioClip _playerShotBowArrowClip;
         [SerializeField] private AudioClip _playerSlingShotClip;
         [SerializeField] private AudioSource _playerRunning;
@@ -54,19 +54,19 @@ namespace Player.Display
         {
             // TODO: Check if Bow/Arrow or SlingShot
             
-            SfxAudioManager.Instance.PlaySound(_playerShotBowArrowClip, 0);
+            SfxAudioManager.Instance.PlaySound(_playerShotBowArrowClip);
         }
 
         private void HandlePlayerJumped()
         {
-            SfxAudioManager.Instance.PlaySound(_playerJumpedClip, 0);
+            SfxAudioManager.Instance.PlaySound(_playJumpAudioPrefab);
         }
 
         private void HandlePlayerLanded(bool playerLanded)
         {
             if (playerLanded)
             {
-                SfxAudioManager.Instance.PlaySound(_playerLandedClip, 0);
+                SfxAudioManager.Instance.PlaySound(_playerLandedClip);
             }
         }
 
