@@ -110,7 +110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movementSpeed: 1000
   _linearDrag: 30
-  _linearDragThreasholdVelocity: 0.1
+  _linearDragThresholdVelocity: 0.5
   _playerSprite: {fileID: 490690759808437027}
   _jumpVelocity: 12
   _fallMultiplier: 10
@@ -119,6 +119,7 @@ MonoBehaviour:
   _dashSpeed: 50
   _dashEffectTime: 0.1
   _playerDashEffect: {fileID: 7023261616746093198}
+  _dashClip: {fileID: 8300000, guid: 6eb17b69c18efb246869549d24d025c0, type: 3}
 --- !u!114 &490690758219448576
 MonoBehaviour:
   m_ObjectHideFlags: 0

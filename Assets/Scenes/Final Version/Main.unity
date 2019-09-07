@@ -156391,11 +156391,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 490690758219448579, guid: 543c6793679c7e34cbae9c5f003405c4,
-        type: 3}
-      propertyPath: _dashClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 6eb17b69c18efb246869549d24d025c0, type: 3}
     - target: {fileID: 490690758219448576, guid: 543c6793679c7e34cbae9c5f003405c4,
         type: 3}
       propertyPath: _mainCamera
