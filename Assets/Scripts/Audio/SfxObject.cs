@@ -46,6 +46,18 @@ namespace Audio
             }
         }
 
+        public void PlayAudio(float playDelay, bool isSpatialAudio = false)
+        {
+            _audioSource.PlayDelayed(playDelay);
+            _playDelay = playDelay;
+
+            // Enable 3D Audio If Requested
+            if (isSpatialAudio)
+            {
+                _audioSource.spatialBlend = 1;
+            }
+        }
+
         #endregion
     }
 }
