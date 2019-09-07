@@ -9,7 +9,7 @@ namespace Player.Movement
         [Header("Movement")]
         [SerializeField] private float _movementSpeed = 250;
         [SerializeField] private float _linearDrag = 50;
-        [SerializeField] private float _linearDragThreasholdVelocity = 0.5f;
+        [SerializeField] private float _linearDragThresholdVelocity = 0.5f;
         [SerializeField] private SpriteRenderer _playerSprite;
 
         [Header("Jump")]
@@ -123,7 +123,7 @@ namespace Player.Movement
 
             if (_playerRb.velocity.y < 0)
             {
-                if (_playerRb.velocity.y < _linearDragThreasholdVelocity)
+                if (_playerRb.velocity.y < _linearDragThresholdVelocity)
                 {
                     _playerRb.drag = 0;
                 }
@@ -132,7 +132,7 @@ namespace Player.Movement
             }
             else if (_playerRb.velocity.y > 0)
             {
-                if (_playerRb.velocity.y > _linearDragThreasholdVelocity)
+                if (_playerRb.velocity.y > _linearDragThresholdVelocity)
                 {
                     _playerRb.drag = 0;
                 }
