@@ -13,15 +13,14 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField]
     private Transform point2;
     [SerializeField]
-    private Vector2 targetPoint;
+    public Vector2 targetPoint;
     private Vector2 GetRandomPosititonBetweenPoints(ref Transform point1, ref Transform point2)
     {
-        float yValue = 0f;
         float randomXValue = 0f;
         randomXValue = Random.Range(point1.position.x, point2.position.x);
-        return new Vector2(randomXValue, yValue);
+        return new Vector2(randomXValue, point2.position.y);
     }
-    private Vector2 GetNextPoint()
+    private void GetNextPoint()
     {
         if (Mathf.Approximately(point1.position.x, targetPoint.x) &&
             Mathf.Approximately(point1.position.y, targetPoint.y))
@@ -37,10 +36,8 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
-            GetRandomPosititonBetweenPoints(ref point1, ref point2);
+            targetPoint = GetRandomPosititonBetweenPoints(ref point1, ref point2);
         }
-
-        return targetPoint;
     }
     private void Move()
     {
@@ -52,8 +49,6 @@ public class EnemyMovement : MonoBehaviour
         {
             GetNextPoint();
         }
-
-
     }
     private void Update()
     {
@@ -64,4 +59,11 @@ public class EnemyMovement : MonoBehaviour
         targetPoint = point2.position;
         transform.eulerAngles = new Vector3(0, -180, 0);
     }
+    public IEnumerator AllowTargetUpdate(float _time)
+    {
+        bAllowTargetUpdate = false;
+        yield return new WaitForSeconds(_time);
+        bAllowTargetUpdate = true;
+    }
+    public bool bAllowTargetUpdate;
 }

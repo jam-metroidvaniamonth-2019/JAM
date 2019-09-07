@@ -5,6 +5,22 @@ namespace Common
 {
     public class HealthSetter : MonoBehaviour
     {
+        public IEnumerator DealInstantaneousDamageRoutine(float _damage, float _time)
+        {
+            if (bCanDealDamage)
+            {
+                ReduceHealth(_damage);
+            }
+            bCanDealDamage = false;
+            yield return new WaitForSeconds(_time);
+            bCanDealDamage = true;
+        }
+
+        public void DealInstantaneousDamage(float _damage,float _time)
+        {
+            StartCoroutine(DealInstantaneousDamageRoutine(_damage, _time));
+        }
+
         public void AllowDamage()
         {
             StartCoroutine(AllowDamageCoroutine(1f));
@@ -12,14 +28,15 @@ namespace Common
 
         public IEnumerator AllowDamageCoroutine(float _time)
         {
-            bCanDealDamage = false;
+            //bCanDealDamage = false;
             yield return new WaitForSeconds(_time);
             bCanDealDamage = true;
-        } 
+        }
 
         [SerializeField]
-        private bool _canDealDamage;
+        private bool _canDealDamage = true;
 
+        [SerializeField]
         public bool bCanDealDamage
         {
             get
@@ -63,6 +80,7 @@ namespace Common
             }
 
             NotifyHealthChanged();
+            AllowDamage();
         }
 
         public void IncreaseHealth(float incrementAmount)

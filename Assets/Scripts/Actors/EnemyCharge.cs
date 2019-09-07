@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy1 : BaseNPC
+public class EnemyCharge : Enemy1
 {
-    public bool isEnemy1;
+
+   
+
+
 
     public string groundMask = "Ground";
 
@@ -150,7 +153,7 @@ public class Enemy1 : BaseNPC
         moveSpeed = 0;
         TriggerAnimation(JamSpace.AnimationTags.ANIMATION_INVESTIGATE);
         yield return new WaitForSeconds(Wait_Monitoring);
-        
+
 
         if (InvestigatedTargetHealthSetter)
         {
@@ -208,10 +211,7 @@ public class Enemy1 : BaseNPC
         }
         else
         {
-            if (!isEnemy1)
-            {
-                targetPoint = GetRandomPosititonBetweenPoints(ref point1, ref point2);
-            }
+            targetPoint = GetRandomPosititonBetweenPoints(ref point1, ref point2);
         }
 
         moveSpeed = normalSpeed;

@@ -17,13 +17,7 @@ public class EnemySkin : MonoBehaviour
         {
             var healthSetter =
             collisionScript.GetComponent<Common.HealthSetter>();
-
-            if (healthSetter.bCanDealDamage)
-            {
-                healthSetter.ReduceHealth(damage);
-                healthSetter.AllowDamage();
-            }
-
+            healthSetter.DealInstantaneousDamage(damage, 1f);
         }
     }
 

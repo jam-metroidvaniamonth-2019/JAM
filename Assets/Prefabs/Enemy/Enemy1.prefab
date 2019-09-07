@@ -86,12 +86,16 @@ MonoBehaviour:
   currentEState: 0
   myAnimator: {fileID: 0}
   boxCollider2d: {fileID: 0}
+  isMovingRight: 0
   moveSpeed: 2
-  platformEndDetector: {fileID: 7079200563552269303}
+  moveRight: 0
   chargeSpeed: 5
   normalSpeed: 2
   rayCastDistance: 0.5
   InvestigatedTargetHealthSetter: {fileID: 0}
+  point1: {fileID: 0}
+  point2: {fileID: 0}
+  targetPoint: {x: 0, y: 0}
 --- !u!61 &7079200563728730822
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -109,8 +113,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.42666668, y: 0.29333332}
-    newSize: {x: 0.42666668, y: 0.29333332}
+    oldSize: {x: 0.4, y: 0.41}
+    newSize: {x: 0.4, y: 0.41}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -156,13 +160,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 8694173379951662054, guid: 9155134420d08db4a8e608012f0c3a7d,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: f240dfd4814d34d55a9b033f3c9d8a60, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.42666668, y: 0.29333332}
+  m_Size: {x: 0.4, y: 0.41}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -179,6 +182,7 @@ GameObject:
   - component: {fileID: 7079200563863420689}
   - component: {fileID: 7079200563863420688}
   - component: {fileID: 7079200563863420691}
+  - component: {fileID: 7290604406105827281}
   m_Layer: 9
   m_Name: DealDamage
   m_TagString: Untagged
@@ -239,3 +243,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageValue: 0
+--- !u!114 &7290604406105827281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7079200563863420686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6faa654f3927f442a128d68ad6d15ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 5
+  enemyCollider: {fileID: 0}
