@@ -9,7 +9,6 @@ public class Enemy1 : BaseNPC
     public string groundMask = "Ground";
 
     [Header("Wait")]
-
     [SerializeField]
     float Wait_Cooldown;
     [SerializeField]
@@ -140,14 +139,14 @@ public class Enemy1 : BaseNPC
     }
     IEnumerator CallCooldown()
     {
-        moveSpeed = 0;
+        moveSpeed = normalSpeed;
         TriggerAnimation(JamSpace.AnimationTags.ANIMATION_COOLDOWN);
         yield return new WaitForSeconds(Wait_Cooldown);
         CurrentState = JamSpace.EState.IDLE;
     }
     IEnumerator CallMonitoring()
     {
-        moveSpeed = 0;
+        moveSpeed = normalSpeed;
         TriggerAnimation(JamSpace.AnimationTags.ANIMATION_INVESTIGATE);
         yield return new WaitForSeconds(Wait_Monitoring);
         
