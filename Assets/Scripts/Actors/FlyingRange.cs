@@ -117,8 +117,9 @@ public class FlyingRange : MonoBehaviour
         float _angleTowardsPlayer = Vector2.SignedAngle(this.gameObject.transform.right, this.gameObject.transform.right-_playerPosition);
         var direction = this.gameObject.transform.right - _playerPosition;
         Vector2 _vec = new Vector2(direction.x, direction.y);
+
         var baseEnemyProj = Instantiate(projectilePrefab, this.transform.position, Quaternion.Euler(0, 0, 0)).GetComponent<Projectiles.BaseProjectile>();
-        baseEnemyProj.GetComponent<Rigidbody2D>().velocity = speed * _vec;
+        baseEnemyProj.GetComponent<Rigidbody2D>().velocity = speed * direction;
     }
 
     IEnumerator CallMonitoring()
