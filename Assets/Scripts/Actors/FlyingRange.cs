@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class FlyingRange : MonoBehaviour
 {
+    public bool isInCooldown;
+    public float cooldownTimer;
+    public float cooldownCounter;
+
     [SerializeField]
     float normalSpeed;
     [SerializeField]
     float moveSpeed;
     [SerializeField]
-
     private bool isMovingRight;
     private const float rotationEulerAngle = 180;
 
@@ -26,7 +29,18 @@ public class FlyingRange : MonoBehaviour
     }
     private void Update()
     {
+        if (isInCooldown)
+        {
+            cooldownCounter += Time.deltaTime;
+            if(cooldownCounter>= cooldownTimer)
+            {
+                cooldownCounter = 0;
+                isInCooldown = false;
+            }
+        }
+
         Move();
+
     }
     private Vector2 GetRandomPosititonBetweenPoints(ref Transform point1, ref Transform point2)
     {
@@ -114,12 +128,21 @@ public class FlyingRange : MonoBehaviour
 
     public void FireProjectileBlast(Vector3 _playerPosition)
     {
-        float _angleTowardsPlayer = Vector2.SignedAngle(this.gameObject.transform.right, this.gameObject.transform.right-_playerPosition);
-        var direction = this.gameObject.transform.right - _playerPosition;
-        Vector2 _vec = new Vector2(direction.x, direction.y);
+        var orbDirection = (_playerPosition - this.transform.position).normalized;
+        var baseEnemyProj = Instantiate(projectilePrefab, this.transform.position, Quaternion.identity).GetComponent<Projectiles.BaseProjectile>();
+        baseEnemyProj.GetComponent<Rigidbody2D>().velocity =  orbDirection * speed;
 
-        var baseEnemyProj = Instantiate(projectilePrefab, this.transform.position, Quaternion.Euler(0, 0, 0)).GetComponent<Projectiles.BaseProjectile>();
-        baseEnemyProj.GetComponent<Rigidbody2D>().velocity = speed * direction;
+        orbDirection = Quaternion.Euler(0, 180, 0) * orbDirection;
+        baseEnemyProj = Instantiate(projectilePrefab, this.transform.position, Quaternion.identity).GetComponent<Projectiles.BaseProjectile>();
+        baseEnemyProj.GetComponent<Rigidbody2D>().velocity = orbDirection * speed;
+
+        orbDirection = Quaternion.Euler(0, 180, 0) * orbDirection;
+        baseEnemyProj = Instantiate(projectilePrefab, this.transform.position, Quaternion.identity).GetComponent<Projectiles.BaseProjectile>();
+        baseEnemyProj.GetComponent<Rigidbody2D>().velocity = orbDirection * -speed;
+
+        orbDirection = Quaternion.Euler(0, 180, 0) * orbDirection;
+        baseEnemyProj = Instantiate(projectilePrefab, this.transform.position, Quaternion.identity).GetComponent<Projectiles.BaseProjectile>();
+        baseEnemyProj.GetComponent<Rigidbody2D>().velocity = orbDirection * -speed;
     }
 
     IEnumerator CallMonitoring()
@@ -127,11 +150,9 @@ public class FlyingRange : MonoBehaviour
         moveSpeed = 0;
         TriggerAnimation(JamSpace.AnimationTags.ANIMATION_INVESTIGATE);
         yield return new WaitForSeconds(Wait_Monitoring);
-
         if (InvestigatedTargetHealthSetter)
         {
             // fire projectile blast and continue
-            
             CurrentState = JamSpace.EState.ATTACKING;
         }
         else
@@ -144,13 +165,18 @@ public class FlyingRange : MonoBehaviour
     {
         TriggerAnimation(JamSpace.AnimationTags.ANIMATION_CHARGE);
         yield return new WaitForSeconds(wait_attack_position);
+        moveSpeed = normalSpeed;
         CurrentState = JamSpace.EState.IDLE;
     }
 
     private void Attack()
     {
-        FireProjectileBlast(new Vector2(0, 0));
-        StartCoroutine(CallAttack());
+        FireProjectileBlast(InvestigatedTargetHealthSetter.transform.position);
+        TriggerAnimation(JamSpace.AnimationTags.ANIMATION_CHARGE);
+        moveSpeed = normalSpeed;
+        CurrentState = JamSpace.EState.IDLE;
+        isInCooldown = true;
+        //StartCoroutine(CallAttack());
     }
 
     private void Start()
@@ -177,6 +203,7 @@ public class FlyingRange : MonoBehaviour
             case JamSpace.EState.IDLE:
                 moveSpeed = normalSpeed;
                 TriggerAnimation(JamSpace.AnimationTags.ANIMATION_IDLE);
+                InvestigatedTargetHealthSetter = null;
                 break;
             case JamSpace.EState.MONITORING:
                 StartCoroutine(CallMonitoring());
@@ -213,13 +240,16 @@ public class FlyingRange : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        var collisionScript = collision.GetComponent<Player.Movement.PlayerCollision>();
-        if (collisionScript)
+        if (CurrentState == JamSpace.EState.IDLE && !isInCooldown)
         {
-            InvestigatedTargetHealthSetter = collisionScript.GetComponent<Common.HealthSetter>();
-            CurrentState = JamSpace.EState.MONITORING;
+            var collisionScript = collision.GetComponent<Player.Movement.PlayerCollision>();
+            if (collisionScript)
+            {
+                InvestigatedTargetHealthSetter = collisionScript.GetComponent<Common.HealthSetter>();
+                CurrentState = JamSpace.EState.MONITORING;
+            }
         }
     }
 

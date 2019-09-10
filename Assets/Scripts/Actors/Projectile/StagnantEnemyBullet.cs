@@ -5,6 +5,6 @@ using UnityEngine;
 public class StagnantEnemyBullet : BaseEnemyProjectile
 {
 
-
+    
 
 }
