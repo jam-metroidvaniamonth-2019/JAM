@@ -30,17 +30,17 @@ public class Enemy1 : BaseNPC
     private const float rotationEulerAngle = 180;
     private void EvaluateRotation()
     {
-        if (isMovingRight)
+        if ((this.gameObject.transform.position.x - targetPoint.x) > 0)
         {
-            transform.eulerAngles = new Vector3(0, 0, 0);
+            this.gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
         else
         {
-            transform.eulerAngles = new Vector3(0, -180, 0);
+            this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
-
-
     }
+
+
 
     void Start()
     {
@@ -154,6 +154,7 @@ public class Enemy1 : BaseNPC
             if (!isEnemy1)
             {
                 targetPoint = InvestigatedTargetHealthSetter.gameObject.transform.position;
+                EvaluateRotation();
             }
 
             CurrentState = JamSpace.EState.ATTACKING;
@@ -208,6 +209,7 @@ public class Enemy1 : BaseNPC
             if (!isEnemy1)
             {
                 targetPoint = GetRandomPosititonBetweenPoints(ref point1, ref point2);
+                EvaluateRotation();
             }
         }
 
