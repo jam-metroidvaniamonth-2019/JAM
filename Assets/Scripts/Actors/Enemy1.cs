@@ -28,8 +28,6 @@ public class Enemy1 : BaseNPC
     [SerializeField]
     private bool isMovingRight;
     private const float rotationEulerAngle = 180;
-
-
     private void EvaluateRotation()
     {
         if (isMovingRight)
@@ -146,7 +144,7 @@ public class Enemy1 : BaseNPC
     }
     IEnumerator CallMonitoring()
     {
-        moveSpeed = normalSpeed;
+        moveSpeed = 0;
         TriggerAnimation(JamSpace.AnimationTags.ANIMATION_INVESTIGATE);
         yield return new WaitForSeconds(Wait_Monitoring);
         
