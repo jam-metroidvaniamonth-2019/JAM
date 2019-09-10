@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class StagnantEnemy : BaseNPC
 {
+
+    public bool bIsInCooldown;
+    public float cooldownTimer;
+    public float cooldownCounter;
+
+
     [SerializeField]
     private GameObject projectilePrefab;
 
@@ -65,26 +71,7 @@ public class StagnantEnemy : BaseNPC
 
         if (InvestigatedTargetHealthSetter)
         {
-            var playerXPos = InvestigatedTargetHealthSetter.transform.position.x;
-            var myXPos = this.transform.position.x;
-
-            Projectiles.BaseProjectile baseEnemyProj = null;
-
-            if ((playerXPos - myXPos) < 0)
-            {
-                // fire in left direction
-                baseEnemyProj = Instantiate(projectilePrefab, this.transform.position, Quaternion.Euler(0, -180, 0)).GetComponent<Projectiles.BaseProjectile>();
-                baseEnemyProj.GetComponent<Rigidbody2D>().velocity = -speed * baseEnemyProj.transform.right;
-
-
-            }
-            else
-            {
-                baseEnemyProj = Instantiate(projectilePrefab, this.transform.position, Quaternion.Euler(0, 0, 0)).GetComponent<Projectiles.BaseProjectile>();
-                baseEnemyProj.GetComponent<Rigidbody2D>().velocity = speed * baseEnemyProj.transform.right;
-
-                // fire in right direction
-            }
+            CurrentState = JamSpace.EState.ATTACKING;
         }
         else
         {
@@ -94,24 +81,50 @@ public class StagnantEnemy : BaseNPC
 
     public Common.HealthSetter InvestigatedTargetHealthSetter = null;
 
+    private bool bWasLastRecorededInside = false;
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        bWasLastRecorededInside = true;
+
+    }
+
+
+
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        var collisionScript = collision.GetComponent<Player.Movement.PlayerCollision>();
-        if (collisionScript)
+        if (!bIsInCooldown)
         {
-            InvestigatedTargetHealthSetter = collisionScript.GetComponent<Common.HealthSetter>();
-
-            if (bCanStartCounter)
+            var collisionScript = collision.GetComponent<Player.Movement.PlayerCollision>();
+            if (collisionScript)
             {
-                CurrentState = JamSpace.EState.MONITORING;
-                bCanStartCounter = false;
+                InvestigatedTargetHealthSetter = collisionScript.GetComponent<Common.HealthSetter>();
+
+                if (bCanStartCounter)
+                {
+                    CurrentState = JamSpace.EState.MONITORING;
+                    bCanStartCounter = false;
+                }
             }
         }
     }
 
     private void Update()
     {
+        if (bIsInCooldown)
+        {
+            cooldownCounter += Time.deltaTime;
+            if(cooldownCounter>= cooldownTimer)
+            {
+                cooldownCounter = 0;
+                bIsInCooldown = false;
+                if (InvestigatedTargetHealthSetter != null)
+                {
+                    InvestigatedTargetHealthSetter.GetComponent<Player.Movement.PlayerCollision>().GetComponent<Rigidbody2D>().WakeUp();
+                }
+            }
+        }
+
     }
 
     [Header("Counter")]
@@ -127,6 +140,27 @@ public class StagnantEnemy : BaseNPC
         {
             InvestigatedTargetHealthSetter = null;
         }
+    }
+
+    public void Attack()
+    {
+        var playerXPos = InvestigatedTargetHealthSetter.transform.position.x;
+        var myXPos = this.transform.position.x;
+        Projectiles.BaseProjectile baseEnemyProj = null;
+
+        if (((playerXPos - myXPos) < 0))
+        {
+            baseEnemyProj = Instantiate(projectilePrefab, this.transform.position, Quaternion.Euler(0, -180, 0)).GetComponent<Projectiles.BaseProjectile>();
+            baseEnemyProj.GetComponent<Rigidbody2D>().velocity = speed * baseEnemyProj.transform.right;
+        }
+        else
+        {
+            baseEnemyProj = Instantiate(projectilePrefab, this.transform.position, Quaternion.Euler(0, 0, 0)).GetComponent<Projectiles.BaseProjectile>();
+            baseEnemyProj.GetComponent<Rigidbody2D>().velocity = speed * baseEnemyProj.transform.right;
+        }
+
+        bIsInCooldown = true;
+        CurrentState = JamSpace.EState.IDLE;
     }
 
     private void Start()
@@ -148,7 +182,7 @@ public class StagnantEnemy : BaseNPC
                 StartCoroutine(CallMonitoring());
                 break;
             case JamSpace.EState.ATTACKING:
-                StartCoroutine(CallCooldown());
+                Attack();
                 break;
             case JamSpace.EState.COOLDOWN:
                 StartCoroutine(CallCooldown());
