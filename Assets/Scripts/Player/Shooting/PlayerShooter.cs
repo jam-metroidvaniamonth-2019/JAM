@@ -52,10 +52,11 @@ namespace Player.Shooting
         private bool _rightTriggerStateChanged;
 
         public delegate void TimeSlowActive();
-
         public TimeSlowActive OnTimeSlowActive;
 
-        #region Unity Event Functions
+        private bool _disableShooting;
+
+        #region Unity Functions
 
         private void Start()
         {
@@ -104,6 +105,14 @@ namespace Player.Shooting
 
             UpdateRotation();
         }
+
+        #endregion
+
+        #region External Functions
+
+        public void DisableShooting() => _disableShooting = true;
+
+        public void EnableShooting() => _disableShooting = false;
 
         #endregion
 
@@ -167,6 +176,11 @@ namespace Player.Shooting
 
         private void SetupBulletShooting()
         {
+            if (_disableShooting)
+            {
+                return;
+            }
+
             _triggerHeldDown = true;
             _timeSlowTimer = _timeSlowActiveWait;
             _autoShootTimer = _autoShootWait;

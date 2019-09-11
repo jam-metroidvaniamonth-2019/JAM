@@ -6,6 +6,7 @@ TagManager:
   tags:
   - TargetCamera
   - TargetFollowerModifier
+  - explosion
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Enemy
   - PlayerProjectile
   - EnemyProjectile
-  - 
+  - PlayerAffectors
   - 
   - 
   - 

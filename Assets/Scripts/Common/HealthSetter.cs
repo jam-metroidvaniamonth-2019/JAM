@@ -17,45 +17,48 @@ namespace Common
             bCanDealDamage = true;
         }
 
-        [SerializeField]
-        private bool _canDealDamage;
+        [SerializeField] private bool _canDealDamage;
 
         public bool bCanDealDamage
         {
-            get
-            {
-                return _canDealDamage;
-            }
+            get => _canDealDamage;
 
-            set
-            {
-                _canDealDamage = value;
-            }
+            set => _canDealDamage = value;
         }
 
         [SerializeField] private float _maxHealth;
 
         public delegate void HealthZero();
+
         public HealthZero OnHealthZero;
 
         public delegate void HealthChanged(float currentHealth, float maxHealth);
         public HealthChanged OnHealthChanged;
 
         private bool _zeroHealthNotified;
-        [SerializeField]
-        private float _currentHealth;
+        [SerializeField] private float _currentHealth;
 
         #region Unity Functions
 
         private void Start()
         {
-            // _currentHealth = _maxHealth;
+            _currentHealth = _maxHealth;
             NotifyHealthChanged();
         }
 
         #endregion
 
         #region External Functions
+
+        public void SetCurrentHealth(float currentHealth)
+        {
+            if (currentHealth > _maxHealth)
+            {
+                currentHealth = _maxHealth;
+            }
+
+            _currentHealth = currentHealth;
+        }
 
         public void ReduceHealth(float reductionAmount)
         {
@@ -79,6 +82,10 @@ namespace Common
 
             NotifyHealthChanged();
         }
+
+        public float CurrentHealth => _currentHealth;
+
+        public float MaxHealth => _maxHealth;
 
         #endregion
 
