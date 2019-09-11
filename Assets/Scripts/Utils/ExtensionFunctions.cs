@@ -20,7 +20,7 @@ namespace Utils
         public static string Format2DecimalPlace(float value) => value.ToString("0.##");
 
         public static Color ConvertAndClampColor(float r = 0, float g = 0, float b = 0, float a = 0) =>
-            new Color(Mathf.Clamp(r, 0, 255) / 255, Mathf.Clamp(g, 0, 255) / 255, Mathf.Clamp(b, 0, 255) / 255,
+            new Color(Mathf.Clamp01(r), Mathf.Clamp01(g), Mathf.Clamp01(b),
                 Mathf.Clamp(a, 0, 255) / 255);
 
         public static float To360Angle(float angle)

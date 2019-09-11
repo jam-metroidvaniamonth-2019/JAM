@@ -1,5 +1,6 @@
 ﻿using Scenes.Common;
 using UI;
+using UI.CutScene;
 using UnityEngine;
 using Utils;
 
@@ -49,7 +50,14 @@ namespace Scenes.Main
             }
             else
             {
-                OpenPauseMenu();
+                if (!_gamePaused)
+                {
+                    OpenPauseMenu();
+                }
+                else
+                {
+                    _pauseAndResume.ResumeGame();
+                }
             }
         }
 

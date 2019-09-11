@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
-using Utils;
 
-namespace UI
+namespace UI.CutScene
 {
     public class CutSceneDisplay : MonoBehaviour
     {
@@ -45,9 +45,11 @@ namespace UI
 
             if (!_cutSceneOpen)
             {
-                _cutSceneFader.StartFadeOut();
-                _cutSceneBackgroundFader.StartFadeOut();
+                _cutSceneFader.StartFadeOut(true);
+                _cutSceneBackgroundFader.StartFadeOut(true);
 
+                _cutSceneFader.OnFadeOutComplete += HandleCutSceneOpen;
+                
                 OnCutSceneOpen?.Invoke();
             }
         }
@@ -55,6 +57,12 @@ namespace UI
         #endregion
 
         #region Utility Functions
+
+        private void HandleCutSceneOpen()
+        {
+            _cutSceneFader.OnFadeOutComplete -= HandleCutSceneOpen;
+            _cutSceneOpen = true;
+        }
 
         public void CloseCutScene()
         {
