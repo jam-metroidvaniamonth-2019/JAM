@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Audio;
 using Common;
 using Player.Movement;
@@ -45,7 +44,7 @@ namespace Player.Display
             _playerHealthSetter.OnHealthZero -= HandlePlayerDead;
         }
 
-        private void Update()
+        private void LateUpdate()
         {
             _playerAnimator.SetBool(MoveParam, _playerRb.velocity.x != 0);
 
@@ -89,7 +88,6 @@ namespace Player.Display
         private void HandlePlayerDead()
         {
             _playerAnimator.SetBool(DeadParam, true);
-            _playerRb.velocity = Vector2.zero;
 
             _playerMovement.DisableMovement();
             _playerShooter.DisableShooting();

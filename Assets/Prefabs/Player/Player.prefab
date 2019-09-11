@@ -386,7 +386,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: f819d3fa5e527be44a774677b1907d6f, type: 2}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -942,6 +942,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490690758219448607}
     m_Modifications:
+    - target: {fileID: 142378574536146621, guid: c1dfe6606a859f340b1b5a6c7faf1e94,
+        type: 3}
+      propertyPath: m_Name
+      value: Player Dash
+      objectReference: {fileID: 0}
     - target: {fileID: 7606780980240439400, guid: c1dfe6606a859f340b1b5a6c7faf1e94,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -996,11 +1001,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 142378574536146621, guid: c1dfe6606a859f340b1b5a6c7faf1e94,
-        type: 3}
-      propertyPath: m_Name
-      value: Player Dash
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1dfe6606a859f340b1b5a6c7faf1e94, type: 3}

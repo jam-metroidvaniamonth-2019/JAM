@@ -184,6 +184,7 @@ namespace Player.Shooting
             _triggerHeldDown = true;
             _timeSlowTimer = _timeSlowActiveWait;
             _autoShootTimer = _autoShootWait;
+            _shootDirectionDisplay.rotation  = Quaternion.Euler(0,0,_directionLockedAngle);
 
             Instantiate(_weaponDisplayEffectPrefab, _shootDirectionDisplay.position, Quaternion.identity);
 

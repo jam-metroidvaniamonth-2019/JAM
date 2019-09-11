@@ -9,6 +9,9 @@ namespace SpeechSystem
         [SerializeField] private TextTyper _speechTextTyper;
         [SerializeField] private float _timeBetweenMultipleDialogues;
 
+        public delegate void SpeechBubbleComplete();
+        public SpeechBubbleComplete OnSpeechBubbleComplete;
+
         private string[] _currentDialogues;
         private bool _dialogueActive;
         private bool _dialogueComplete;
@@ -63,6 +66,8 @@ namespace SpeechSystem
         {
             _dialogueActive = false;
             _speechBubbleAnimator.SetBool(DialogueDisplayParam, false);
+
+            OnSpeechBubbleComplete?.Invoke();
         }
 
         #endregion
