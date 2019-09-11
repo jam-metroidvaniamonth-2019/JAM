@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class FlyingRange : MonoBehaviour
 {
+
+    public float baseAnim_Atttack_Time = 0.4677f;
+    public float baseAnim_Monitoring_Time = 0.4f;
+    public float baseAnim_Idle_Time = 0.4f;
+
     public bool isInCooldown;
     public float cooldownTimer;
     public float cooldownCounter;
@@ -114,7 +119,6 @@ public class FlyingRange : MonoBehaviour
 
     void TriggerAnimation(string animTag)
     {
-        return;
         myAnimator.SetTrigger(animTag);
     }
 
@@ -149,6 +153,7 @@ public class FlyingRange : MonoBehaviour
     {
         moveSpeed = 0;
         TriggerAnimation(JamSpace.AnimationTags.ANIMATION_INVESTIGATE);
+        myAnimator.speed = (1 / (Wait_Monitoring / baseAnim_Monitoring_Time));
         yield return new WaitForSeconds(Wait_Monitoring);
         if (InvestigatedTargetHealthSetter)
         {
@@ -183,13 +188,17 @@ public class FlyingRange : MonoBehaviour
     {
         targetPoint = point2.position;
         EvaluateRotation();
+
         myAnimator = this.GetComponent<Animator>();
     }
 
     IEnumerator CallCooldown()
     {
         moveSpeed = 0;
-        TriggerAnimation(JamSpace.AnimationTags.ANIMATION_COOLDOWN);
+        //TriggerAnimation(JamSpace.AnimationTags.ANIMATION_COOLDOWN);
+
+        TriggerAnimation(JamSpace.AnimationTags.ANIMATION_IDLE);
+        myAnimator.speed = 1;
         yield return new WaitForSeconds(Wait_Cooldown);
         CurrentState = JamSpace.EState.IDLE;
     }
@@ -204,6 +213,7 @@ public class FlyingRange : MonoBehaviour
                 moveSpeed = normalSpeed;
                 TriggerAnimation(JamSpace.AnimationTags.ANIMATION_IDLE);
                 InvestigatedTargetHealthSetter = null;
+                myAnimator.speed = 1;
                 break;
             case JamSpace.EState.MONITORING:
                 StartCoroutine(CallMonitoring());
