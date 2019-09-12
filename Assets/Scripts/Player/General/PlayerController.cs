@@ -28,7 +28,7 @@ namespace Player.General
             NotifyBagStatusChanged();
         }
 
-        public void PlayerLostBag()
+        public void PlayerLoseBag()
         {
             _playerHasBag = false;
             NotifyBagStatusChanged();

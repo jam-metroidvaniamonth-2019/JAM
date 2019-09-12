@@ -447,11 +447,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64e3a33a6a4f3e1458ce4571b886c025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shootDirectionDisplayGameObject: {fileID: 490690759645175123}
+  _playerBowDisplay: {fileID: 490690759645175123}
+  _playerSlingShotDisplay: {fileID: 8422008751842715934}
   _playerTransform: {fileID: 490690758219448607}
   _mainCamera: {fileID: 0}
   _weaponDisplayEffectPrefab: {fileID: 6905591882997995792, guid: 9f392c392f3a12143bcdc2e1a4aa0c08,
     type: 3}
+  _playerController: {fileID: 7410804983857183026}
   _rotationOffset: 0
   _timeSlowActiveWait: 0.3
   _autoShootWait: 3
@@ -460,7 +462,8 @@ MonoBehaviour:
   _bulletObject: {fileID: 9094691206825400465, guid: c18700d619899f745ae7e54f996f7905,
     type: 3}
   _bulletHolder: {fileID: 0}
-  _shootingPoint: {fileID: 490690759652174684}
+  _bowShootingPoint: {fileID: 490690759652174684}
+  _slingShotShootingPoint: {fileID: 7544184343512268302}
   _bowAngleRestriction: 30
   _slingShotAngleRestriction: 20
   _playerSprite: {fileID: 490690759808437027}
@@ -879,11 +882,9 @@ MonoBehaviour:
   _playerRb: {fileID: 490690758219448605}
   _movementThreshold: 0.1
   _runningSounds:
-  - {fileID: 7917904661819864452, guid: a4d0c7cd5d086a4438db2761f413b1f5, type: 3}
-  - {fileID: 7917904661819864452, guid: 3ddedfb2a3465a7408e24f1768f58ec6, type: 3}
-  - {fileID: 7917904661819864452, guid: 0ad7e491441c8794c9476714c383d91a, type: 3}
-  - {fileID: 7917904661819864452, guid: f46b4e10db60d3948b43c3153a7ed452, type: 3}
-  - {fileID: 7917904661819864452, guid: df22fa306d5fea7479eb70f0b3cd79a2, type: 3}
+  - {fileID: 7917904661819864452, guid: 22e3dba8b831f184dab1173179cc7e66, type: 3}
+  - {fileID: 7917904661819864452, guid: 7acf2335431558d49adb93269cd64737, type: 3}
+  - {fileID: 7917904661819864452, guid: 4f857f53b3678684bb7c58337851b223, type: 3}
 --- !u!95 &490690759808437052
 Animator:
   serializedVersion: 3
@@ -1102,11 +1103,9 @@ MonoBehaviour:
   _playerRb: {fileID: 490690758219448605}
   _movementThreshold: 0.1
   _runningSounds:
-  - {fileID: 7917904661819864452, guid: a4d0c7cd5d086a4438db2761f413b1f5, type: 3}
-  - {fileID: 7917904661819864452, guid: 3ddedfb2a3465a7408e24f1768f58ec6, type: 3}
-  - {fileID: 7917904661819864452, guid: 0ad7e491441c8794c9476714c383d91a, type: 3}
-  - {fileID: 7917904661819864452, guid: f46b4e10db60d3948b43c3153a7ed452, type: 3}
-  - {fileID: 7917904661819864452, guid: df22fa306d5fea7479eb70f0b3cd79a2, type: 3}
+  - {fileID: 7917904661819864452, guid: 22e3dba8b831f184dab1173179cc7e66, type: 3}
+  - {fileID: 7917904661819864452, guid: 7acf2335431558d49adb93269cd64737, type: 3}
+  - {fileID: 7917904661819864452, guid: 4f857f53b3678684bb7c58337851b223, type: 3}
 --- !u!95 &8562415179825532186
 Animator:
   serializedVersion: 3

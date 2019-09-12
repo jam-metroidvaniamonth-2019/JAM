@@ -44,7 +44,6 @@ namespace Player.Movement
 
         // Delegates
         public delegate void PlayerJumped();
-
         public PlayerJumped OnPlayerJumped;
 
         #region Unity Functions

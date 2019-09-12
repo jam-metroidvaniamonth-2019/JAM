@@ -1,4 +1,5 @@
-﻿using Player.Movement;
+﻿using Player.General;
+using Player.Movement;
 using Projectiles;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -14,6 +15,7 @@ namespace Player.Shooting
         [SerializeField] private Transform _playerTransform;
         [SerializeField] private Camera _mainCamera;
         [SerializeField] private GameObject _weaponDisplayEffectPrefab;
+        [SerializeField] private PlayerController _playerController;
 
         [Header("Extra Controls")]
         [SerializeField] private float _rotationOffset = 90;
@@ -25,7 +27,8 @@ namespace Player.Shooting
         [SerializeField] private float _shotWaitTime = 0.5f;
         [SerializeField] private GameObject _bulletObject;
         [SerializeField] private Transform _bulletHolder;
-        [SerializeField] private Transform _shootingPoint;
+        [SerializeField] private Transform _bowShootingPoint;
+        [SerializeField] private Transform _slingShotShootingPoint;
 
         [Header("Shooting Angle Limits")]
         [SerializeField] [Range(10, 30)] private float _bowAngleRestriction;
@@ -34,8 +37,7 @@ namespace Player.Shooting
         [SerializeField] private SpriteRenderer _playerBagSprite;
         [SerializeField] private PlayerMovement _playerMovement;
 
-        public delegate void PlayerShot();
-
+        public delegate void PlayerShot(bool playerHasBow);
         public PlayerShot OnPlayerShot;
 
         // Display State Objects
@@ -140,10 +142,18 @@ namespace Player.Shooting
             if (!_triggerHeldDown)
             {
                 _shootBowDirectionDisplayRenderer.enabled = false;
+                _shootSlingShotDirectionDisplayRenderer.enabled = false;
                 return;
             }
 
-            _shootBowDirectionDisplayRenderer.enabled = true;
+            if (_playerController.PlayerHasBow)
+            {
+                _shootBowDirectionDisplayRenderer.enabled = true;
+            }
+            else
+            {
+                _shootSlingShotDirectionDisplayRenderer.enabled = true;
+            }
 
             float xMovement = Input.GetAxis(ControlConstants.HorizontalShootAxis);
             float yMovement = Input.GetAxis(ControlConstants.VerticalShootAxis);
@@ -174,10 +184,19 @@ namespace Player.Shooting
                 rotationAngle = ExtensionFunctions.To360Angle(rotationAngle);
             }
 
-            rotationAngle = Mathf.Clamp(rotationAngle, _directionLockedAngle - _bowAngleRestriction,
-                _directionLockedAngle + _bowAngleRestriction);
+            if (_playerController.PlayerHasBow)
+            {
+                rotationAngle = Mathf.Clamp(rotationAngle, _directionLockedAngle - _bowAngleRestriction,
+                    _directionLockedAngle + _bowAngleRestriction);
+            }
+            else
+            {
+                rotationAngle = Mathf.Clamp(rotationAngle, _directionLockedAngle - _slingShotAngleRestriction,
+                    _directionLockedAngle + _slingShotAngleRestriction);
+            }
 
             _shootBowDirectionDisplay.rotation = Quaternion.Euler(0, 0, rotationAngle);
+            _shootSlingShotDirectionDisplay.rotation = Quaternion.Euler(0,0, rotationAngle);
         }
 
         private void ActivateShootingTimeSlow()
@@ -203,7 +222,9 @@ namespace Player.Shooting
             _triggerHeldDown = true;
             _timeSlowTimer = _timeSlowActiveWait;
             _autoShootTimer = _autoShootWait;
+
             _shootBowDirectionDisplay.rotation = Quaternion.Euler(0, 0, _directionLockedAngle);
+            _shootSlingShotDirectionDisplay.rotation = Quaternion.Euler(0, 0, _directionLockedAngle);
 
             Instantiate(_weaponDisplayEffectPrefab, _shootBowDirectionDisplay.position, Quaternion.identity);
 
@@ -220,13 +241,16 @@ namespace Player.Shooting
             {
                 return;
             }
-
-            // TODO: Invoke Value Based On SlingShot and Bow/Arrow
-            OnPlayerShot?.Invoke();
+            
+            OnPlayerShot?.Invoke(_playerController.PlayerHasBow);
 
             _timeBeforeLastShot = 0;
 
-            GameObject bulletInstance = Instantiate(_bulletObject, _shootingPoint.position, Quaternion.identity);
+            Vector3 shootingPosition = _playerController.PlayerHasBow
+                ? _bowShootingPoint.position
+                : _slingShotShootingPoint.position;
+
+            GameObject bulletInstance = Instantiate(_bulletObject, shootingPosition, Quaternion.identity);
 
             float launchSpeed = bulletInstance.GetComponent<BaseProjectile>().LaunchSpeed;
             float xVelocity = Mathf.Cos(_shootBowDirectionDisplay.rotation.eulerAngles.z * Mathf.Deg2Rad);
