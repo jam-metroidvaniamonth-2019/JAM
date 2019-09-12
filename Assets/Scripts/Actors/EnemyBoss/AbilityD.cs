@@ -25,6 +25,9 @@ public class AbilityD : BaseBossAbility
     {
         base.Trigger(_direction);
         //StartCoroutine(spawnEnemies());
+
+        StartCoroutine(spawnEnemies());
+
         NotifyAbilityCompleted();
 
     }

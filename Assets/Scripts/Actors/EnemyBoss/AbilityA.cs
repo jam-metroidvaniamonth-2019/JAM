@@ -14,7 +14,6 @@ public class AbilityA : BaseBossAbility
         LaunchAbilityAProjectile(_direction);
         NotifyAbilityCompleted();
     }
-
     private void LaunchAbilityAProjectile(Vector2 _direction)
     {
         var baseEnemyProj = Instantiate(projectileA, this.transform.position, Quaternion.identity).GetComponent<Projectiles.BaseProjectile>();
