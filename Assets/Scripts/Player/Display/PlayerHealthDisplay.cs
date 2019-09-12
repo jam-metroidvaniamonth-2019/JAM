@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 namespace Player.Display
 {
-    [RequireComponent(typeof(HealthSetter))]
     public class PlayerHealthDisplay : MonoBehaviour
     {
         [Header("Colors")]
@@ -15,14 +14,12 @@ namespace Player.Display
         [Header("Display")]
         [SerializeField] private Slider _healthSlider;
         [SerializeField] private Image _healthFiller;
-
-        private HealthSetter _healthSetter;
+        [SerializeField] private HealthSetter _healthSetter;
 
         #region Unity Functions
 
         private void Start()
         {
-            _healthSetter = GetComponent<HealthSetter>();
             _healthSetter.OnHealthChanged += HandleHealthChange;
         }
 

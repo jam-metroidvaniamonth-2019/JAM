@@ -1,5 +1,10 @@
-﻿using Player.Movement;
+﻿using System.Collections.Generic;
+using Audio;
+using Common;
+using Player.Movement;
+using Player.Shooting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Player.Display
 {
@@ -9,12 +14,18 @@ namespace Player.Display
         private static readonly int JumpParam = Animator.StringToHash("Jump");
         private static readonly int FallParam = Animator.StringToHash("Fall");
         private static readonly int MoveParam = Animator.StringToHash("Move");
+        private static readonly int DeadParam = Animator.StringToHash("Dead");
 
         [Header("Controllers")]
         [SerializeField] private PlayerCollision _playerCollision;
         [SerializeField] private PlayerMovement _playerMovement;
+        [SerializeField] private HealthSetter _playerHealthSetter;
+        [SerializeField] private PlayerShooter _playerShooter;
         [SerializeField] private Rigidbody2D _playerRb;
         [SerializeField] private float _movementThreshold;
+
+        [Header("Player Animation Audio")]
+        [SerializeField] private List<GameObject> _runningSounds;
 
         private Animator _playerAnimator;
 
@@ -24,9 +35,16 @@ namespace Player.Display
         {
             _playerAnimator = GetComponent<Animator>();
             _playerMovement.OnPlayerJumped += HandlePlayerJumped;
+            _playerHealthSetter.OnHealthZero += HandlePlayerDead;
         }
 
-        private void Update()
+        private void OnDestroy()
+        {
+            _playerMovement.OnPlayerJumped -= HandlePlayerJumped;
+            _playerHealthSetter.OnHealthZero -= HandlePlayerDead;
+        }
+
+        private void LateUpdate()
         {
             _playerAnimator.SetBool(MoveParam, _playerRb.velocity.x != 0);
 
@@ -59,6 +77,20 @@ namespace Player.Display
         {
             _playerAnimator.SetBool(JumpParam, true);
             _playerAnimator.SetBool(FallParam, false);
+        }
+
+        private void PlayRandomRunningSound()
+        {
+            GameObject audioPrefab = _runningSounds[Mathf.FloorToInt(Random.value * _runningSounds.Count)];
+            SfxAudioManager.Instance.PlaySound(audioPrefab);
+        }
+
+        private void HandlePlayerDead()
+        {
+            _playerAnimator.SetBool(DeadParam, true);
+
+            _playerMovement.DisableMovement();
+            _playerShooter.DisableShooting();
         }
 
         #endregion

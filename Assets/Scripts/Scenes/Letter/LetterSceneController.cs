@@ -1,8 +1,6 @@
 ﻿using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using Utils;
 
 namespace Scenes.Letter
 {
@@ -10,11 +8,20 @@ namespace Scenes.Letter
     {
         [SerializeField] private Fader _fader;
         [SerializeField] private float _faderDelay;
-        [SerializeField] private TextTyper _letterTyper;
-        [SerializeField] private Text _controlDisplayText;
+        [SerializeField] private TextTyper _letterTyper1;
+
+        [Header("Input Detection")]
+        [SerializeField] private string _gamePadText;
+        [SerializeField] private string _keyboardText;
+        [SerializeField] private TextTyper _inputTextTyper;
+
 
         private bool _sceneExitTriggered;
-        private float _triggerTimer;
+        private float _sceneExitTimer;
+
+        private bool _sceneActive;
+        private bool _keyboardConnectedLastState;
+        private bool _gamePadConnectedLastState;
 
         #region Unity Functions
 
@@ -22,23 +29,26 @@ namespace Scenes.Letter
         {
             _fader.OnFadeInComplete += HandleFadeInComplete;
             _fader.OnFadeOutComplete += HandleFadeOutComplete;
-            _letterTyper.OnTypingCompleted += HandleLetterTypingComplete;
+
+            _letterTyper1.OnTypingCompleted += HandleInitialLetterTypingComplete;
 
             _fader.StartFadeIn();
         }
 
         private void Update()
         {
+            if (_sceneActive)
+            {
+                CheckGamePadConnected();
+            }
+
             UpdateTimer();
-            CheckGamePadConnected();
-            HandleForceSceneSwitch();
         }
 
         private void OnDestroy()
         {
             _fader.OnFadeInComplete -= HandleFadeInComplete;
             _fader.OnFadeOutComplete -= HandleFadeOutComplete;
-            _letterTyper.OnTypingCompleted -= HandleLetterTypingComplete;
         }
 
         #endregion
@@ -47,59 +57,60 @@ namespace Scenes.Letter
 
         private void UpdateTimer()
         {
-            if (_triggerTimer > 0)
+            if (_sceneExitTimer > 0 && _sceneExitTriggered)
             {
-                _triggerTimer -= Time.deltaTime;
-                if (_triggerTimer <= 0)
+                _sceneExitTimer -= Time.deltaTime;
+                if (_sceneExitTimer <= 0)
                 {
-                    if (!_sceneExitTriggered)
-                    {
-                        _letterTyper.StartTyping();
-                    }
-                    else
-                    {
-                        _fader.StartFadeOut();
-                    }
+                    HandleSceneSwitch();
                 }
             }
         }
 
-        private void HandleForceSceneSwitch()
-        {
-            if (_sceneExitTriggered)
-            {
-                return;
-            }
-
-            if (Input.GetButtonDown(ControlConstants.StartButton))
-            {
-                _letterTyper.ForceComplete();
-            }
-        }
-
+        private void HandleSceneSwitch() => _fader.StartFadeOut();
+        
         private void CheckGamePadConnected()
         {
             string[] connectedGamePads = Input.GetJoystickNames();
-            if (connectedGamePads.Length > 0)
+            if (connectedGamePads.Length > 0 && !string.IsNullOrEmpty(connectedGamePads[0]))
             {
-                _controlDisplayText.text = string.IsNullOrEmpty(connectedGamePads[0])
-                    ? "PRESS SPACE TO SKIP"
-                    : "PRESS A TO SKIP";
+                if (!_gamePadConnectedLastState)
+                {
+                    _inputTextTyper.UpdateText(_gamePadText);
+                    _inputTextTyper.StartTyping();
+
+                    _gamePadConnectedLastState = true;
+                    _keyboardConnectedLastState = false;
+                }
             }
             else
             {
-                _controlDisplayText.text = "PRESS SPACE TO SKIP";
+                if (!_keyboardConnectedLastState)
+                {
+                    _inputTextTyper.UpdateText(_keyboardText);
+                    _inputTextTyper.StartTyping();
+
+                    _gamePadConnectedLastState = false;
+                    _keyboardConnectedLastState = true;
+                }
             }
         }
 
-        private void HandleFadeInComplete() => _triggerTimer = _faderDelay;
+        private void HandleFadeInComplete()
+        {
+            _sceneActive = true;
+            _letterTyper1.StartTyping();
+        }
 
         private void HandleFadeOutComplete() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
-        private void HandleLetterTypingComplete()
+        private void HandleInitialLetterTypingComplete()
         {
+            _letterTyper1.OnTypingCompleted -= HandleInitialLetterTypingComplete;
+
             _sceneExitTriggered = true;
-            _triggerTimer = _faderDelay;
+            _sceneExitTimer = _faderDelay;
+            _sceneActive = false;
         }
 
         #endregion
