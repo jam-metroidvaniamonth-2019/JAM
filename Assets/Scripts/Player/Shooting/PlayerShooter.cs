@@ -29,9 +29,11 @@ namespace Player.Shooting
         [SerializeField] [Range(10, 30)] private float _bowAngleRestriction;
         [SerializeField] [Range(10, 30)] private float _slingShotAngleRestriction;
         [SerializeField] private SpriteRenderer _playerSprite;
+        [SerializeField] private SpriteRenderer _playerBagSprite;
         [SerializeField] private PlayerMovement _playerMovement;
 
         public delegate void PlayerShot();
+
         public PlayerShot OnPlayerShot;
 
         // Display State Objects
@@ -52,6 +54,7 @@ namespace Player.Shooting
         private bool _rightTriggerStateChanged;
 
         public delegate void TimeSlowActive();
+
         public TimeSlowActive OnTimeSlowActive;
 
         private bool _disableShooting;
@@ -69,7 +72,15 @@ namespace Player.Shooting
         private void Update()
         {
             // Lock Direction based on Sprite Flip Methods
-            _directionLockedAngle = _playerSprite.flipX ? 180 : 0;
+            if (_playerSprite.gameObject.activeInHierarchy)
+            {
+                _directionLockedAngle = _playerSprite.flipX ? 180 : 0;
+            }
+            else
+            {
+                _directionLockedAngle = _playerBagSprite.flipX ? 180 : 0;
+            }
+
 
             _timeBeforeLastShot += Time.deltaTime;
 
@@ -156,7 +167,9 @@ namespace Player.Shooting
             {
                 rotationAngle = ExtensionFunctions.To360Angle(rotationAngle);
             }
-            rotationAngle = Mathf.Clamp(rotationAngle, _directionLockedAngle - _bowAngleRestriction, _directionLockedAngle + _bowAngleRestriction);
+
+            rotationAngle = Mathf.Clamp(rotationAngle, _directionLockedAngle - _bowAngleRestriction,
+                _directionLockedAngle + _bowAngleRestriction);
 
             _shootDirectionDisplay.rotation = Quaternion.Euler(0, 0, rotationAngle);
         }
@@ -184,7 +197,7 @@ namespace Player.Shooting
             _triggerHeldDown = true;
             _timeSlowTimer = _timeSlowActiveWait;
             _autoShootTimer = _autoShootWait;
-            _shootDirectionDisplay.rotation  = Quaternion.Euler(0,0,_directionLockedAngle);
+            _shootDirectionDisplay.rotation = Quaternion.Euler(0, 0, _directionLockedAngle);
 
             Instantiate(_weaponDisplayEffectPrefab, _shootDirectionDisplay.position, Quaternion.identity);
 

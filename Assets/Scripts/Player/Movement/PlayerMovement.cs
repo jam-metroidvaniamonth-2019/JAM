@@ -12,6 +12,7 @@ namespace Player.Movement
         [SerializeField] private float _linearDrag = 50;
         [SerializeField] private float _linearDragThresholdVelocity = 0.5f;
         [SerializeField] private SpriteRenderer _playerSprite;
+        [SerializeField] private SpriteRenderer _playerBagSprite;
         [SerializeField] private float _movementTolerance = 0.3f;
 
         [Header("Jump")]
@@ -26,7 +27,6 @@ namespace Player.Movement
         [SerializeField] private ParticleSystem _playerDashEffect;
 
         public delegate void PlayerDashed();
-
         public PlayerDashed OnPlayerDashed;
 
         private Rigidbody2D _playerRb;
@@ -105,10 +105,12 @@ namespace Player.Movement
             if (_playerRb.velocity.x < 0)
             {
                 _playerSprite.flipX = true;
+                _playerBagSprite.flipX = true;
             }
             else if (_playerRb.velocity.x > 0)
             {
                 _playerSprite.flipX = false;
+                _playerBagSprite.flipX = false;
             }
         }
 
