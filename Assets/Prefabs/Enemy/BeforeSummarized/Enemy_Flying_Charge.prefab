@@ -56,7 +56,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3005043080682176140}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 38.118965, y: -13.68, z: -1.5673828}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3005043081154698635}
@@ -174,12 +174,12 @@ PrefabInstance:
     - target: {fileID: 7079200563728730820, guid: 64973169d61982845a403a0d05b18441,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 35.88
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7079200563728730820, guid: 64973169d61982845a403a0d05b18441,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -13.86
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7079200563728730820, guid: 64973169d61982845a403a0d05b18441,
         type: 3}
@@ -266,6 +266,16 @@ PrefabInstance:
       propertyPath: point2
       value: 
       objectReference: {fileID: 3005043081912817244}
+    - target: {fileID: 7079200563728730822, guid: 64973169d61982845a403a0d05b18441,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079200563728730822, guid: 64973169d61982845a403a0d05b18441,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.385
+      objectReference: {fileID: 0}
     - target: {fileID: 7079200563728730823, guid: 64973169d61982845a403a0d05b18441,
         type: 3}
       propertyPath: m_Sprite
@@ -297,7 +307,8 @@ PrefabInstance:
       propertyPath: enemyCollider
       value: 
       objectReference: {fileID: 5443252870243320968}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7079200563863420691, guid: 64973169d61982845a403a0d05b18441, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 64973169d61982845a403a0d05b18441, type: 3}
 --- !u!1 &5443252869839171930 stripped
 GameObject:
