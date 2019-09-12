@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FlyingRange : MonoBehaviour
 {
-
     public float baseAnim_Atttack_Time = 0.4677f;
     public float baseAnim_Monitoring_Time = 0.4f;
     public float baseAnim_Idle_Time = 0.4f;
@@ -128,7 +127,6 @@ public class FlyingRange : MonoBehaviour
     public GameObject projectilePrefab;
     [SerializeField]
     private float speed;
-
 
     public void FireProjectileBlast(Vector3 _playerPosition)
     {

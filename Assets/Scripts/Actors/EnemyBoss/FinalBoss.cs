@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class FinalBoss : MonoBehaviour
 {
+    public Transform projectileAFiringPt;
+    public Transform projectileBFiringPt;
+
     public void StartBossBattle()
     {
         CallNextAbility();
@@ -35,7 +38,7 @@ public class FinalBoss : MonoBehaviour
     private void TriggerAbility(EAttackType _attackType)
     {
         var _triggerAbility = Array.Find(CollectionOfAttachedAbilities, element => element.attackType == _attackType);
-        Vector2 _direction = Vector2.zero;
+        Vector2 _direction = (playerCol.transform.position - projectileAFiringPt.position).normalized;
 
         if (_triggerAbility)
         {

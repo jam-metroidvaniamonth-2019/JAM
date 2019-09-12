@@ -11,7 +11,7 @@ public class AbilityA : BaseBossAbility
     public override void Trigger(Vector2 _direction)
     {
         base.Trigger(_direction);
-        //LaunchAbilityAProjectile(_direction);
+        LaunchAbilityAProjectile(_direction);
         NotifyAbilityCompleted();
     }
 

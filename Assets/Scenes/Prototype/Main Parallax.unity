@@ -1200,6 +1200,36 @@ MonoBehaviour:
   _mainCamera: {fileID: 786850328}
   _parallaxRate: 0.5
   _chokeAmount: 0
+--- !u!1 &200231439
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 200231440}
+  m_Layer: 0
+  m_Name: FiringPt_C
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &200231440
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200231439}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1395990555}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &202961359
 GameObject:
   m_ObjectHideFlags: 0
@@ -5962,6 +5992,36 @@ SpriteMask:
   m_BackSortingOrder: 0
   m_IsCustomRangeActive: 0
   m_SpriteSortPoint: 0
+--- !u!1 &827987752
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 827987753}
+  m_Layer: 0
+  m_Name: FiringPt_B
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &827987753
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827987752}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1395990555}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &853077982
 GameObject:
   m_ObjectHideFlags: 0
@@ -7538,6 +7598,36 @@ PolygonCollider2D:
       - {x: -0.25, y: -0.25}
       - {x: 0.25, y: -0.25}
       - {x: 0.25, y: 0.25}
+--- !u!1 &1091560552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1091560553}
+  m_Layer: 0
+  m_Name: FiringPt_D
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1091560553
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1091560552}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1395990555}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1126830992
 GameObject:
   m_ObjectHideFlags: 0
@@ -9929,10 +10019,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1395990554}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.02, y: 0.406, z: -76.16785}
+  m_LocalPosition: {x: 29.02, y: 0.406, z: 0}
   m_LocalScale: {x: 1, y: 2.4950585, z: 1}
   m_Children:
   - {fileID: 268197024}
+  - {fileID: 2058882304}
+  - {fileID: 827987753}
+  - {fileID: 200231440}
+  - {fileID: 1091560553}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9950,7 +10044,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackType: 1
   cooldown: 3
-  projectileA: {fileID: 0}
+  projectileA: {fileID: 7823771168321983583, guid: f0978c2108c4bdf4fac0aab666cef163,
+    type: 3}
   direction: {x: 0, y: 0}
   speed: 3
 --- !u!114 &1395990557
@@ -9965,6 +10060,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a3ac20369ade654ab6ab66ce7357ef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileAFiringPt: {fileID: 2058882304}
+  projectileBFiringPt: {fileID: 827987753}
   currentBossAbility: {fileID: 0}
   playerCol: {fileID: 0}
   attackSequence: 010000000200000003000000
@@ -10021,6 +10118,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackType: 2
   cooldown: 3
+  projectileB: {fileID: 7823771168321983583, guid: ac1bb5d90fcb0bf43b4868f4651c6b7d,
+    type: 3}
+  direction: {x: 0, y: 0}
+  speed: 3
+  child_speed: 10
 --- !u!212 &1395990561
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -95499,6 +95601,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteMaskWorldPosition: {x: 74.33317, y: -10.65277}
+--- !u!1 &2058882303
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2058882304}
+  m_Layer: 0
+  m_Name: FiringPt_A
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2058882304
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2058882303}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.44, y: 0.773, z: 0}
+  m_LocalScale: {x: 6.464, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1395990555}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2099066578
 GameObject:
   m_ObjectHideFlags: 0
