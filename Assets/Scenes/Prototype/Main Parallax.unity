@@ -519,8 +519,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerCollision: {fileID: 1621930639}
   _playerMovement: {fileID: 1621930638}
+  _playerHealthSetter: {fileID: 0}
+  _playerShooter: {fileID: 0}
   _playerRb: {fileID: 1621930640}
   _movementThreshold: 0.1
+  _runningSounds: []
 --- !u!1 &57547541
 GameObject:
   m_ObjectHideFlags: 0
@@ -785,6 +788,7 @@ MonoBehaviour:
   _mainCamera: {fileID: 786850328}
   _parallaxRate: 0.5
   _chokeAmount: 0
+  _children: []
 --- !u!1 &113998870
 GameObject:
   m_ObjectHideFlags: 0
@@ -1200,6 +1204,7 @@ MonoBehaviour:
   _mainCamera: {fileID: 786850328}
   _parallaxRate: 0.5
   _chokeAmount: 0
+  _children: []
 --- !u!1 &202961359
 GameObject:
   m_ObjectHideFlags: 0
@@ -5743,7 +5748,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 40.000004
+  field of view: 39.999996
   orthographic: 0
   orthographic size: 3.2875001
   m_Depth: -1
@@ -5769,7 +5774,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 786850326}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.33263, y: 0.5, z: -8.521515}
+  m_LocalPosition: {x: 19.33263, y: 0.5, z: -8.521519}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1752686462}
@@ -6892,6 +6897,7 @@ MonoBehaviour:
   _mainCamera: {fileID: 786850328}
   _parallaxRate: 0.7
   _chokeAmount: 0
+  _children: []
 --- !u!1 &1015623682
 GameObject:
   m_ObjectHideFlags: 0
@@ -7731,6 +7737,7 @@ MonoBehaviour:
   _mainCamera: {fileID: 786850328}
   _parallaxRate: 0.7
   _chokeAmount: 0
+  _children: []
 --- !u!1 &1146673248
 GameObject:
   m_ObjectHideFlags: 0
@@ -92154,9 +92161,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64e3a33a6a4f3e1458ce4571b886c025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shootDirectionDisplayGameObject: {fileID: 363327198}
+  _playerBowDisplay: {fileID: 0}
+  _playerSlingShotDisplay: {fileID: 0}
   _playerTransform: {fileID: 1621930642}
   _mainCamera: {fileID: 786850328}
+  _weaponDisplayEffectPrefab: {fileID: 0}
+  _playerController: {fileID: 0}
   _rotationOffset: 90
   _timeSlowActiveWait: 0.3
   _autoShootWait: 3
@@ -92165,7 +92175,13 @@ MonoBehaviour:
   _bulletObject: {fileID: 9094691206825400465, guid: c18700d619899f745ae7e54f996f7905,
     type: 3}
   _bulletHolder: {fileID: 864256353}
-  _shootingPoint: {fileID: 355604689}
+  _bowShootingPoint: {fileID: 0}
+  _slingShotShootingPoint: {fileID: 0}
+  _bowAngleRestriction: 0
+  _slingShotAngleRestriction: 0
+  _playerSprite: {fileID: 0}
+  _playerBagSprite: {fileID: 0}
+  _playerMovement: {fileID: 0}
 --- !u!114 &1621930638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92180,14 +92196,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movementSpeed: 750
   _linearDrag: 50
-  _linearDragThreasholdVelocity: 0.1
+  _linearDragThresholdVelocity: 0.5
   _playerSprite: {fileID: 40024238}
+  _playerBagSprite: {fileID: 0}
+  _movementTolerance: 0.3
   _jumpVelocity: 14
   _fallMultiplier: 10
   _lowJumpMultiplier: 8
   _jumpDecelearationRate: 20
   _dashSpeed: 50
   _dashEffectTime: 0.1
+  _playerDashEffect: {fileID: 0}
 --- !u!114 &1621930639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92420,6 +92439,7 @@ MonoBehaviour:
   _mainCamera: {fileID: 786850328}
   _parallaxRate: 0.5
   _chokeAmount: 0
+  _children: []
 --- !u!1 &1671331852
 GameObject:
   m_ObjectHideFlags: 0
@@ -93040,7 +93060,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1707555863}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.33263, y: 0.5, z: -8.521515}
+  m_LocalPosition: {x: 19.33263, y: 0.5, z: -8.521519}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 296728162}
@@ -93096,7 +93116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a708619f2e1e0e9408be408ffd6c508f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _virtualCamera: {fileID: 1707555865}
+  _mainCamera: {fileID: 0}
 --- !u!1 &1738455648
 GameObject:
   m_ObjectHideFlags: 0
@@ -94587,6 +94607,7 @@ MonoBehaviour:
   _mainCamera: {fileID: 786850328}
   _parallaxRate: 0.7
   _chokeAmount: 0
+  _children: []
 --- !u!1 &1952306259
 GameObject:
   m_ObjectHideFlags: 0
