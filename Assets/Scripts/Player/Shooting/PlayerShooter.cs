@@ -1,6 +1,7 @@
 ﻿using Player.Movement;
 using Projectiles;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Utils;
 
 namespace Player.Shooting
@@ -8,7 +9,8 @@ namespace Player.Shooting
     public class PlayerShooter : MonoBehaviour
     {
         [Header("Display Objects")]
-        [SerializeField] private GameObject _shootDirectionDisplayGameObject;
+        [SerializeField] private GameObject _playerBowDisplay;
+        [SerializeField] private GameObject _playerSlingShotDisplay;
         [SerializeField] private Transform _playerTransform;
         [SerializeField] private Camera _mainCamera;
         [SerializeField] private GameObject _weaponDisplayEffectPrefab;
@@ -37,8 +39,10 @@ namespace Player.Shooting
         public PlayerShot OnPlayerShot;
 
         // Display State Objects
-        private Transform _shootDirectionDisplay;
-        private SpriteRenderer _shootDirectionDisplayRenderer;
+        private Transform _shootBowDirectionDisplay;
+        private SpriteRenderer _shootBowDirectionDisplayRenderer;
+        private Transform _shootSlingShotDirectionDisplay;
+        private SpriteRenderer _shootSlingShotDirectionDisplayRenderer;
 
         // Shooting Status Controls
         private float _timeBeforeLastShot;
@@ -54,7 +58,6 @@ namespace Player.Shooting
         private bool _rightTriggerStateChanged;
 
         public delegate void TimeSlowActive();
-
         public TimeSlowActive OnTimeSlowActive;
 
         private bool _disableShooting;
@@ -63,8 +66,11 @@ namespace Player.Shooting
 
         private void Start()
         {
-            _shootDirectionDisplay = _shootDirectionDisplayGameObject.transform;
-            _shootDirectionDisplayRenderer = _shootDirectionDisplayGameObject.GetComponent<SpriteRenderer>();
+            _shootBowDirectionDisplay = _playerBowDisplay.transform;
+            _shootBowDirectionDisplayRenderer = _playerBowDisplay.GetComponent<SpriteRenderer>();
+
+            _shootSlingShotDirectionDisplay = _playerSlingShotDisplay.transform;
+            _shootSlingShotDirectionDisplayRenderer = _playerSlingShotDisplay.GetComponent<SpriteRenderer>();
 
             _triggerHeldDown = false;
         }
@@ -133,11 +139,11 @@ namespace Player.Shooting
         {
             if (!_triggerHeldDown)
             {
-                _shootDirectionDisplayRenderer.enabled = false;
+                _shootBowDirectionDisplayRenderer.enabled = false;
                 return;
             }
 
-            _shootDirectionDisplayRenderer.enabled = true;
+            _shootBowDirectionDisplayRenderer.enabled = true;
 
             float xMovement = Input.GetAxis(ControlConstants.HorizontalShootAxis);
             float yMovement = Input.GetAxis(ControlConstants.VerticalShootAxis);
@@ -171,7 +177,7 @@ namespace Player.Shooting
             rotationAngle = Mathf.Clamp(rotationAngle, _directionLockedAngle - _bowAngleRestriction,
                 _directionLockedAngle + _bowAngleRestriction);
 
-            _shootDirectionDisplay.rotation = Quaternion.Euler(0, 0, rotationAngle);
+            _shootBowDirectionDisplay.rotation = Quaternion.Euler(0, 0, rotationAngle);
         }
 
         private void ActivateShootingTimeSlow()
@@ -197,9 +203,9 @@ namespace Player.Shooting
             _triggerHeldDown = true;
             _timeSlowTimer = _timeSlowActiveWait;
             _autoShootTimer = _autoShootWait;
-            _shootDirectionDisplay.rotation = Quaternion.Euler(0, 0, _directionLockedAngle);
+            _shootBowDirectionDisplay.rotation = Quaternion.Euler(0, 0, _directionLockedAngle);
 
-            Instantiate(_weaponDisplayEffectPrefab, _shootDirectionDisplay.position, Quaternion.identity);
+            Instantiate(_weaponDisplayEffectPrefab, _shootBowDirectionDisplay.position, Quaternion.identity);
 
             _playerMovement.DisableMovement();
         }
@@ -223,11 +229,11 @@ namespace Player.Shooting
             GameObject bulletInstance = Instantiate(_bulletObject, _shootingPoint.position, Quaternion.identity);
 
             float launchSpeed = bulletInstance.GetComponent<BaseProjectile>().LaunchSpeed;
-            float xVelocity = Mathf.Cos(_shootDirectionDisplay.rotation.eulerAngles.z * Mathf.Deg2Rad);
-            float yVelocity = Mathf.Sin(_shootDirectionDisplay.rotation.eulerAngles.z * Mathf.Deg2Rad);
+            float xVelocity = Mathf.Cos(_shootBowDirectionDisplay.rotation.eulerAngles.z * Mathf.Deg2Rad);
+            float yVelocity = Mathf.Sin(_shootBowDirectionDisplay.rotation.eulerAngles.z * Mathf.Deg2Rad);
             Vector2 launchDirection = new Vector2(xVelocity, yVelocity);
 
-            bulletInstance.transform.rotation = _shootDirectionDisplay.rotation;
+            bulletInstance.transform.rotation = _shootBowDirectionDisplay.rotation;
 
             bulletInstance.GetComponent<Rigidbody2D>().velocity = launchSpeed * launchDirection.normalized;
             bulletInstance.transform.SetParent(_bulletHolder);

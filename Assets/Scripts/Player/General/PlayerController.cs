@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Player.General
 {
@@ -9,6 +8,7 @@ namespace Player.General
         public PlayerBagStatusChanged OnPlayerBagStatusChanged;
 
         private bool _playerHasBag;
+        private bool _playerHasBow;
 
         #region Unity Functions
 
@@ -34,7 +34,13 @@ namespace Player.General
             NotifyBagStatusChanged();
         }
 
+        public void PlayerCollectBow() => _playerHasBow = true;
+
+        public void PlayerLoseBow() => _playerHasBow = false;
+
         public bool PlayerHasBag => _playerHasBag;
+
+        public bool PlayerHasBow => _playerHasBow;
 
         #endregion
 
