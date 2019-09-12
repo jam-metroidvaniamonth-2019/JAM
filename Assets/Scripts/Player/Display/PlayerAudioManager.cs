@@ -35,12 +35,8 @@ namespace Player.Display
 
         #region Utility Functions
 
-        private void HandlePlayShooting()
-        {
-            // TODO: Check if Bow/Arrow or SlingShot
-            
-            SfxAudioManager.Instance.PlaySound(_playerShotBowArrowClip);
-        }
+        private void HandlePlayShooting(bool playerHasBow) =>
+            SfxAudioManager.Instance.PlaySound(playerHasBow ? _playerShotBowArrowClip : _playerSlingShotClip);
 
         private void HandlePlayerJumped()
         {

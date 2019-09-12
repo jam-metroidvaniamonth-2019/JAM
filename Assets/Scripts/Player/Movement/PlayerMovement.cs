@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using Audio;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using Utils;
 
@@ -12,6 +12,8 @@ namespace Player.Movement
         [SerializeField] private float _linearDrag = 50;
         [SerializeField] private float _linearDragThresholdVelocity = 0.5f;
         [SerializeField] private SpriteRenderer _playerSprite;
+        [SerializeField] private SpriteRenderer _playerBagSprite;
+        [SerializeField] private float _movementTolerance = 0.3f;
 
         [Header("Jump")]
         [SerializeField] private float _jumpVelocity = 7;
@@ -82,7 +84,7 @@ namespace Player.Movement
             float moveX = Input.GetAxis(ControlConstants.HorizontalAxis);
             float moveXRaw = Input.GetAxisRaw(ControlConstants.HorizontalAxis);
 
-            if (moveXRaw == 0 && _playerCollision.IsOnGround)
+            if (Math.Abs(moveXRaw) < _movementTolerance && _playerCollision.IsOnGround)
             {
                 _playerRb.drag = _linearDrag;
             }
@@ -102,10 +104,12 @@ namespace Player.Movement
             if (_playerRb.velocity.x < 0)
             {
                 _playerSprite.flipX = true;
+                _playerBagSprite.flipX = true;
             }
             else if (_playerRb.velocity.x > 0)
             {
                 _playerSprite.flipX = false;
+                _playerBagSprite.flipX = false;
             }
         }
 
@@ -186,7 +190,7 @@ namespace Player.Movement
             _playerDashEffect.Play();
             ParticleSystemRenderer renderer = _playerDashEffect.GetComponent<ParticleSystemRenderer>();
             renderer.flip = _playerSprite.flipX ? new Vector3(1, 0, 0) : new Vector3(-1, 0, 0);
-            
+
             OnPlayerDashed?.Invoke();
 
             StartCoroutine(DashWait());
@@ -219,7 +223,12 @@ namespace Player.Movement
 
         public void EnableMovement() => _movementEnabled = true;
 
-        public void DisableMovement() => _movementEnabled = false;
+        public void DisableMovement()
+        {
+            _movementEnabled = false;
+            _playerRb.drag = _linearDrag;
+            _playerRb.velocity = Vector3.zero;
+        }
 
         #endregion
     }

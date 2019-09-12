@@ -6,27 +6,28 @@ namespace UI
 {
     public class Fader : MonoBehaviour
     {
+        [Header("Fade Rate")]
+        [SerializeField] private float _fadeInRate;
+        [SerializeField] private float _fadeOutRate;
+
         public delegate void FadeInComplete();
         public delegate void FadeOutComplete();
 
         public FadeInComplete OnFadeInComplete;
         public FadeOutComplete OnFadeOutComplete;
 
-        [Header("Fade Rate")]
-        [SerializeField] private float _fadeInRate;
-        [SerializeField] private float _fadeOutRate;
-
         private Image _fadeImage;
         private bool _activateFadeIn;
         private bool _activateFadeOut;
         private float _currentAlpha;
 
+        private bool _initialized;
+
         #region Unity Functions
 
         private void Start()
         {
-            _fadeImage = GetComponent<Image>();
-            _currentAlpha = ExtensionFunctions.Map(_fadeImage.color.a, 0, 1, 0, 255);
+            Initialize();
         }
 
         private void Update()
@@ -41,8 +42,30 @@ namespace UI
 
         #region Utility Functions
 
-        public void StartFadeIn()
+        private void Initialize()
         {
+            if (_initialized)
+            {
+                return;
+            }
+
+            _initialized = true;
+            _fadeImage = GetComponent<Image>();
+            _currentAlpha = ExtensionFunctions.Map(_fadeImage.color.a, 0, 1, 0, 255);
+        }
+
+        public void StartFadeIn(bool forceResetAlpha = false)
+        {
+            if (!_initialized)
+            {
+                Initialize();
+            }
+
+            if (forceResetAlpha)
+            {
+                _currentAlpha = 255;
+            }
+
             _activateFadeIn = true;
             _activateFadeOut = false;
         }
@@ -64,8 +87,18 @@ namespace UI
             _fadeImage.gameObject.SetActive(false);
         }
 
-        public void StartFadeOut()
+        public void StartFadeOut(bool forceResetAlpha = false)
         {
+            if (!_initialized)
+            {
+                Initialize();
+            }
+
+            if (forceResetAlpha)
+            {
+                _currentAlpha = 0;
+            }
+
             _fadeImage.gameObject.SetActive(true);
 
             _activateFadeOut = true;
@@ -89,20 +122,5 @@ namespace UI
         }
 
         #endregion
-
-        #region Singleton
-
-        public static Fader instance;
-
-        private void Awake()
-        {
-            if (instance == null)
-                instance = this;
-
-            if (instance != this)
-                Destroy(gameObject);
-        }
-
-        #endregion Singleton
     }
 }

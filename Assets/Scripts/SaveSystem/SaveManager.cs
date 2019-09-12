@@ -4,9 +4,18 @@ namespace SaveSystem
 {
     public class SaveManager : MonoBehaviour
     {
+        [SerializeField] private bool _clearOnStart;
+
         private const string SavePref = "MtJam";
 
+        public delegate void SaveComplete();
+        public delegate void LoadComplete();
+
+        public SaveComplete OnSaveComplete;
+        public LoadComplete OnLoadComplete;
+
         private SaveStructure _saveStructure;
+        private bool _disableSaving;
 
         public SaveStructure SaveStructure
         {
@@ -19,27 +28,58 @@ namespace SaveSystem
         private void Start()
         {
             Initialize();
-            LoadData();
+            if (_clearOnStart)
+            {
+                ClearData();
+            }
+            else
+            {
+                LoadData();
+            }
         }
 
         #endregion
-
 
         #region Save/Load Data
 
         public void SaveData()
         {
+            if (_disableSaving)
+            {
+                return;
+            }
+
             string jsonData = JsonUtility.ToJson(_saveStructure);
             PlayerPrefs.SetString(SavePref, jsonData);
+            OnSaveComplete?.Invoke();
         }
 
-        public void LoadData()
+        public void ClearData()
+        {
+            if (PlayerPrefs.HasKey(SavePref))
+            {
+                PlayerPrefs.DeleteKey(SavePref);
+            }
+        }
+
+        private void LoadData()
         {
             if (PlayerPrefs.HasKey(SavePref))
             {
                 _saveStructure = JsonUtility.FromJson<SaveStructure>(PlayerPrefs.GetString(SavePref));
+                OnLoadComplete?.Invoke();
             }
         }
+
+        #endregion
+
+        #region External Functions
+
+        public void DisableSaving() => _disableSaving = true;
+
+        public void EnableSaving() => _disableSaving = false;
+
+        public bool IsSavingDisabled() => _disableSaving;
 
         #endregion
 
@@ -51,16 +91,17 @@ namespace SaveSystem
 
         #region Singleton
 
-        public static SaveManager instance;
+        private static SaveManager _instance;
+        public static SaveManager Instance => _instance;
 
         private void Awake()
         {
-            if (instance == null)
+            if (_instance == null)
             {
-                instance = this;
+                _instance = this;
             }
 
-            if (instance != this)
+            if (_instance != this)
             {
                 Destroy(gameObject);
             }

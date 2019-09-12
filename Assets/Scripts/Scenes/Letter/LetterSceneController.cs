@@ -1,8 +1,6 @@
 ﻿using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using Utils;
 
 namespace Scenes.Letter
 {
@@ -11,7 +9,6 @@ namespace Scenes.Letter
         [SerializeField] private Fader _fader;
         [SerializeField] private float _faderDelay;
         [SerializeField] private TextTyper _letterTyper1;
-        [SerializeField] private TextTyper _letterTyper2;
 
         [Header("Input Detection")]
         [SerializeField] private string _gamePadText;
@@ -21,8 +18,6 @@ namespace Scenes.Letter
 
         private bool _sceneExitTriggered;
         private float _sceneExitTimer;
-
-        private bool _isForcedExit;
 
         private bool _sceneActive;
         private bool _keyboardConnectedLastState;
@@ -36,7 +31,6 @@ namespace Scenes.Letter
             _fader.OnFadeOutComplete += HandleFadeOutComplete;
 
             _letterTyper1.OnTypingCompleted += HandleInitialLetterTypingComplete;
-            _letterTyper2.OnTypingCompleted += HandleFinalLetterTypingComplete;
 
             _fader.StartFadeIn();
         }
@@ -46,7 +40,6 @@ namespace Scenes.Letter
             if (_sceneActive)
             {
                 CheckGamePadConnected();
-                CheckControls();
             }
 
             UpdateTimer();
@@ -75,16 +68,7 @@ namespace Scenes.Letter
         }
 
         private void HandleSceneSwitch() => _fader.StartFadeOut();
-
-        private void CheckControls()
-        {
-            if (Input.GetButtonDown(ControlConstants.StartButton))
-            {
-                _isForcedExit = true;
-                _letterTyper1.ForceComplete();
-            }
-        }
-
+        
         private void CheckGamePadConnected()
         {
             string[] connectedGamePads = Input.GetJoystickNames();
@@ -123,20 +107,6 @@ namespace Scenes.Letter
         private void HandleInitialLetterTypingComplete()
         {
             _letterTyper1.OnTypingCompleted -= HandleInitialLetterTypingComplete;
-
-            if (!_isForcedExit)
-            {
-                _letterTyper2.StartTyping();
-            }
-            else
-            {
-                _letterTyper2.ForceComplete();
-            }
-        }
-
-        private void HandleFinalLetterTypingComplete()
-        {
-            _letterTyper2.OnTypingCompleted -= HandleFinalLetterTypingComplete;
 
             _sceneExitTriggered = true;
             _sceneExitTimer = _faderDelay;
