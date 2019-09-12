@@ -24,7 +24,7 @@ namespace Projectiles
             SpawnLaunchEffect();
         }
 
-        private void Update()
+        public virtual void Update()
         {
             _currentLifeTime -= Time.deltaTime;
             if (_currentLifeTime <= 0)
@@ -39,7 +39,7 @@ namespace Projectiles
 
         #region Helpers
 
-        private void DestroyProjectile()
+        public void DestroyProjectile()
         {
             SpawnDestroyEffect();
             Destroy(gameObject);

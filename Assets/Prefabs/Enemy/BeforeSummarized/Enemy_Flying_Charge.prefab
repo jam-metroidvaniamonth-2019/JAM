@@ -302,6 +302,16 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.46290684
       objectReference: {fileID: 0}
+    - target: {fileID: 7079200563728730822, guid: 64973169d61982845a403a0d05b18441,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079200563728730822, guid: 64973169d61982845a403a0d05b18441,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.385
+      objectReference: {fileID: 0}
     - target: {fileID: 7290604406105827281, guid: 64973169d61982845a403a0d05b18441,
         type: 3}
       propertyPath: enemyCollider

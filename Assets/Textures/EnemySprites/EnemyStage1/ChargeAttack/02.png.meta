@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 2208088249cb6964bb0e4c9deb3d3243
+=======
+guid: 39e9fae0ba46f3544a0abfa675b9eff0
+>>>>>>> BossEnemy
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
