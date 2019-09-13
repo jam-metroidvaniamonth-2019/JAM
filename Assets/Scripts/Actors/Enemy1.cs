@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Enemy1 : BaseNPC
 {
+    public bool isGroundCharging;
+
     public float baseAnim_Atttack_Time = 0.4677f;
     public float baseAnim_Monitoring_Time = 0.4f;
     public float baseAnim_Idle_Time = 0.4f;
@@ -90,13 +92,21 @@ public class Enemy1 : BaseNPC
     public float rayCastDistance;
     public Common.HealthSetter InvestigatedTargetHealthSetter = null;
 
+    public float _counter;
+    public float _waitAfterEndPoint;
+    public bool _canSearch;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        var collisionScript = collision.GetComponent<Player.Movement.PlayerCollision>();
-        if (collisionScript)
+        if (_canSearch)
         {
-            InvestigatedTargetHealthSetter = collisionScript.GetComponent<Common.HealthSetter>();
-            CurrentState = JamSpace.EState.MONITORING;
+            var collisionScript = collision.GetComponent<Player.Movement.PlayerCollision>();
+            if (collisionScript)
+            {
+                InvestigatedTargetHealthSetter = collisionScript.GetComponent<Common.HealthSetter>();
+                CurrentState = JamSpace.EState.MONITORING;
+                StopFromSearch();
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -172,8 +182,24 @@ public class Enemy1 : BaseNPC
             CurrentState = JamSpace.EState.IDLE;
         }
     }
+
+    public void StopFromSearch()
+    {
+        _canSearch = false;
+        _counter = _waitAfterEndPoint;
+    }
+
     void Update()
     {
+        if (!_canSearch)
+        {
+            _counter -= Time.deltaTime;
+            if (_counter <= 0)
+            {
+                _canSearch = true;
+            }
+        }
+
         Move();
     }
 
@@ -192,6 +218,7 @@ public class Enemy1 : BaseNPC
         if (Mathf.Approximately(transform.position.x, targetPoint.x) &&
             Mathf.Approximately(transform.position.y, targetPoint.y))
         {
+            StopFromSearch();
             GetNextPoint();
         }
     }
@@ -222,9 +249,17 @@ public class Enemy1 : BaseNPC
         }
 
         moveSpeed = normalSpeed;
-        if (currentEState == JamSpace.EState.ATTACKING)
+
+        if (!isGroundCharging)
         {
-            CurrentState = JamSpace.EState.COOLDOWN;
+            if (currentEState == JamSpace.EState.ATTACKING)
+            {
+                CurrentState = JamSpace.EState.COOLDOWN;
+            }
+        }
+        else
+        {
+            CurrentState = JamSpace.EState.IDLE;
         }
     }
 
