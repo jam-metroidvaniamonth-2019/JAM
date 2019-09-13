@@ -6,11 +6,11 @@ namespace WorldDisplay
 {
     public class MakeChildrenFall : MonoBehaviour
     {
-        [SerializeField] private Rigidbody2D[] _children;
         [SerializeField] private float _downwardInitialForce;
         [SerializeField] private bool _triggerOnCollide;
         [SerializeField] private float _destroyChildrenAfterTime;
         [SerializeField] private GameObject _destroyEffect;
+        [SerializeField] private Rigidbody2D[] _children;
 
         #region Unity Functions
 

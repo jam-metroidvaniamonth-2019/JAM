@@ -15,17 +15,20 @@ namespace Player.Display
         private static readonly int FallParam = Animator.StringToHash("Fall");
         private static readonly int MoveParam = Animator.StringToHash("Move");
         private static readonly int DeadParam = Animator.StringToHash("Dead");
+        private static readonly int BowIdleParam = Animator.StringToHash("Bow");
+        private static readonly int SlingShotIdleParam = Animator.StringToHash("SlingShot");
 
-        [Header("Controllers")]
-        [SerializeField] private PlayerCollision _playerCollision;
+        [Header("Controllers")] [SerializeField]
+        private PlayerCollision _playerCollision;
+
         [SerializeField] private PlayerMovement _playerMovement;
         [SerializeField] private HealthSetter _playerHealthSetter;
         [SerializeField] private PlayerShooter _playerShooter;
         [SerializeField] private Rigidbody2D _playerRb;
         [SerializeField] private float _movementThreshold;
 
-        [Header("Player Animation Audio")]
-        [SerializeField] private List<GameObject> _runningSounds;
+        [Header("Player Animation Audio")] [SerializeField]
+        private List<GameObject> _runningSounds;
 
         private Animator _playerAnimator;
 
@@ -34,14 +37,21 @@ namespace Player.Display
         private void Start()
         {
             _playerAnimator = GetComponent<Animator>();
+
             _playerMovement.OnPlayerJumped += HandlePlayerJumped;
             _playerHealthSetter.OnHealthZero += HandlePlayerDead;
+
+            _playerShooter.OnPlayerShootInPosition += HandlePlayerInShootPosition;
+            _playerShooter.OnPlayerShot += HandlePlayerShot;
         }
 
         private void OnDestroy()
         {
             _playerMovement.OnPlayerJumped -= HandlePlayerJumped;
             _playerHealthSetter.OnHealthZero -= HandlePlayerDead;
+
+            _playerShooter.OnPlayerShootInPosition -= HandlePlayerInShootPosition;
+            _playerShooter.OnPlayerShot -= HandlePlayerShot;
         }
 
         private void LateUpdate()
@@ -92,6 +102,12 @@ namespace Player.Display
             _playerMovement.DisableMovement();
             _playerShooter.DisableShooting();
         }
+
+        private void HandlePlayerInShootPosition(bool playerHasBow) =>
+            _playerAnimator.SetBool(playerHasBow ? BowIdleParam : SlingShotIdleParam, true);
+
+        private void HandlePlayerShot(bool playerHasBow) =>
+            _playerAnimator.SetBool(playerHasBow ? BowIdleParam : SlingShotIdleParam, false);
 
         #endregion
     }

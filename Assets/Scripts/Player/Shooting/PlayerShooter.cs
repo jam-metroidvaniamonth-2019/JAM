@@ -32,14 +32,17 @@ namespace Player.Shooting
         [SerializeField] private Transform _slingShotShootingPoint;
 
         [Header("Shooting Angle Limits")]
-        [SerializeField] [Range(10, 30)] private float _bowAngleRestriction;
-        [SerializeField] [Range(10, 30)] private float _slingShotAngleRestriction;
+        [SerializeField] [Range(10, 40)] private float _bowAngleRestriction;
+        [SerializeField] [Range(10, 40)] private float _slingShotAngleRestriction;
         [SerializeField] private SpriteRenderer _playerSprite;
         [SerializeField] private SpriteRenderer _playerBagSprite;
         [SerializeField] private PlayerMovement _playerMovement;
 
         public delegate void PlayerShot(bool playerHasBow);
         public PlayerShot OnPlayerShot;
+
+        public delegate void PlayerShootInPosition(bool playerHasBow);
+        public PlayerShootInPosition OnPlayerShootInPosition;
 
         // Display State Objects
         private Transform _shootBowDirectionDisplay;
@@ -147,14 +150,15 @@ namespace Player.Shooting
                 return;
             }
 
-            if (_playerController.PlayerHasBow)
-            {
-                _shootBowDirectionDisplayRenderer.enabled = true;
-            }
-            else
-            {
-                _shootSlingShotDirectionDisplayRenderer.enabled = true;
-            }
+            // Disabled as Animations directly from the Player is being used
+//            if (_playerController.PlayerHasBow)
+//            {
+//                _shootBowDirectionDisplayRenderer.enabled = true;
+//            }
+//            else
+//            {
+//                _shootSlingShotDirectionDisplayRenderer.enabled = true;
+//            }
 
             float xMovement = Input.GetAxis(ControlConstants.HorizontalShootAxis);
             float yMovement = Input.GetAxis(ControlConstants.VerticalShootAxis);
@@ -230,6 +234,8 @@ namespace Player.Shooting
             Instantiate(_weaponDisplayEffectPrefab, _shootBowDirectionDisplay.position, Quaternion.identity);
 
             _playerMovement.DisableMovement();
+
+            OnPlayerShootInPosition?.Invoke(_playerController.PlayerHasBow);
         }
 
         private void ShootBullet()

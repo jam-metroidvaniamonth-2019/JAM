@@ -467,8 +467,8 @@ MonoBehaviour:
   _bulletHolder: {fileID: 0}
   _bowShootingPoint: {fileID: 490690759652174684}
   _slingShotShootingPoint: {fileID: 7544184343512268302}
-  _bowAngleRestriction: 30
-  _slingShotAngleRestriction: 20
+  _bowAngleRestriction: 40
+  _slingShotAngleRestriction: 35
   _playerSprite: {fileID: 490690759808437027}
   _playerBagSprite: {fileID: 5094698494566072642}
   _playerMovement: {fileID: 490690758219448579}
@@ -1265,11 +1265,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490690758219448607}
     m_Modifications:
-    - target: {fileID: 142378574536146621, guid: c1dfe6606a859f340b1b5a6c7faf1e94,
-        type: 3}
-      propertyPath: m_Name
-      value: Player Dash
-      objectReference: {fileID: 0}
     - target: {fileID: 7606780980240439400, guid: c1dfe6606a859f340b1b5a6c7faf1e94,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1324,6 +1319,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 142378574536146621, guid: c1dfe6606a859f340b1b5a6c7faf1e94,
+        type: 3}
+      propertyPath: m_Name
+      value: Player Dash
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1dfe6606a859f340b1b5a6c7faf1e94, type: 3}
