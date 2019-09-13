@@ -9,6 +9,7 @@ public class BaseNPC : MonoBehaviour
     public virtual void Start()
     {
         enemyHealthObject.enemyHealthSetter.OnHealthZero += EnemyDead;
+        enemyHealthObject.enemyCollider = this.GetComponent<Collider2D>();
     }
 
     private void EnemyDead()

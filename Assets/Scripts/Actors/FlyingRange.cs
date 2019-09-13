@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlyingRange : MonoBehaviour
+public class FlyingRange : BaseNPC
 {
     public float baseAnim_Atttack_Time = 0.4677f;
     public float baseAnim_Monitoring_Time = 0.4f;

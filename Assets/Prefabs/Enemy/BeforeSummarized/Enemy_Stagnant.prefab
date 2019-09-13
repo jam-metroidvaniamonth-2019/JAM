@@ -63,6 +63,7 @@ Transform:
   m_Children:
   - {fileID: 2353232404037591048}
   - {fileID: 1902416988}
+  - {fileID: 5141835260235252804}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -78,6 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a739654d930f6524d87ffdb86989e32d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyHealthObject: {fileID: 6847182161832240634}
   detectionDelay: 0
   damageOnTouch: 0
   speed: 10
@@ -245,3 +247,81 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.0193851}
   serializedVersion: 2
   m_Radius: 0.30227017
+--- !u!1 &6405980421946437209
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5141835260235252804}
+  - component: {fileID: 6847182161832240634}
+  - component: {fileID: 7538463397216353655}
+  - component: {fileID: 12317016004345480}
+  m_Layer: 14
+  m_Name: EHealthObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5141835260235252804
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6405980421946437209}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.089999996, y: -0.11399999, z: 0}
+  m_LocalScale: {x: 1.6253408, y: 1.6253408, z: 1.6253408}
+  m_Children: []
+  m_Father: {fileID: 2353232403819844860}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6847182161832240634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6405980421946437209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23f4621feb6aba24abd1761cd36badae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyHealthSetter: {fileID: 7538463397216353655}
+  enemyCollider: {fileID: 12317016004345480}
+--- !u!114 &7538463397216353655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6405980421946437209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af6cac04193ffff40b4c3dd13011d132, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canDealDamage: 0
+  _maxHealth: 100
+  _currentHealth: 0
+--- !u!58 &12317016004345480
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6405980421946437209}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5

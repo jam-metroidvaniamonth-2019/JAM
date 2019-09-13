@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FinalBoss : MonoBehaviour
+public class FinalBoss : BaseNPC
 {
     public Transform projectileAFiringPt;
     public Transform projectileBFiringPt;
