@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class StagnantEnemy : BaseNPC
 {
+    public float _waitBeforeAnim = 0.5f;
+
+    public Transform bulletPosition;
 
     public bool bIsInCooldown;
     public float cooldownTimer;
     public float cooldownCounter;
-
 
     [SerializeField]
     private GameObject projectilePrefab;
@@ -39,7 +41,6 @@ public class StagnantEnemy : BaseNPC
 
     public void TriggerAnimation(string animTag)
     {
-        return;
         myAnimator.SetTrigger(animTag);
     }
 
@@ -65,7 +66,6 @@ public class StagnantEnemy : BaseNPC
 
     IEnumerator CallMonitoring()
     {
-        TriggerAnimation(JamSpace.AnimationTags.ANIMATION_INVESTIGATE);
         playerInsideRangeCounter = readyToAttackDur;
         yield return new WaitForSeconds(readyToAttackDur);
 
@@ -144,27 +144,47 @@ public class StagnantEnemy : BaseNPC
 
     public void Attack()
     {
+        
+    }
+
+    IEnumerator AfterAttackAnimRoutine()
+    {
+        TriggerAnimation(JamSpace.AnimationTags.ANIMATION_BITE);
         var playerXPos = InvestigatedTargetHealthSetter.transform.position.x;
         var myXPos = this.transform.position.x;
         Projectiles.BaseProjectile baseEnemyProj = null;
+        var rightDirection = false;
 
         if (((playerXPos - myXPos) < 0))
         {
-            baseEnemyProj = Instantiate(projectilePrefab, this.transform.position, Quaternion.Euler(0, -180, 0)).GetComponent<Projectiles.BaseProjectile>();
-            baseEnemyProj.GetComponent<Rigidbody2D>().velocity = speed * baseEnemyProj.transform.right;
+            rightDirection = true;
+            this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         else
         {
-            baseEnemyProj = Instantiate(projectilePrefab, this.transform.position, Quaternion.Euler(0, 0, 0)).GetComponent<Projectiles.BaseProjectile>();
-            baseEnemyProj.GetComponent<Rigidbody2D>().velocity = speed * baseEnemyProj.transform.right;
+            rightDirection = false;
+            this.gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
 
         bIsInCooldown = true;
         CurrentState = JamSpace.EState.IDLE;
+        yield return new WaitForSeconds(_waitBeforeAnim);
+
+        if (rightDirection)
+        {
+            baseEnemyProj = Instantiate(projectilePrefab, bulletPosition.position, Quaternion.Euler(0, -180, 0)).GetComponent<Projectiles.BaseProjectile>();
+            baseEnemyProj.GetComponent<Rigidbody2D>().velocity = speed * baseEnemyProj.transform.right;
+        }
+        else
+        {
+            baseEnemyProj = Instantiate(projectilePrefab, bulletPosition.position, Quaternion.Euler(0, 0, 0)).GetComponent<Projectiles.BaseProjectile>();
+            baseEnemyProj.GetComponent<Rigidbody2D>().velocity = speed * baseEnemyProj.transform.right;
+        }
     }
 
     private void Start()
     {
+        myAnimator = this.GetComponent<Animator>();
         this.gameObject.GetComponent<CircleCollider2D>().radius = rangeRadius;
     }
 
@@ -182,7 +202,8 @@ public class StagnantEnemy : BaseNPC
                 StartCoroutine(CallMonitoring());
                 break;
             case JamSpace.EState.ATTACKING:
-                Attack();
+                StartCoroutine(AfterAttackAnimRoutine());
+                
                 break;
             case JamSpace.EState.COOLDOWN:
                 StartCoroutine(CallCooldown());
