@@ -197,7 +197,7 @@ MonoBehaviour:
   Wait_Monitoring: 1
   wait_attack_position: 1
   InvestigatedTargetHealthSetter: {fileID: 0}
-  projectilePrefab: {fileID: 7823771168321983583, guid: f1bfb3a765694b24f9fa8fce1a74e4d1,
+  projectilePrefab: {fileID: 7823771168321983583, guid: d5a28e5fdd7b52940b298e010bd73dc5,
     type: 3}
   speed: 6
   currentEState: 1

@@ -216,7 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e262b8c49f8e324db129b1b5299d0ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _amount: 5
+  _amount: 30
 --- !u!114 &-8448805043360296908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,4 +276,4 @@ MonoBehaviour:
     type: 3}
   child_speed: 0
   child_damage: 0
-  blastLifeTime: 1
+  blastLifeTime: 3
