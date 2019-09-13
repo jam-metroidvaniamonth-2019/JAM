@@ -159,6 +159,84 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &8777461490573736387
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 950157314255963022}
+  - component: {fileID: 849762674679028093}
+  - component: {fileID: 1109814572379476776}
+  - component: {fileID: 7320791889001917008}
+  m_Layer: 14
+  m_Name: EHealthObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &950157314255963022
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8777461490573736387}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.2021999, y: 1.2021999, z: 1.2021999}
+  m_Children: []
+  m_Father: {fileID: 5443252869839171932}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &849762674679028093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8777461490573736387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23f4621feb6aba24abd1761cd36badae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyHealthSetter: {fileID: 1109814572379476776}
+  enemyCollider: {fileID: 7320791889001917008}
+--- !u!114 &1109814572379476776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8777461490573736387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af6cac04193ffff40b4c3dd13011d132, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canDealDamage: 0
+  _maxHealth: 0
+  _currentHealth: 0
+--- !u!58 &7320791889001917008
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8777461490573736387}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1001 &3005043080159591320
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -327,8 +405,7 @@ PrefabInstance:
       propertyPath: enemyCollider
       value: 
       objectReference: {fileID: 5443252870243320968}
-    m_RemovedComponents:
-    - {fileID: 7079200563863420691, guid: 64973169d61982845a403a0d05b18441, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64973169d61982845a403a0d05b18441, type: 3}
 --- !u!1 &5443252869839171930 stripped
 GameObject:
