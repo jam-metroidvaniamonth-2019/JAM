@@ -269,6 +269,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackType: 1
   cooldown: 3
+  currentCounter: 0
+  delayPerProjectile: 0.8
+  counter: 8
   projectileA: {fileID: 7823771168321983583, guid: f0978c2108c4bdf4fac0aab666cef163,
     type: 3}
   direction: {x: 0, y: 0}
