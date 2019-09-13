@@ -2,19 +2,22 @@ using System.Collections.Generic;
 using Common;
 using Interactibles.ColliderModifier;
 using Interactibles.Followers;
+using Player.General;
 using Player.Movement;
 using Player.Shooting;
 using UI.CutScene;
 using UnityEngine;
 using Utils;
+using WorldDisplay;
 
 namespace Scenes.Main
 {
     public class PlayerInitialBossFightController : MonoBehaviour
     {
         [Header("Boss Scene")]
-        [SerializeField] private GameObject _leftBoundaryLocker;
-        [SerializeField] private GameObject _rightBoundaryLocker;
+        [SerializeField] private Rigidbody2D _fallingStone;
+        [SerializeField] private float _fallingStoneMass;
+        [SerializeField] private TriggerExplosionOnChildren _rightBoundaryLocker;
         [SerializeField] private GameObject _bossEnemy;
         [SerializeField] private CollisionNotifier _bossSceneActivator;
 
@@ -25,6 +28,7 @@ namespace Scenes.Main
         [Header("Player")]
         [SerializeField] private HealthSetter _playerHealthSetter;
         [SerializeField] [Range(0.1f, 0.9f)] private float _playerLowHealthLimit;
+        [SerializeField] private PlayerController _playerController;
         [SerializeField] private PlayerMovement _playerMovement;
         [SerializeField] private PlayerShooter _playerShooter;
         [SerializeField] private Transform _player;
@@ -40,19 +44,11 @@ namespace Scenes.Main
         private void Start()
         {
             _fireflyIndices = new List<int>();
-
-            _leftBoundaryLocker.SetActive(false);
-            _rightBoundaryLocker.SetActive(false);
+            _fallingStone.isKinematic = true;
 
             _playerHealthSetter.OnHealthChanged += HandlePlayerHealthChange;
             _firefliesExitNotifier.OnTriggerEntered += HandlePlayerEnteredFireflyExit;
             _bossSceneActivator.OnTriggerEntered += ActivateBossScene;
-        }
-
-        private void OnDestroy()
-        {
-            _playerHealthSetter.OnHealthChanged -= HandlePlayerHealthChange;
-            _firefliesExitNotifier.OnTriggerEntered -= HandlePlayerEnteredFireflyExit;
         }
 
         #endregion
@@ -65,12 +61,17 @@ namespace Scenes.Main
             if (healthRatio <= _playerLowHealthLimit)
             {
                 ActivateCutSceneSequence();
+                _playerHealthSetter.OnHealthChanged -= HandlePlayerHealthChange;
             }
         }
 
         private void HandleCutSceneOpen()
         {
             CutSceneDisplay.Instance.OnCutSceneOpen -= HandleCutSceneOpen;
+
+            _rightBoundaryLocker.MakeChildrenExplode();
+            _playerController.PlayerLoseBag();
+            Destroy(_bossEnemy);
 
             for (int i = 0; i < _fireflySpawnCount; i++)
             {
@@ -89,6 +90,7 @@ namespace Scenes.Main
 
         private void HandlePlayerEnteredFireflyExit(Collider2D other)
         {
+            _firefliesExitNotifier.OnTriggerEntered -= HandlePlayerEnteredFireflyExit;
             if (other.CompareTag(TagManager.Player))
             {
                 for (int i = 0; i < _fireflyIndices.Count; i++)
@@ -104,9 +106,8 @@ namespace Scenes.Main
         {
             if (other.CompareTag(TagManager.Player))
             {
-                _leftBoundaryLocker.SetActive(true);
-                _rightBoundaryLocker.SetActive(true);
-
+                _fallingStone.isKinematic = false;
+                _fallingStone.mass = _fallingStoneMass;
                 _bossSceneActivator.OnTriggerEntered -= ActivateBossScene;
             }
         }
@@ -115,11 +116,6 @@ namespace Scenes.Main
         {
             _playerMovement.DisableMovement();
             _playerShooter.DisableShooting();
-
-            Destroy(_bossEnemy);
-
-            _leftBoundaryLocker.SetActive(false);
-            _rightBoundaryLocker.SetActive(false);
 
             CutSceneDisplay.Instance.DisplayCutScene(_cutSceneImage, _cutSceneDisplayTime);
 
