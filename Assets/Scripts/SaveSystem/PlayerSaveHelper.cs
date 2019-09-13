@@ -50,6 +50,11 @@ namespace SaveSystem
 
         private void SavePlayerData()
         {
+            if (_playerHealthSetter.CurrentHealth <= 0)
+            {
+                return;
+            }
+
             Vector3 playerPosition = _player.position;
             float playerHealth = _playerHealthSetter.CurrentHealth;
 
