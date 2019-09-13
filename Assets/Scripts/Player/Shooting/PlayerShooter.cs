@@ -2,7 +2,6 @@
 using Player.Movement;
 using Projectiles;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Utils;
 
 namespace Player.Shooting

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Audio;
 using Common;
 using Player.Movement;
@@ -26,6 +27,7 @@ namespace Player.Display
         [SerializeField] private PlayerShooter _playerShooter;
         [SerializeField] private Rigidbody2D _playerRb;
         [SerializeField] private float _movementThreshold;
+        public ParticleSystem _playerTrailParticleSystem;
 
         [Header("Player Animation Audio")] [SerializeField]
         private List<GameObject> _runningSounds;
@@ -56,7 +58,7 @@ namespace Player.Display
 
         private void LateUpdate()
         {
-            _playerAnimator.SetBool(MoveParam, _playerRb.velocity.x != 0);
+            _playerAnimator.SetBool(MoveParam, Math.Abs(_playerRb.velocity.x) > _movementThreshold);
 
             // This extra check is added as sometimes
             // when colliding with walls and then falling
@@ -76,6 +78,21 @@ namespace Player.Display
             {
                 _playerAnimator.SetBool(JumpParam, false);
                 _playerAnimator.SetBool(FallParam, true);
+            }
+
+            if (_playerCollision.IsOnGround && Math.Abs(_playerRb.velocity.x) > _movementThreshold)
+            {
+                if (_playerTrailParticleSystem.isStopped)
+                {
+                    _playerTrailParticleSystem.Play();
+                }
+            }
+            else
+            {
+                if (_playerTrailParticleSystem.isPlaying)
+                {
+                    _playerTrailParticleSystem.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+                }
             }
         }
 
