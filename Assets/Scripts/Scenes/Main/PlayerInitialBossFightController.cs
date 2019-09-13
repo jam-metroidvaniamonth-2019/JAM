@@ -49,12 +49,6 @@ namespace Scenes.Main
             _bossSceneActivator.OnTriggerEntered += ActivateBossScene;
         }
 
-        private void OnDestroy()
-        {
-            _playerHealthSetter.OnHealthChanged -= HandlePlayerHealthChange;
-            _firefliesExitNotifier.OnTriggerEntered -= HandlePlayerEnteredFireflyExit;
-        }
-
         #endregion
 
         #region Utility Functions
@@ -65,6 +59,7 @@ namespace Scenes.Main
             if (healthRatio <= _playerLowHealthLimit)
             {
                 ActivateCutSceneSequence();
+                _playerHealthSetter.OnHealthChanged -= HandlePlayerHealthChange;
             }
         }
 
@@ -89,6 +84,7 @@ namespace Scenes.Main
 
         private void HandlePlayerEnteredFireflyExit(Collider2D other)
         {
+            _firefliesExitNotifier.OnTriggerEntered -= HandlePlayerEnteredFireflyExit;
             if (other.CompareTag(TagManager.Player))
             {
                 for (int i = 0; i < _fireflyIndices.Count; i++)
