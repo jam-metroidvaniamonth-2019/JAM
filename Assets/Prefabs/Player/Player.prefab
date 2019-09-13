@@ -422,7 +422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 619dcc3d8754ef94aa9bb828abaa0f5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playercontroller: {fileID: 0}
+  _playercontroller: {fileID: 7410804983857183026}
   _movementSpeed: 750
   _linearDrag: 30
   _linearDragThresholdVelocity: 0.5
