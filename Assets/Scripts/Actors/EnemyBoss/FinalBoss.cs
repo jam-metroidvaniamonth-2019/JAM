@@ -86,7 +86,6 @@ public class FinalBoss : MonoBehaviour
     {
         StartCoroutine(TriggerAbilityRoutine(_abilityCooldownDuration));
     }
-
     private void Start()
     {
         foreach (var element in CollectionOfAttachedAbilities)
