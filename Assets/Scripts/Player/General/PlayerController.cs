@@ -9,12 +9,16 @@ namespace Player.General
 
         private bool _playerHasBag;
         private bool _playerHasBow;
+        private bool _playerHasDash;
+
 
         #region Unity Functions
 
         private void Start()
         {
             _playerHasBag = true;
+            _playerHasDash = false;
+
             NotifyBagStatusChanged();
         }
 
@@ -38,9 +42,15 @@ namespace Player.General
 
         public void PlayerLoseBow() => _playerHasBow = false;
 
+        public void PlayerLoseDash() => _playerHasDash = false;
+
+        public void PlayerCollectDash() => _playerHasDash = true;
+
         public bool PlayerHasBag => _playerHasBag;
 
         public bool PlayerHasBow => _playerHasBow;
+
+        public bool PlayerHasDash => _playerHasDash;
 
         #endregion
 

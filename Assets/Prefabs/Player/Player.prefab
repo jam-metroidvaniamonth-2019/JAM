@@ -422,6 +422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 619dcc3d8754ef94aa9bb828abaa0f5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playercontroller: {fileID: 0}
   _movementSpeed: 750
   _linearDrag: 30
   _linearDragThresholdVelocity: 0.5
@@ -459,7 +460,9 @@ MonoBehaviour:
   _autoShootWait: 3
   _timeSlowAmount: 0.3
   _shotWaitTime: 0.5
-  _bulletObject: {fileID: 9094691206825400465, guid: c18700d619899f745ae7e54f996f7905,
+  _arrowPrefab: {fileID: 9094691206825400465, guid: c18700d619899f745ae7e54f996f7905,
+    type: 3}
+  _stonePrefab: {fileID: 9094691206825400465, guid: 6b5fc073aa44ad14fb631c031c487c81,
     type: 3}
   _bulletHolder: {fileID: 0}
   _bowShootingPoint: {fileID: 490690759652174684}
@@ -675,8 +678,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 490690759645175123}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.295, y: 0.014, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 0.428, y: 0.014, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 490690759652174684}
   m_Father: {fileID: 490690758219448607}
@@ -720,7 +723,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 6
-  m_Sprite: {fileID: 21300000, guid: ef49d115e58111f45b12860e21535360, type: 3}
+  m_Sprite: {fileID: 21300000, guid: aeb128c2d3c9f4e48a5ee9df314f2f03, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1054,7 +1057,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 974f508b2fbecd64c9f14da14ecebf5f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1eb4f5d7a6d2e8d4bbc5ebc8f8c66b7a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1150,8 +1153,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8422008751842715934}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.27, y: -0.101, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.353, y: 0.03, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 7544184343512268302}
   m_Father: {fileID: 490690758219448607}
@@ -1195,7 +1198,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 6
-  m_Sprite: {fileID: 21300000, guid: aeb128c2d3c9f4e48a5ee9df314f2f03, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ef49d115e58111f45b12860e21535360, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
