@@ -25,7 +25,8 @@ namespace Player.Shooting
 
         [Header("Bullet")]
         [SerializeField] private float _shotWaitTime = 0.5f;
-        [SerializeField] private GameObject _bulletObject;
+        [SerializeField] private GameObject _arrowPrefab;
+        [SerializeField] private GameObject _stonePrefab;
         [SerializeField] private Transform _bulletHolder;
         [SerializeField] private Transform _bowShootingPoint;
         [SerializeField] private Transform _slingShotShootingPoint;
@@ -196,7 +197,7 @@ namespace Player.Shooting
             }
 
             _shootBowDirectionDisplay.rotation = Quaternion.Euler(0, 0, rotationAngle);
-            _shootSlingShotDirectionDisplay.rotation = Quaternion.Euler(0,0, rotationAngle);
+            _shootSlingShotDirectionDisplay.rotation = Quaternion.Euler(0, 0, rotationAngle);
         }
 
         private void ActivateShootingTimeSlow()
@@ -241,7 +242,7 @@ namespace Player.Shooting
             {
                 return;
             }
-            
+
             OnPlayerShot?.Invoke(_playerController.PlayerHasBow);
 
             _timeBeforeLastShot = 0;
@@ -250,7 +251,8 @@ namespace Player.Shooting
                 ? _bowShootingPoint.position
                 : _slingShotShootingPoint.position;
 
-            GameObject bulletInstance = Instantiate(_bulletObject, shootingPosition, Quaternion.identity);
+            GameObject bulletPrefab = _playerController.PlayerHasBow ? _arrowPrefab : _stonePrefab;
+            GameObject bulletInstance = Instantiate(bulletPrefab, shootingPosition, Quaternion.identity);
 
             float launchSpeed = bulletInstance.GetComponent<BaseProjectile>().LaunchSpeed;
             float xVelocity = Mathf.Cos(_shootBowDirectionDisplay.rotation.eulerAngles.z * Mathf.Deg2Rad);

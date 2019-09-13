@@ -89,6 +89,22 @@ namespace Common
 
         #endregion
 
+        public IEnumerator DealInstantaneousDamageRoutine(float _damage, float _time)
+        {
+            if (bCanDealDamage)
+            {
+                ReduceHealth(_damage);
+            }
+            bCanDealDamage = false;
+            yield return new WaitForSeconds(_time);
+            bCanDealDamage = true;
+        }
+
+        public void DealInstantaneousDamage(float _damage, float _time)
+        {
+            StartCoroutine(DealInstantaneousDamageRoutine(_damage, _time));
+        }
+
         #region Utility Functions
 
         private void NotifyHealthChanged() => OnHealthChanged?.Invoke(_currentHealth, _maxHealth);

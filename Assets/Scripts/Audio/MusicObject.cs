@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Audio
 {
@@ -7,6 +6,7 @@ namespace Audio
     public class MusicObject : MonoBehaviour
     {
         private AudioSource _audioSource;
+        private float _maxVolume;
 
         private float _audioChangeRate;
         private bool _isFadingIn;
@@ -17,7 +17,7 @@ namespace Audio
 
         private void Update()
         {
-            if (_isFadingIn && _audioSource.volume < 1)
+            if (_isFadingIn && _audioSource.volume < _maxVolume)
             {
                 _audioSource.volume += _audioChangeRate * Time.deltaTime;
             }
@@ -44,6 +44,17 @@ namespace Audio
 
             _audioSource.volume = 0;
             _audioSource.clip = audioClip;
+            _audioSource.Play();
+        }
+
+        public void PlayMusic(float fadeInRate)
+        {
+            _isFadingIn = true;
+            _audioChangeRate = fadeInRate;
+
+            _maxVolume = _audioSource.volume;
+
+            _audioSource.volume = 0;
             _audioSource.Play();
         }
 

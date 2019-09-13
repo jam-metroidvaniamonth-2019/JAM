@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: a3b3300d8f11c2d468f38e2bc593f645
+=======
+guid: fa9107c120788a0489ef24642a039f21
+>>>>>>> BossEnemy
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

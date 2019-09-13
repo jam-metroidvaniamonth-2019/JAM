@@ -22,6 +22,6 @@ public class AbilityB : BaseBossAbility
         var baseEnemyProj = Instantiate(projectileB, this.transform.position, Quaternion.identity).GetComponent<ProjectileB_Primary>();
         baseEnemyProj.GetComponent<Rigidbody2D>().velocity = _direction * speed;
         baseEnemyProj.child_speed = child_speed;
-        baseEnemyProj.child_damage /= (baseEnemyProj.pointsForChildProjectils.Count);
+        baseEnemyProj.child_damage = baseEnemyProj.GetComponent<Common.AffectorAmount>().Amount / (baseEnemyProj.pointsForChildProjectils.Count);
     }
 }

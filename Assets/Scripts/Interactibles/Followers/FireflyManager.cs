@@ -9,23 +9,20 @@ namespace Interactibles.Followers
     {
         [Header("Prefabs")]
         [SerializeField] private GameObject _fireflyPrefab;
-        [SerializeField] private GameObject _fireflySpawnEffect;
-        [SerializeField] private GameObject _fireflyDestroyEffect;
+        [SerializeField] private float _constantZPosition = 5;
 
         [Header("Control Points")]
         [SerializeField] private Transform _firefliesHolder;
         [SerializeField] private Transform[] _outOfScreenPoints;
 
-        private List<FireflyInformation> _fireflies;
+        private List<FireflyInformation> _fireflies = new List<FireflyInformation>();
         private int _currentIndex;
 
         #region Unity Functions
 
-        private void Start() => _fireflies = new List<FireflyInformation>();
-
         private void Update()
         {
-            for (int i = _fireflies.Count - 1; i >= 0; i++)
+            for (int i = _fireflies.Count - 1; i >= 0; i--)
             {
                 FireflyInformation fireflyInformation = _fireflies[i];
                 if (fireflyInformation.destroyOnReachTarget && fireflyInformation.fireflyInstance.TargetReachedPosition())
@@ -55,19 +52,21 @@ namespace Interactibles.Followers
             _currentIndex += 1;
 
             GameObject fireflyInstance = SpawnFirefly(spawnPoint);
+            FloatyFollowTarget followTarget = fireflyInstance.GetComponent<FloatyFollowTarget>();
             FireflyInformation fireflyInformation = new FireflyInformation
             {
                 destroyOnReachTarget = destroyOnReachTarget,
                 fireflyIndex = _currentIndex,
-                fireflyInstance = fireflyInstance.GetComponent<FloatyFollowTarget>()
+                fireflyInstance = followTarget
             };
 
+            followTarget.UpdateTarget(target);
             _fireflies.Add(fireflyInformation);
 
             return _currentIndex;
         }
 
-        public void UpdateFireflyTargetToRandom(int fireflyIndex)
+        public void UpdateFireflyTargetToRandom(int fireflyIndex, bool destroyOnReach = false)
         {
             FireflyInformation fireflyInformation = _fireflies.FirstOrDefault(_ => _.fireflyIndex == fireflyIndex);
             if (fireflyInformation == null)
@@ -77,6 +76,7 @@ namespace Interactibles.Followers
             }
 
             Transform randomTarget = GetRandomTransformPoint();
+            fireflyInformation.destroyOnReachTarget = destroyOnReach;
             fireflyInformation.fireflyInstance.GetComponent<FloatyFollowTarget>().UpdateTarget(randomTarget);
         }
 
@@ -106,10 +106,26 @@ namespace Interactibles.Followers
             return fireflyInstance;
         }
 
-        private void DestroyFirefly(GameObject firefly)
+        private void DestroyFirefly(GameObject firefly) => Destroy(firefly);
+
+        #endregion
+
+        #region Singleton
+
+        private static FireflyManager _instance;
+        public static FireflyManager Instance => _instance;
+
+        private void Awake()
         {
-            Instantiate(_fireflyDestroyEffect, firefly.transform.position, Quaternion.identity);
-            Destroy(firefly);
+            if (_instance == null)
+            {
+                _instance = this;
+            }
+
+            if (_instance != this)
+            {
+                Destroy(gameObject);
+            }
         }
 
         #endregion

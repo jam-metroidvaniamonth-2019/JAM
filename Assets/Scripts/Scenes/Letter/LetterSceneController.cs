@@ -10,12 +10,6 @@ namespace Scenes.Letter
         [SerializeField] private float _faderDelay;
         [SerializeField] private TextTyper _letterTyper1;
 
-        [Header("Input Detection")]
-        [SerializeField] private string _gamePadText;
-        [SerializeField] private string _keyboardText;
-        [SerializeField] private TextTyper _inputTextTyper;
-
-
         private bool _sceneExitTriggered;
         private float _sceneExitTimer;
 
@@ -35,15 +29,7 @@ namespace Scenes.Letter
             _fader.StartFadeIn();
         }
 
-        private void Update()
-        {
-            if (_sceneActive)
-            {
-                CheckGamePadConnected();
-            }
-
-            UpdateTimer();
-        }
+        private void Update() => UpdateTimer();
 
         private void OnDestroy()
         {
@@ -68,33 +54,6 @@ namespace Scenes.Letter
         }
 
         private void HandleSceneSwitch() => _fader.StartFadeOut();
-        
-        private void CheckGamePadConnected()
-        {
-            string[] connectedGamePads = Input.GetJoystickNames();
-            if (connectedGamePads.Length > 0 && !string.IsNullOrEmpty(connectedGamePads[0]))
-            {
-                if (!_gamePadConnectedLastState)
-                {
-                    _inputTextTyper.UpdateText(_gamePadText);
-                    _inputTextTyper.StartTyping();
-
-                    _gamePadConnectedLastState = true;
-                    _keyboardConnectedLastState = false;
-                }
-            }
-            else
-            {
-                if (!_keyboardConnectedLastState)
-                {
-                    _inputTextTyper.UpdateText(_keyboardText);
-                    _inputTextTyper.StartTyping();
-
-                    _gamePadConnectedLastState = false;
-                    _keyboardConnectedLastState = true;
-                }
-            }
-        }
 
         private void HandleFadeInComplete()
         {

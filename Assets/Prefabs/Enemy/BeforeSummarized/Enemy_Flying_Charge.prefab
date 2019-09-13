@@ -56,7 +56,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3005043080682176140}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 38.118965, y: -13.68, z: -1.5673828}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3005043081154698635}
@@ -171,15 +171,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy2
       objectReference: {fileID: 0}
+    - target: {fileID: 7079200563728730818, guid: 64973169d61982845a403a0d05b18441,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 7079200563728730820, guid: 64973169d61982845a403a0d05b18441,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 35.88
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7079200563728730820, guid: 64973169d61982845a403a0d05b18441,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -13.86
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7079200563728730820, guid: 64973169d61982845a403a0d05b18441,
         type: 3}
@@ -241,6 +246,32 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7079200563728730822, guid: 64973169d61982845a403a0d05b18441,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079200563728730822, guid: 64973169d61982845a403a0d05b18441,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.385
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079200563728730822, guid: 64973169d61982845a403a0d05b18441,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079200563728730822, guid: 64973169d61982845a403a0d05b18441,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.385
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079200563728730823, guid: 64973169d61982845a403a0d05b18441,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 42b475821c76e044497136ba9ffea9f9,
+        type: 3}
     - target: {fileID: 7079200563728730821, guid: 64973169d61982845a403a0d05b18441,
         type: 3}
       propertyPath: myAnimator
@@ -266,38 +297,38 @@ PrefabInstance:
       propertyPath: point2
       value: 
       objectReference: {fileID: 3005043081912817244}
-    - target: {fileID: 7079200563728730823, guid: 64973169d61982845a403a0d05b18441,
+    - target: {fileID: 7079200563863420686, guid: 64973169d61982845a403a0d05b18441,
         type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 42b475821c76e044497136ba9ffea9f9,
-        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7079200563863420688, guid: 64973169d61982845a403a0d05b18441,
         type: 3}
       propertyPath: m_Offset.x
-      value: 0.02332785
+      value: 0.11
       objectReference: {fileID: 0}
     - target: {fileID: 7079200563863420688, guid: 64973169d61982845a403a0d05b18441,
         type: 3}
       propertyPath: m_Offset.y
-      value: 0.018258125
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: 7079200563863420688, guid: 64973169d61982845a403a0d05b18441,
         type: 3}
       propertyPath: m_Size.x
-      value: 0.5354207
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7079200563863420688, guid: 64973169d61982845a403a0d05b18441,
         type: 3}
       propertyPath: m_Size.y
-      value: 0.46290684
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7290604406105827281, guid: 64973169d61982845a403a0d05b18441,
         type: 3}
       propertyPath: enemyCollider
       value: 
       objectReference: {fileID: 5443252870243320968}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7079200563863420691, guid: 64973169d61982845a403a0d05b18441, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 64973169d61982845a403a0d05b18441, type: 3}
 --- !u!1 &5443252869839171930 stripped
 GameObject:

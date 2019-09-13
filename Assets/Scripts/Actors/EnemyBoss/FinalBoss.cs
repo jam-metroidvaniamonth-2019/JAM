@@ -8,6 +8,8 @@ public class FinalBoss : MonoBehaviour
     public Transform projectileAFiringPt;
     public Transform projectileBFiringPt;
 
+    public AbilityD abilityD;
+
     public void StartBossBattle()
     {
         CallNextAbility();
@@ -35,15 +37,44 @@ public class FinalBoss : MonoBehaviour
     {
         CallNextAbility();
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            abilityD.Trigger(Vector2.zero);
+        }
+    }
+
+
+    private Vector2 GetDirecitonForAbilityAttack(EAttackType _attackType)
+    {
+        if(_attackType == EAttackType.Ability_A)
+        {
+            var _direction = (playerCol.transform.localPosition - projectileAFiringPt.localPosition).normalized;
+            Debug.DrawRay(_direction, projectileAFiringPt.localPosition, Color.gray,5f);
+            return _direction;
+
+        }else if (_attackType == EAttackType.Ability_B)
+        {
+            var _direction = (playerCol.transform.localPosition - projectileBFiringPt.position).normalized;
+            Debug.DrawRay(_direction, projectileBFiringPt.position,Color.red,5f);
+            return _direction;
+        }
+        else
+        {
+            return Vector2.zero;
+        }
+    }
+
     private void TriggerAbility(EAttackType _attackType)
     {
         var _triggerAbility = Array.Find(CollectionOfAttachedAbilities, element => element.attackType == _attackType);
-        Vector2 _direction = (playerCol.transform.position - projectileAFiringPt.position).normalized;
 
         if (_triggerAbility)
         {
             currentBossAbility = _triggerAbility;
-            _triggerAbility.Trigger(_direction);
+            _triggerAbility.Trigger(GetDirecitonForAbilityAttack(_attackType));
         }
     }
     private IEnumerator TriggerAbilityRoutine(float _wait)
