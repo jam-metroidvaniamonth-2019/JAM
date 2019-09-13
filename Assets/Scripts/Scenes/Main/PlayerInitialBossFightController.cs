@@ -15,7 +15,8 @@ namespace Scenes.Main
     public class PlayerInitialBossFightController : MonoBehaviour
     {
         [Header("Boss Scene")]
-        [SerializeField] private GameObject _leftBoundaryLocker;
+        [SerializeField] private Rigidbody2D _fallingStone;
+        [SerializeField] private float _fallingStoneMass;
         [SerializeField] private TriggerExplosionOnChildren _rightBoundaryLocker;
         [SerializeField] private GameObject _bossEnemy;
         [SerializeField] private CollisionNotifier _bossSceneActivator;
@@ -43,8 +44,7 @@ namespace Scenes.Main
         private void Start()
         {
             _fireflyIndices = new List<int>();
-
-            _leftBoundaryLocker.SetActive(false);
+            _fallingStone.isKinematic = true;
 
             _playerHealthSetter.OnHealthChanged += HandlePlayerHealthChange;
             _firefliesExitNotifier.OnTriggerEntered += HandlePlayerEnteredFireflyExit;
@@ -69,6 +69,7 @@ namespace Scenes.Main
         {
             CutSceneDisplay.Instance.OnCutSceneOpen -= HandleCutSceneOpen;
 
+            _rightBoundaryLocker.MakeChildrenExplode();
             _playerController.PlayerLoseBag();
             Destroy(_bossEnemy);
 
@@ -105,8 +106,8 @@ namespace Scenes.Main
         {
             if (other.CompareTag(TagManager.Player))
             {
-                _leftBoundaryLocker.SetActive(true);
-
+                _fallingStone.isKinematic = false;
+                _fallingStone.mass = _fallingStoneMass;
                 _bossSceneActivator.OnTriggerEntered -= ActivateBossScene;
             }
         }
@@ -115,9 +116,6 @@ namespace Scenes.Main
         {
             _playerMovement.DisableMovement();
             _playerShooter.DisableShooting();
-
-            _leftBoundaryLocker.SetActive(false);
-            _rightBoundaryLocker.MakeChildrenExplode();
 
             CutSceneDisplay.Instance.DisplayCutScene(_cutSceneImage, _cutSceneDisplayTime);
 
