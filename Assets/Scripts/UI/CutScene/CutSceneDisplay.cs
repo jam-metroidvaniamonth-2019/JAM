@@ -49,8 +49,6 @@ namespace UI.CutScene
                 _cutSceneBackgroundFader.StartFadeOut(true);
 
                 _cutSceneFader.OnFadeOutComplete += HandleCutSceneOpen;
-                
-                OnCutSceneOpen?.Invoke();
             }
         }
 
@@ -62,6 +60,13 @@ namespace UI.CutScene
         {
             _cutSceneFader.OnFadeOutComplete -= HandleCutSceneOpen;
             _cutSceneOpen = true;
+            OnCutSceneOpen?.Invoke();
+        }
+
+        private void HandleCutSceneClose()
+        {
+            _cutSceneFader.OnFadeInComplete -= HandleCutSceneClose;
+            OnCutSceneClose?.Invoke();
         }
 
         public void CloseCutScene()
@@ -71,11 +76,12 @@ namespace UI.CutScene
                 return;
             }
 
-            _cutSceneFader.StartFadeIn();
-            _cutSceneBackgroundFader.StartFadeIn();
             _cutSceneOpen = false;
 
-            OnCutSceneClose?.Invoke();
+            _cutSceneFader.StartFadeIn();
+            _cutSceneBackgroundFader.StartFadeIn();
+
+            _cutSceneFader.OnFadeInComplete += HandleCutSceneClose;
         }
 
         #endregion

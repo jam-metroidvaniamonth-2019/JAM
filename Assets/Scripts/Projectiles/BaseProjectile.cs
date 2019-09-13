@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Interactibles.ColliderModifier;
+using UnityEngine;
 
 namespace Projectiles
 {
@@ -11,7 +12,7 @@ namespace Projectiles
         [Header("Projectile Stats")]
         [SerializeField] private float _launchSpeed = 20;
         [SerializeField] private float _lifetime;
-        
+
         public float LaunchSpeed => _launchSpeed;
 
         private float _currentLifeTime;
@@ -33,7 +34,16 @@ namespace Projectiles
             }
         }
 
-        private void OnTriggerEnter2D(Collider2D other) => DestroyProjectile();
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            CollisionNotifier collisionNotifier = other.GetComponent<CollisionNotifier>();
+            if (collisionNotifier != null)
+            {
+                return;
+            }
+
+            DestroyProjectile();
+        }
 
         #endregion
 

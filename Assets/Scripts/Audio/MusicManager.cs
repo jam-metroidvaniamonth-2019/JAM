@@ -20,6 +20,17 @@ namespace Audio
             return musicObject;
         }
 
+        public MusicObject PlaySound(GameObject musicPrefab, float fadeInRate)
+        {
+            GameObject audioInstance = Instantiate(musicPrefab, _musicHolder.position, Quaternion.identity);
+            audioInstance.transform.SetParent(_musicHolder);
+
+            MusicObject musicObject = audioInstance.GetComponent<MusicObject>();
+            musicObject.PlayMusic(fadeInRate);
+
+            return musicObject;
+        }
+
         #endregion
 
         #region Singleton

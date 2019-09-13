@@ -1,4 +1,5 @@
-﻿using Scenes.Common;
+﻿using Audio;
+using Scenes.Common;
 using UI;
 using UI.CutScene;
 using UnityEngine;
@@ -10,6 +11,10 @@ namespace Scenes.Main
     {
         [SerializeField] private PauseAndResume _pauseAndResume;
         [SerializeField] private Fader _fader;
+
+        [Header("Background Music")]
+        [SerializeField] private GameObject _backgroundMusicPrefab;
+        [SerializeField] private float _audioFadeInRate = 0.15f;
 
         private CutSceneDisplay _cutSceneDisplay;
 
@@ -25,6 +30,8 @@ namespace Scenes.Main
             _cutSceneDisplay.OnCutSceneClose += HandleCutSceneClose;
 
             _pauseAndResume.OnPauseDisabled += HandleGameUnPaused;
+
+            MusicManager.Instance.PlaySound(_backgroundMusicPrefab, _audioFadeInRate);
 
             _fader.StartFadeIn();
         }

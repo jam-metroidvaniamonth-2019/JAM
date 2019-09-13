@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Player.General;
 using UnityEngine;
 using Utils;
 
@@ -7,6 +8,9 @@ namespace Player.Movement
 {
     public class PlayerMovement : MonoBehaviour
     {
+        [Header("Systems Affector")]
+        [SerializeField] private PlayerController _playercontroller;
+
         [Header("Movement")]
         [SerializeField] private float _movementSpeed = 250;
         [SerializeField] private float _linearDrag = 50;
@@ -162,7 +166,7 @@ namespace Player.Movement
 
         private void HandleDash()
         {
-            if (_dashUsed || !Input.GetButtonDown(ControlConstants.DashButton))
+            if (_dashUsed || !Input.GetButtonDown(ControlConstants.DashButton) || !_playercontroller.PlayerHasDash)
             {
                 return;
             }
