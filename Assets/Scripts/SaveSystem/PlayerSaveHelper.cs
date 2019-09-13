@@ -1,5 +1,4 @@
-﻿using System;
-using Common;
+﻿using Common;
 using UnityEngine;
 using Utils;
 
@@ -9,6 +8,8 @@ namespace SaveSystem
     {
         [SerializeField] private Transform _player;
         [SerializeField] private HealthSetter _playerHealthSetter;
+        [SerializeField] private GameObject _saveEffect;
+        [SerializeField] private float _saveEffectZPosition;
 
         #region Unity Functions
 
@@ -57,6 +58,9 @@ namespace SaveSystem
             SaveManager.Instance.SaveStructure.playerYPosition = playerPosition.y;
 
             SaveManager.Instance.SaveData();
+
+            Vector3 spawnPosition = new Vector3(_player.position.x, _player.position.y, _player.position.z + _saveEffectZPosition);
+            Instantiate(_saveEffect, spawnPosition, Quaternion.identity);
         }
 
         #endregion

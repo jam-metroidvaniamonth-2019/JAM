@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2353232403819844858}
   - component: {fileID: 2353232403819844857}
   - component: {fileID: 398817954251151695}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Enemy_Stagnant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 2353232404037591048}
   - component: {fileID: 2353232404037591046}
   - component: {fileID: 2353232404037591047}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemySkin
   m_TagString: Untagged
   m_Icon: {fileID: 0}

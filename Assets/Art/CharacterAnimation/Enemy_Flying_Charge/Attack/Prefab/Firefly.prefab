@@ -4903,7 +4903,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _minFollowTargetRadius: 1
   _maxFollowTargetRadius: 3
-  _followTargetOffset: {x: 1, y: 2, z: 0}
+  _followTargetOffset: {x: -1, y: 1, z: 0}
   _targetClosePointChangeRate: 7
   _targetLerpSpeed: 3
   _target: {fileID: 0}
