@@ -13,14 +13,18 @@ namespace UI
         private float _currentAlpha;
 
         private Image _affectorImage;
+        private bool _initialized;
 
         #region Unity Functions
 
         private void Start()
         {
-            _affectorImage = GetComponent<Image>();
-            _isFadingActive = true;
-            _isFadingIn = false;
+            if (!_initialized)
+            {
+                _affectorImage = GetComponent<Image>();
+                _isFadingActive = true;
+                _isFadingIn = false;
+            }
         }
 
         private void Update()
@@ -62,15 +66,41 @@ namespace UI
 
         #region External Functions
 
-        public void StartFading() => _isFadingActive = true;
+        public void StartFading()
+        {
+            if (!_initialized)
+            {
+                Initialize();
+            }
+
+            _isFadingActive = true;
+        }
 
         public void StopFading(bool resetAlpha = true)
         {
+            if (!_initialized)
+            {
+                Initialize();
+            }
+
             _isFadingActive = false;
 
             Color imageColor = _affectorImage.color;
             imageColor.a = 0;
             _affectorImage.color = imageColor;
+        }
+
+        #endregion
+
+        #region Utility Functions
+
+        private void Initialize()
+        {
+            _affectorImage = GetComponent<Image>();
+            _isFadingActive = true;
+            _isFadingIn = false;
+
+            _initialized = true;
         }
 
         #endregion
