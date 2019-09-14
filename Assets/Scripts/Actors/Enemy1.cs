@@ -51,7 +51,6 @@ public class Enemy1 : BaseNPC
         targetPoint = point2.position;
         EvaluateRotation();
         //transform.eulerAngles = new Vector3(0, -rotationEulerAngle, 0);
-
         //int intLMask = LayerMask.GetMask(groundMask);
         myAnimator = this.GetComponent<Animator>();
     }
@@ -96,7 +95,7 @@ public class Enemy1 : BaseNPC
     public float _waitAfterEndPoint;
     public bool _canSearch;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (_canSearch)
         {
@@ -218,7 +217,10 @@ public class Enemy1 : BaseNPC
         if (Mathf.Approximately(transform.position.x, targetPoint.x) &&
             Mathf.Approximately(transform.position.y, targetPoint.y))
         {
-            StopFromSearch();
+            if (isGroundCharging)
+            {
+                StopFromSearch();
+            }
             GetNextPoint();
         }
     }
