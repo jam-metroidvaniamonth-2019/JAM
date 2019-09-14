@@ -7,6 +7,7 @@ TagManager:
   - TargetCamera
   - TargetFollowerModifier
   - explosion
+  - FinalBossStonePoint
   layers:
   - Default
   - TransparentFX

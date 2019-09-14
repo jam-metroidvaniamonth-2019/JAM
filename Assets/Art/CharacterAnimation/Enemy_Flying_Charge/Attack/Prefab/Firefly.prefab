@@ -964,8 +964,8 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.15284216
-          value: 0.011049736
+          time: 0.1301676
+          value: 0.15655755
           inSlope: 0.34868717
           outSlope: 0.34868717
           tangentMode: 0
@@ -982,8 +982,8 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.23386037
-          value: 0
+          time: 0.26334035
+          value: 0.12384033
           inSlope: -0.00000017606348
           outSlope: -0.00000017606348
           tangentMode: 0
@@ -991,8 +991,8 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.44909266
-          value: 0
+          time: 0.43548182
+          value: 0.1300354
           inSlope: -0
           outSlope: -0
           tangentMode: 0
@@ -1009,8 +1009,8 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.5520207
-          value: 0.016574599
+          time: 0.5474736
+          value: 0.13733265
           inSlope: 0.071465254
           outSlope: 0.071465254
           tangentMode: 0
@@ -1027,8 +1027,8 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.6494508
-          value: 0.011049725
+          time: 0.6630616
+          value: 0.17514274
           inSlope: -0
           outSlope: -0
           tangentMode: 0
@@ -1036,8 +1036,8 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.80262554
-          value: 0.011049725
+          time: 0.7844981
+          value: 0.17514274
           inSlope: -0
           outSlope: -0
           tangentMode: 0
@@ -1054,8 +1054,8 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.8962702
-          value: 0.011049725
+          time: 0.8940119
+          value: 0.16894767
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -4905,7 +4905,7 @@ MonoBehaviour:
   _maxFollowTargetRadius: 3
   _followTargetOffset: {x: -1, y: 1, z: 0}
   _targetClosePointChangeRate: 7
-  _targetLerpSpeed: 3
+  _targetLerpSpeed: 0.7
   _target: {fileID: 0}
   _amplitude: 2
   _frequency: 0.3

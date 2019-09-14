@@ -1,13 +1,16 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace WorldDisplay
 {
     public class MakeChildrenFall : MonoBehaviour
     {
-        [SerializeField] private Rigidbody2D[] _children;
         [SerializeField] private float _downwardInitialForce;
         [SerializeField] private bool _triggerOnCollide;
+        [SerializeField] private float _destroyChildrenAfterTime;
+        [SerializeField] private GameObject _destroyEffect;
+        [SerializeField] private Rigidbody2D[] _children;
 
         #region Unity Functions
 
@@ -37,6 +40,25 @@ namespace WorldDisplay
             {
                 child.isKinematic = false;
                 child.AddForce(Vector2.down * _downwardInitialForce, ForceMode2D.Impulse);
+            }
+
+            StartCoroutine(DelayedDestroyChildren());
+        }
+
+        #endregion
+
+        #region Utility Functions
+
+        private IEnumerator DelayedDestroyChildren()
+        {
+            yield return new WaitForSeconds(_destroyChildrenAfterTime);
+
+            foreach (Rigidbody2D child in _children)
+            {
+                Vector3 destroyEffectPosition = child.transform.position;
+                Instantiate(_destroyEffect, destroyEffectPosition, Quaternion.identity);
+
+                Destroy(child.gameObject);
             }
 
             Destroy(gameObject);

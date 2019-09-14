@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Audio;
 using Common;
 using Player.Movement;
@@ -15,17 +16,21 @@ namespace Player.Display
         private static readonly int FallParam = Animator.StringToHash("Fall");
         private static readonly int MoveParam = Animator.StringToHash("Move");
         private static readonly int DeadParam = Animator.StringToHash("Dead");
+        private static readonly int BowIdleParam = Animator.StringToHash("Bow");
+        private static readonly int SlingShotIdleParam = Animator.StringToHash("SlingShot");
 
-        [Header("Controllers")]
-        [SerializeField] private PlayerCollision _playerCollision;
+        [Header("Controllers")] [SerializeField]
+        private PlayerCollision _playerCollision;
+
         [SerializeField] private PlayerMovement _playerMovement;
         [SerializeField] private HealthSetter _playerHealthSetter;
         [SerializeField] private PlayerShooter _playerShooter;
         [SerializeField] private Rigidbody2D _playerRb;
         [SerializeField] private float _movementThreshold;
+        public ParticleSystem _playerTrailParticleSystem;
 
-        [Header("Player Animation Audio")]
-        [SerializeField] private List<GameObject> _runningSounds;
+        [Header("Player Animation Audio")] [SerializeField]
+        private List<GameObject> _runningSounds;
 
         private Animator _playerAnimator;
 
@@ -34,19 +39,26 @@ namespace Player.Display
         private void Start()
         {
             _playerAnimator = GetComponent<Animator>();
+
             _playerMovement.OnPlayerJumped += HandlePlayerJumped;
             _playerHealthSetter.OnHealthZero += HandlePlayerDead;
+
+            _playerShooter.OnPlayerShootInPosition += HandlePlayerInShootPosition;
+            _playerShooter.OnPlayerShot += HandlePlayerShot;
         }
 
         private void OnDestroy()
         {
             _playerMovement.OnPlayerJumped -= HandlePlayerJumped;
             _playerHealthSetter.OnHealthZero -= HandlePlayerDead;
+
+            _playerShooter.OnPlayerShootInPosition -= HandlePlayerInShootPosition;
+            _playerShooter.OnPlayerShot -= HandlePlayerShot;
         }
 
         private void LateUpdate()
         {
-            _playerAnimator.SetBool(MoveParam, _playerRb.velocity.x != 0);
+            _playerAnimator.SetBool(MoveParam, Math.Abs(_playerRb.velocity.x) > _movementThreshold);
 
             // This extra check is added as sometimes
             // when colliding with walls and then falling
@@ -66,6 +78,21 @@ namespace Player.Display
             {
                 _playerAnimator.SetBool(JumpParam, false);
                 _playerAnimator.SetBool(FallParam, true);
+            }
+
+            if (_playerCollision.IsOnGround && Math.Abs(_playerRb.velocity.x) > _movementThreshold)
+            {
+                if (_playerTrailParticleSystem.isStopped)
+                {
+                    _playerTrailParticleSystem.Play();
+                }
+            }
+            else
+            {
+                if (_playerTrailParticleSystem.isPlaying)
+                {
+                    _playerTrailParticleSystem.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+                }
             }
         }
 
@@ -92,6 +119,12 @@ namespace Player.Display
             _playerMovement.DisableMovement();
             _playerShooter.DisableShooting();
         }
+
+        private void HandlePlayerInShootPosition(bool playerHasBow) =>
+            _playerAnimator.SetBool(playerHasBow ? BowIdleParam : SlingShotIdleParam, true);
+
+        private void HandlePlayerShot(bool playerHasBow) =>
+            _playerAnimator.SetBool(playerHasBow ? BowIdleParam : SlingShotIdleParam, false);
 
         #endregion
     }
