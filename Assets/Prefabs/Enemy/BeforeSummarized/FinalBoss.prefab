@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1849446762512076790}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.23, y: -1.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1849446764095502533}
@@ -155,7 +155,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1849446763432596513}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.44, y: 0.773, z: 0}
+  m_LocalPosition: {x: -1.22, y: -1.27, z: 0}
   m_LocalScale: {x: 6.464, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1849446764095502533}
@@ -264,7 +264,7 @@ MonoBehaviour:
   - {fileID: 1849446764095502530}
   - {fileID: 1849446764095502590}
   - {fileID: 1849446764095502529}
-  _waitBeforeFire: 2
+  _waitBeforeFire: 0.85
 --- !u!114 &1849446764095502530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,6 +279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackType: 1
   cooldown: 3
+  FirePt: {fileID: 1849446763432596958}
   currentCounter: 0
   delayPerProjectile: 0.8
   counter: 8
@@ -300,6 +301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackType: 2
   cooldown: 3
+  FirePt: {fileID: 1849446762512076791}
   projectileB: {fileID: 7823771168321983583, guid: ac1bb5d90fcb0bf43b4868f4651c6b7d,
     type: 3}
   direction: {x: 0, y: 0}

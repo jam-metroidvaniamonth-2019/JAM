@@ -128,7 +128,7 @@ public class FlyingRange : BaseNPC
 
     public void FireProjectileBlast(Vector3 _playerPosition)
     {
-        var zProjectile = 5;
+        var zProjectile = 0;
         var pos = this.transform.position;
         var newPos = new Vector3(pos.x, pos.y, zProjectile);
 
