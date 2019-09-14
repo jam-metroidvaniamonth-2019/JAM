@@ -1,11 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using CustomCamera;
+using Interactibles.Teleporters;
 using UnityEngine;
+using WorldDisplay;
 
 public class DetectPlayerEntryScript : MonoBehaviour
 {
-    [SerializeField]
-    private FinalBoss finalBoss;
+    [SerializeField] private FinalBoss finalBoss;
+    [SerializeField] private Teleporter _teleporter;
+    [SerializeField] private CameraController _cameraController;
+    [SerializeField] private Vector3 _offset;
 
     private bool battleStartedAlready = false;
 
@@ -17,7 +22,11 @@ public class DetectPlayerEntryScript : MonoBehaviour
             {
                 finalBoss.playerCol = playerCol;
                 finalBoss.StartBossBattle();
-                this.GetComponent<Collider2D>().enabled = false;
+
+                GetComponent<Collider2D>().enabled = false;
+
+                _cameraController.UpdatePlayerOffset(_offset);
+                _teleporter.DisableTeleporter();
             }
         }
     }

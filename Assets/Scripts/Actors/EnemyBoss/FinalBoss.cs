@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using CustomCamera;
 using UI.CutScene;
 using UnityEngine;
 
@@ -17,6 +18,8 @@ public class FinalBoss : BaseNPC
     [Header("CutSceneAfterDeath")]
     public Sprite cutSceneImg;
     public float cutSceneDuration;
+    public Vector3 cameraOffset;
+    public CameraController cameraController;
 
     public Transform projectileAFiringPt;
     public Transform projectileBFiringPt;
@@ -133,6 +136,7 @@ public class FinalBoss : BaseNPC
         enemyHealthObject.enemyHealthSetter.OnHealthChanged += CallHealthReduceAnimation;
 
         enemyHealthObject.enemyHealthSetter.OnHealthZero += DsiplayCutscene;
+        cameraController.UpdatePlayerOffset(cameraOffset);
 
         foreach (var element in CollectionOfAttachedAbilities)
         {
