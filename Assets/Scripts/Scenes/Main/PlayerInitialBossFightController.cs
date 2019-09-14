@@ -5,6 +5,7 @@ using Interactibles.Followers;
 using Player.General;
 using Player.Movement;
 using Player.Shooting;
+using SpeechSystem;
 using UI.CutScene;
 using UnityEngine;
 using Utils;
@@ -24,6 +25,7 @@ namespace Scenes.Main
         [Header("CutScene Controls")]
         [SerializeField] private float _cutSceneDisplayTime;
         [SerializeField] private Sprite _cutSceneImage;
+        [SerializeField] [TextArea] private string[] _dialogues;
 
         [Header("Player")]
         [SerializeField] private HealthSetter _playerHealthSetter;
@@ -86,6 +88,7 @@ namespace Scenes.Main
 
             _playerMovement.EnableMovement();
             _playerShooter.EnableShooting();
+            SimpleSpeechController.Instance.DisplayDialogues(_dialogues);
         }
 
         private void HandlePlayerEnteredFireflyExit(Collider2D other)

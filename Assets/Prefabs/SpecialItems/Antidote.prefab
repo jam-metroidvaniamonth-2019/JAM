@@ -191,3 +191,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c3e3035aba865d4f94cc830e89af86d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dialogues:
+  - Oh! that's my antidote
