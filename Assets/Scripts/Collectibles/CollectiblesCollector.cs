@@ -8,6 +8,7 @@ namespace Collectibles
     {
         [SerializeField] private CollisionNotifier _collectibleNotifier;
         public ParticleSystem _collectibleSystem;
+        public ParticleSystem _collectEffect;
 
         #region Unity Functions
 
@@ -15,8 +16,6 @@ namespace Collectibles
         {
             _collectibleNotifier.OnTriggerEntered += HandlePlayerCollision;
         }
-
-
 
         #endregion
 
@@ -29,7 +28,9 @@ namespace Collectibles
                 _collectibleNotifier.OnTriggerEntered -= HandlePlayerCollision;
 
                 Destroy(_collectibleNotifier.gameObject);
+
                 _collectibleSystem.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+                _collectEffect.Play();
             }
 
         }
