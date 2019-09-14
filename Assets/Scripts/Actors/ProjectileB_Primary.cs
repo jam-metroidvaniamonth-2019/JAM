@@ -33,7 +33,7 @@ public class ProjectileB_Primary : BaseEnemyProjectile
 
             var baseEnemyProj = Instantiate(childProjectile, pos, Quaternion.identity).GetComponent<Projectiles.BaseProjectile>();
             baseEnemyProj.GetComponent<Common.AffectorAmount>().SetDamage(child_damage);
-            baseEnemyProj.GetComponent<Rigidbody2D>().velocity = this.GetComponent<Rigidbody2D>().velocity * -3;
+            baseEnemyProj.GetComponent<Rigidbody2D>().velocity = this.GetComponent<Rigidbody2D>().velocity.normalized * -child_speed;
         }
 
         DestroyProjectile();

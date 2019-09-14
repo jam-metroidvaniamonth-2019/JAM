@@ -6,7 +6,7 @@ using WorldDisplay;
 
 public class AbilityC : BaseBossAbility
 {
-    [SerializeField] private GameObject _stoneFallingHolderPrefab;
+    [SerializeField] private GameObject[] _stoneFallingHolderPrefab;
     [SerializeField] private GameObject _stoneSpawnEffect;
     [SerializeField] private float _stoneFallingWaitTime = 1;
 
@@ -35,10 +35,11 @@ public class AbilityC : BaseBossAbility
     private void LaunchAttack()
     {
         GameObject stoneFallingInstance =
-            Instantiate(_stoneFallingHolderPrefab, _stonesFallingPoint.position, Quaternion.identity);
+            Instantiate(_stoneFallingHolderPrefab[UnityEngine.Random.Range(0,_stoneFallingHolderPrefab.Length)], _stonesFallingPoint.position, Quaternion.identity);
         _stoneFallingActivator = stoneFallingInstance.GetComponent<MakeChildrenFall>();
 
         Instantiate(_stoneSpawnEffect, _stonesFallingPoint.position, Quaternion.identity);
+        StartCoroutine(ActivateStoneFalling());
     }
 
     private IEnumerator ActivateStoneFalling()

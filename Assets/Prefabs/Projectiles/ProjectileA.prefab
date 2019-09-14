@@ -114,9 +114,9 @@ ParticleSystem:
     enabled: 1
     startLifetime:
       serializedVersion: 2
-      minMaxState: 3
-      scalar: 0.6
-      minScalar: 1
+      minMaxState: 0
+      scalar: 20
+      minScalar: 10
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -881,7 +881,7 @@ ParticleSystem:
     m_BurstCount: 0
     m_Bursts: []
   SizeModule:
-    enabled: 1
+    enabled: 0
     curve:
       serializedVersion: 2
       minMaxState: 1
@@ -919,7 +919,7 @@ ParticleSystem:
           outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
-          value: 0
+          value: 1
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -3778,7 +3778,7 @@ ParticleSystem:
         m_RotationOrder: 4
     maxLights: 20
   TrailModule:
-    enabled: 1
+    enabled: 0
     mode: 0
     ratio: 1
     lifetime:
@@ -4676,7 +4676,7 @@ Transform:
   m_GameObject: {fileID: 7823771168321983583}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 38.58, y: 11.71, z: 5}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 2}
   m_Children:
   - {fileID: 465227210262018922}
   m_Father: {fileID: 0}
@@ -4769,7 +4769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e262b8c49f8e324db129b1b5299d0ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _amount: 5
+  _amount: 2
 --- !u!114 &6361071689244472907
 MonoBehaviour:
   m_ObjectHideFlags: 0

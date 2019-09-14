@@ -5,6 +5,7 @@ using UnityEngine;
 public class AbilityD : BaseBossAbility
 {
     public GameObject antidotePrefab;
+    public Transform MinionSpawnPosition;
 
     private void SpawnAntidote(Vector2 _position)
     {
@@ -29,7 +30,7 @@ public class AbilityD : BaseBossAbility
     }
     private Vector2 GetRandomPosition()
     {
-        return new Vector2(0, 0);
+        return MinionSpawnPosition.position;
     }
     public override void Trigger(Vector2 _direction)
     {
