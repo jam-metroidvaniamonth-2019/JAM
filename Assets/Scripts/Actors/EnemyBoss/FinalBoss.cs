@@ -67,16 +67,18 @@ public class FinalBoss : BaseNPC
 
     private Vector2 GetDirecitonForAbilityAttack(EAttackType _attackType)
     {
-        if(_attackType == EAttackType.Ability_A)
+        Vector3 _direction = new Vector3(0, 0, 0);
+
+        if (_attackType == EAttackType.Ability_A)
         {
-            var _direction = (playerCol.transform.localPosition - projectileAFiringPt.localPosition).normalized;
-            Debug.DrawRay(_direction, projectileAFiringPt.localPosition, Color.gray,5f);
+            _direction = (playerCol.transform.position - projectileAFiringPt.position).normalized;
+            Debug.DrawRay(projectileAFiringPt.position, _direction,Color.red,3f);
             return _direction;
 
         }else if (_attackType == EAttackType.Ability_B)
         {
-            var _direction = (playerCol.transform.localPosition - projectileBFiringPt.position).normalized;
-            Debug.DrawRay(_direction, projectileBFiringPt.position,Color.red,5f);
+            _direction = (playerCol.transform.position - projectileBFiringPt.position).normalized;
+            Debug.DrawRay(projectileBFiringPt.position, _direction, Color.red, 3f);
             return _direction;
         }
         else
