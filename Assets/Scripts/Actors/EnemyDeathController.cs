@@ -5,7 +5,6 @@ public class EnemyDeathController : MonoBehaviour
 {
     [SerializeField] private EnemyHealthSetter _enemyHealthSetter;
     [SerializeField] private GameObject _enemyDeathEffect;
-    [SerializeField] private Transform _effectSpawnPosition;
     [SerializeField] private GameObject _enemyBody;
 
     #region Unity Functions
@@ -25,7 +24,7 @@ public class EnemyDeathController : MonoBehaviour
 
     protected virtual void RunEffectOnZero()
     {
-        Instantiate(_enemyDeathEffect, _effectSpawnPosition.position, Quaternion.identity);
+        Instantiate(_enemyDeathEffect, _enemyBody.transform.position, Quaternion.identity);
         Destroy(_enemyBody);
 
     }

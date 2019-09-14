@@ -424,13 +424,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playercontroller: {fileID: 7410804983857183026}
-  _movementSpeed: 750
+  _movementSpeed: 1200
   _linearDrag: 30
   _linearDragThresholdVelocity: 0.5
   _playerSprite: {fileID: 490690759808437027}
   _playerBagSprite: {fileID: 5094698494566072642}
   _movementTolerance: 0.3
-  _jumpVelocity: 12
+  _jumpVelocity: 13
   _fallMultiplier: 10
   _lowJumpMultiplier: 8
   _jumpDecelearationRate: 20
@@ -506,6 +506,7 @@ MonoBehaviour:
   _deadWaitTime: 3
   _lowHealthActivationRatio: 0.3
   _lowHealthFader: {fileID: 0}
+  _playerHasDash: 1
 --- !u!1 &490690758999993684
 GameObject:
   m_ObjectHideFlags: 0
