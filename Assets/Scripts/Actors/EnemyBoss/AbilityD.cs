@@ -6,8 +6,9 @@ public class AbilityD : BaseBossAbility
 {
     public GameObject antidotePrefab;
     public Transform MinionSpawnPosition;
+    public GameObject antridote;
 
-    private void SpawnAntidote(Vector2 _position)
+    private void SpawnAntidote(Vector3 _position)
     {
         GameObject.Instantiate(antidotePrefab, _position, Quaternion.identity);
     }
@@ -46,10 +47,9 @@ public class AbilityD : BaseBossAbility
         _abilityTriggered = true;
     }
 
-    private void EnemyDiedAt(BaseNPC _enemyScript)
+    private void EnemyDiedAt()
     {
-        // all dead spawn antidote here
-        SpawnAntidote(_enemyScript.transform.position);
+        antridote.SetActive(true);
     }
 
     private IEnumerator spawnEnemies()
@@ -59,7 +59,7 @@ public class AbilityD : BaseBossAbility
         --numberOfMinonsToSpawn;
         var enemyMinion = GameObject.Instantiate(GetRandomMinionPrefab(), GetRandomPosition(), Quaternion.identity);
         var NPCScript = enemyMinion.GetComponentInChildren<BaseNPC>();
-        NPCScript.OnEnemyDeathPosition += EnemyDiedAt;
+        NPCScript.enemyHealthObject.enemyHealthSetter.OnHealthZero += EnemyDiedAt;
         allSpawnedNPCs.Add(NPCScript);
 
         if (numberOfMinonsToSpawn > 0)

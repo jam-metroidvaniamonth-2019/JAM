@@ -17,11 +17,13 @@ public class Antidote : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        var collider = collision.GetComponent<Player.General.PlayerController>();
+        var collider = collision.gameObject.GetComponent<Player.General.PlayerController>();
         if (collider)
         {
             collider.PlayerCollectAntidote();
             OnObtainingAntidote?.Invoke();
+
+            Destroy(gameObject);
         }
     }
 }

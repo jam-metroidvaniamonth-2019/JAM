@@ -155,8 +155,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 299, y: -44.9}
-  m_SizeDelta: {x: 406.7, y: 624}
+  m_AnchoredPosition: {x: 298, y: -0.000022888}
+  m_SizeDelta: {x: 460.5, y: 661.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &48190744
 MonoBehaviour:
@@ -672,7 +672,7 @@ MonoBehaviour:
   _gameOverWinText: 'And so the adventurous tale of finding Yu-Jin ends.
 
 
-    The antidote cures Yu-Jin and they reach home safely.'
+    The antidote kills and cures Yu-Jin and they reach home to a happy ending'
   _gameOverLoseText: 'No no no. This is not how the story is supposed to end.
 
 

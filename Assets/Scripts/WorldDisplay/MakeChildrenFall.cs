@@ -12,14 +12,13 @@ namespace WorldDisplay
         [SerializeField] private GameObject _destroyEffect;
         [SerializeField] private Rigidbody2D[] _children;
 
+        private bool _initialized;
+
         #region Unity Functions
 
         private void Start()
         {
-            foreach (Rigidbody2D child in _children)
-            {
-                child.isKinematic = true;
-            }
+            Initialize();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -36,6 +35,8 @@ namespace WorldDisplay
 
         public void ThrowChildrenWithForce()
         {
+            Initialize();
+
             foreach (Rigidbody2D child in _children)
             {
                 child.isKinematic = false;
@@ -62,6 +63,21 @@ namespace WorldDisplay
             }
 
             Destroy(gameObject);
+        }
+
+        private void Initialize()
+        {
+            if (_initialized)
+            {
+                return;
+            }
+
+            foreach (Rigidbody2D child in _children)
+            {
+                child.isKinematic = true;
+            }
+
+            _initialized = true;
         }
 
         #endregion

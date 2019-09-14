@@ -255,8 +255,8 @@ MonoBehaviour:
   damageOnTouch: 0
   speed: 0
   myAnimator: {fileID: 0}
-  cutSceneImg: {fileID: 21300000, guid: 880b7bf3fc4b16244982b612a548642e, type: 3}
-  cutSceneDuration: 3
+  cutSceneImg: {fileID: 21300000, guid: b8baf6ee5dacd8b478c7733eebcdad59, type: 3}
+  cutSceneDuration: 10
   cameraOffset: {x: 0, y: 3, z: 0}
   cameraController: {fileID: 0}
   projectileAFiringPt: {fileID: 1849446763432596958}
@@ -264,7 +264,7 @@ MonoBehaviour:
   abilityD: {fileID: 1849446764095502528}
   currentBossAbility: {fileID: 0}
   playerCol: {fileID: 0}
-  attackSequence: 01000000020000000200000003000000
+  attackSequence: 01000000020000000300000002000000
   counter: -1
   CollectionOfAttachedAbilities:
   - {fileID: 1849446764095502530}
@@ -307,7 +307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackType: 2
-  cooldown: 3
+  cooldown: 1
   FirePt: {fileID: 1849446762512076791}
   projectileB: {fileID: 7823771168321983583, guid: ac1bb5d90fcb0bf43b4868f4651c6b7d,
     type: 3}
@@ -328,7 +328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackType: 3
-  cooldown: 4
+  cooldown: 3
   _stoneFallingHolderPrefab:
   - {fileID: 1721921256505444197, guid: ddf19228907163649a17681e2add7b45, type: 3}
   - {fileID: 1721921256505444197, guid: 2736cd3fb0b436841a3652c85bbc0af5, type: 3}
@@ -352,6 +352,7 @@ MonoBehaviour:
   antidotePrefab: {fileID: 3840854672065454277, guid: b04bb5c2eb1bd9a45be8a3bfdb77a0b2,
     type: 3}
   MinionSpawnPosition: {fileID: 0}
+  antridote: {fileID: 0}
   verticesOfTheAreaInWhichToSpawnMinions: []
   minionPrefabs:
   - {fileID: 3005043080488531011, guid: d0a5ab262fbdeb440a69676519c57310, type: 3}
