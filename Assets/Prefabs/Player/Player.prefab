@@ -424,7 +424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playercontroller: {fileID: 7410804983857183026}
-  _movementSpeed: 1200
+  _movementSpeed: 500
   _linearDrag: 30
   _linearDragThresholdVelocity: 0.5
   _playerSprite: {fileID: 490690759808437027}
