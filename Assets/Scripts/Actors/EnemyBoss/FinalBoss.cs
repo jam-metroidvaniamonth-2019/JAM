@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FinalBoss : MonoBehaviour
+public class FinalBoss : BaseNPC
 {
     public Transform projectileAFiringPt;
     public Transform projectileBFiringPt;
@@ -86,7 +86,6 @@ public class FinalBoss : MonoBehaviour
     {
         StartCoroutine(TriggerAbilityRoutine(_abilityCooldownDuration));
     }
-
     private void Start()
     {
         foreach (var element in CollectionOfAttachedAbilities)

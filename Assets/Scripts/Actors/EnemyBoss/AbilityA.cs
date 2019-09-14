@@ -4,6 +4,26 @@ using UnityEngine;
 
 public class AbilityA : BaseBossAbility
 {
+    [SerializeField]
+    private int currentCounter;
+
+    private IEnumerator FireProjectileRoutine(Vector2 _direction)
+    {
+        LaunchAbilityAProjectile(_direction);
+        yield return new WaitForSeconds(delayPerProjectile);
+        if (currentCounter > 0)
+        {
+            StartCoroutine(FireProjectileRoutine(_direction));
+            --currentCounter;
+        }
+        else {
+        NotifyAbilityCompleted();
+        }
+    }
+
+    public float delayPerProjectile;
+    public int counter;
+
     public GameObject projectileA;
     public Vector2 direction;
     public float speed;
@@ -11,8 +31,8 @@ public class AbilityA : BaseBossAbility
     public override void Trigger(Vector2 _direction)
     {
         base.Trigger(_direction);
-        LaunchAbilityAProjectile(_direction);
-        NotifyAbilityCompleted();
+        currentCounter = counter;
+        StartCoroutine(FireProjectileRoutine(_direction));
     }
     private void LaunchAbilityAProjectile(Vector2 _direction)
     {

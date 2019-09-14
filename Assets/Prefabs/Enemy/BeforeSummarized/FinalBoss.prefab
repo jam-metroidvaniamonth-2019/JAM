@@ -229,6 +229,7 @@ Transform:
   - {fileID: 1849446762512076791}
   - {fileID: 1849446762607153870}
   - {fileID: 1849446763859197111}
+  - {fileID: 4266003475751156782}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -244,6 +245,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a3ac20369ade654ab6ab66ce7357ef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyHealthObject: {fileID: 7461386710718193875}
+  detectionDelay: 0
+  damageOnTouch: 0
+  speed: 0
   projectileAFiringPt: {fileID: 1849446763432596958}
   projectileBFiringPt: {fileID: 1849446762512076791}
   abilityD: {fileID: 1849446764095502528}
@@ -269,6 +274,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackType: 1
   cooldown: 3
+  currentCounter: 0
+  delayPerProjectile: 0.8
+  counter: 8
   projectileA: {fileID: 7823771168321983583, guid: f0978c2108c4bdf4fac0aab666cef163,
     type: 3}
   direction: {x: 0, y: 0}
@@ -376,3 +384,91 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &5338870048245616949
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4266003475751156782}
+  - component: {fileID: 7461386710718193875}
+  - component: {fileID: 5523130314286602164}
+  - component: {fileID: 7747167550261145621}
+  m_Layer: 14
+  m_Name: EHealthObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4266003475751156782
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5338870048245616949}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.089999996, y: -0.04569031, z: 0}
+  m_LocalScale: {x: 1.92352, y: 0.77093184, z: 1.92352}
+  m_Children: []
+  m_Father: {fileID: 1849446764095502533}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7461386710718193875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5338870048245616949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23f4621feb6aba24abd1761cd36badae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyHealthSetter: {fileID: 5523130314286602164}
+  enemyCollider: {fileID: 7747167550261145621}
+--- !u!114 &5523130314286602164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5338870048245616949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af6cac04193ffff40b4c3dd13011d132, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canDealDamage: 0
+  _maxHealth: 100
+  _currentHealth: 0
+--- !u!61 &7747167550261145621
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5338870048245616949}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.044863224, y: 0.06480265}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.3688755, y: 3.322918}
+  m_EdgeRadius: 0
