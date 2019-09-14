@@ -27,7 +27,7 @@ public class ProjectileB_Primary : BaseEnemyProjectile
 
         for (int i0 = 0; i0 < pointsForChildProjectils.Count; i0++)
         {
-            var zProjectile = 5;
+            var zProjectile = 0;
             var pos = pointsForChildProjectils[i0].position;
             var newPos = new Vector3(pos.x, pos.y, zProjectile);
 

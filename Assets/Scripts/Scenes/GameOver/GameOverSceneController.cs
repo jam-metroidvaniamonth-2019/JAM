@@ -9,6 +9,11 @@ namespace Scenes.GameOver
         [SerializeField] private Fader _fader;
         [SerializeField] private float _waitTimer;
 
+        [Header("GameOver Text")]
+        [SerializeField] private TextTyper _gameOverTyper;
+        [SerializeField] [TextArea] private string _gameOverWinText;
+        [SerializeField] [TextArea] private string _gameOverLoseText;
+
         private bool _sceneActive;
         private float _currentCountdownTime;
 
@@ -20,6 +25,15 @@ namespace Scenes.GameOver
             _fader.OnFadeOutComplete += SwitchScene;
 
             _fader.StartFadeIn();
+
+            if (GameOverSceneData.didPlayerWin)
+            {
+                _gameOverTyper.UpdateText(_gameOverWinText);
+            }
+            else
+            {
+                _gameOverTyper.UpdateText(_gameOverLoseText);
+            }
         }
 
         private void OnDestroy()
@@ -51,6 +65,13 @@ namespace Scenes.GameOver
         private void HandleSceneFadeIn()
         {
             _currentCountdownTime = _waitTimer;
+            _gameOverTyper.StartTyping();
+            _gameOverTyper.OnTypingCompleted += HandleTypingComplete;
+        }
+
+        private void HandleTypingComplete()
+        {
+            _gameOverTyper.OnTypingCompleted -= HandleTypingComplete;
             _sceneActive = true;
         }
 

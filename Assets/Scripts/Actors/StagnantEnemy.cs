@@ -170,7 +170,7 @@ public class StagnantEnemy : BaseNPC
         CurrentState = JamSpace.EState.IDLE;
         yield return new WaitForSeconds(_waitBeforeAnim);
 
-        var zProjectile = 5;
+        var zProjectile = 0;
         var pos = bulletPosition.position;
         var newPos = new Vector3(pos.x, pos.y, zProjectile);
 
