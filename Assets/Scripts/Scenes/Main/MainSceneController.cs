@@ -3,6 +3,7 @@ using Scenes.Common;
 using UI;
 using UI.CutScene;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Utils;
 
 namespace Scenes.Main
@@ -70,6 +71,16 @@ namespace Scenes.Main
 
         #endregion
 
+        #region External Functions
+
+        public void FadeAndSwitchScene()
+        {
+            _fader.StartFadeOut();
+            _fader.OnFadeOutComplete += SwitchScene;
+        }
+
+        #endregion
+
         #region Utility Functions
 
         private void OpenPauseMenu()
@@ -83,6 +94,32 @@ namespace Scenes.Main
         private void HandleCutSceneOpen() => _cutSceneOpen = true;
 
         private void HandleCutSceneClose() => _cutSceneOpen = false;
+
+        private void SwitchScene()
+        {
+            _fader.OnFadeOutComplete -= SwitchScene;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+
+        #endregion
+
+        #region Singleton
+
+        private static MainSceneController _instance;
+        public static MainSceneController Instance => _instance;
+
+        private void Awake()
+        {
+            if (_instance == null)
+            {
+                _instance = this;
+            }
+
+            if (_instance != this)
+            {
+                Destroy(gameObject);
+            }
+        }
 
         #endregion
     }
