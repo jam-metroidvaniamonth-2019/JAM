@@ -1,5 +1,6 @@
 ﻿using Common;
 using Scenes.Main;
+using UI;
 using UnityEngine;
 
 namespace Player.General
@@ -8,6 +9,8 @@ namespace Player.General
     {
         [SerializeField] private HealthSetter _playerHealthSetter;
         [SerializeField] private float _deadWaitTime;
+        [SerializeField] [Range(0, 1)] private float _lowHealthActivationRatio;
+        [SerializeField] private ImageFader _lowHealthFader;
 
         public delegate void PlayerBagStatusChanged(bool playerHasBag);
         public PlayerBagStatusChanged OnPlayerBagStatusChanged;
@@ -28,6 +31,7 @@ namespace Player.General
             _playerHasBag = true;
             _playerHasDash = false;
 
+            _playerHealthSetter.OnHealthChanged += HandleHealthChange;
             _playerHealthSetter.OnHealthZero += HandleHealthZero;
 
             NotifyBagStatusChanged();
@@ -82,6 +86,19 @@ namespace Player.General
         #endregion
 
         #region Utility Functions
+
+        private void HandleHealthChange(float currentHealth, float maxHealth)
+        {
+            float healthRatio = currentHealth / maxHealth;
+            if (healthRatio <= _lowHealthActivationRatio)
+            {
+                _lowHealthFader.StartFading();
+            }
+            else
+            {
+                _lowHealthFader.StopFading();
+            }
+        }
 
         private void HandleHealthZero()
         {

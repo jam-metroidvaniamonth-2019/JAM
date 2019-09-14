@@ -502,6 +502,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerHealthSetter: {fileID: 4985062292742912031}
   _deadWaitTime: 3
+  _lowHealthActivationRatio: 0.3
+  _lowHealthFader: {fileID: 0}
 --- !u!1 &490690758999993684
 GameObject:
   m_ObjectHideFlags: 0
