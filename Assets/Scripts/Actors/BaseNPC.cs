@@ -17,7 +17,7 @@ public class BaseNPC : MonoBehaviour
 
     public void EnemyDead()
     {
-        OnEnemyDeathPosition(this);
+        OnEnemyDeathPosition?.Invoke(this);
         // this character is dead
     }
 
