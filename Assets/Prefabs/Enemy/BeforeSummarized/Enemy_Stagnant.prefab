@@ -320,16 +320,16 @@ MonoBehaviour:
   enemyHealthObject: {fileID: 6847182161832240634}
   detectionDelay: 0
   damageOnTouch: 0
-  speed: 10
+  speed: 8
   _waitBeforeAnim: 0.45
   bulletPosition: {fileID: 1902416988}
   bIsInCooldown: 0
-  cooldownTimer: 2
+  cooldownTimer: 1
   cooldownCounter: 0
   projectilePrefab: {fileID: 7823771168321983583, guid: f1bfb3a765694b24f9fa8fce1a74e4d1,
     type: 3}
   rangeRadius: 5
-  playerInsideDur: 0
+  playerInsideDur: 0.2
   readyToAttackDur: 1
   monitoringRange: {fileID: 7636368976659358775}
   cooldownDur: 1

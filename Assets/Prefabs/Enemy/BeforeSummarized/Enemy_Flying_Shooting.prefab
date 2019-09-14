@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6faa654f3927f442a128d68ad6d15ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 10
   enemyCollider: {fileID: 7034097298780516627}
 --- !u!60 &7034097298780516627
 PolygonCollider2D:
@@ -136,7 +136,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -261,7 +261,6 @@ MonoBehaviour:
   InvestigatedTargetHealthSetter: {fileID: 0}
   projectilePrefab: {fileID: 7823771168321983583, guid: d5a28e5fdd7b52940b298e010bd73dc5,
     type: 3}
-  speed: 6
   currentEState: 1
   point1: {fileID: 8532530951559492959}
   point2: {fileID: 8532530951579787980}
