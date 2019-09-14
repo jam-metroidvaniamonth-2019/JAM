@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UI.CutScene;
 using UnityEngine;
 
 public class FinalBoss : BaseNPC
 {
+    [Header("CutSceneAfterDeath")]
+    public Sprite cutSceneImg;
+    public float cutSceneDuration;
+
     public Transform projectileAFiringPt;
     public Transform projectileBFiringPt;
 
@@ -86,9 +91,17 @@ public class FinalBoss : BaseNPC
     {
         StartCoroutine(TriggerAbilityRoutine(_abilityCooldownDuration));
     }
+
+    public void DsiplayCutscene()
+    {
+        CutSceneDisplay.Instance.DisplayCutScene(cutSceneImg, cutSceneDuration);
+    }
+
     public override void Start()
     {
         base.Start();
+
+        enemyHealthObject.enemyHealthSetter.OnHealthZero += DsiplayCutscene;
 
         foreach (var element in CollectionOfAttachedAbilities)
         {
