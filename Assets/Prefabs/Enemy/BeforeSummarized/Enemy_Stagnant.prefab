@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 6847182161832240634}
   - component: {fileID: 7538463397216353655}
   - component: {fileID: 12317016004345480}
-  m_Layer: 14
+  m_Layer: 10
   m_Name: EHealthObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}

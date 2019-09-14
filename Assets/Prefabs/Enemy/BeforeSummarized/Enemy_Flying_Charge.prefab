@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 849762674679028093}
   - component: {fileID: 1109814572379476776}
   - component: {fileID: 7320791889001917008}
-  m_Layer: 14
+  m_Layer: 10
   m_Name: EHealthObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -231,7 +231,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -410,7 +410,8 @@ PrefabInstance:
       propertyPath: enemyCollider
       value: 
       objectReference: {fileID: 5443252870243320968}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7079200563863420691, guid: 64973169d61982845a403a0d05b18441, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 64973169d61982845a403a0d05b18441, type: 3}
 --- !u!1 &5443252869839171930 stripped
 GameObject:
