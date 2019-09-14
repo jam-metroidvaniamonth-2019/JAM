@@ -315,8 +315,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackType: 3
   cooldown: 3
-  _stoneFallingHolderPrefab: {fileID: 0}
-  _stoneSpawnEffect: {fileID: 0}
+  _stoneFallingHolderPrefab: {fileID: 1721921256505444197, guid: ddf19228907163649a17681e2add7b45,
+    type: 3}
+  _stoneSpawnEffect: {fileID: 6221017944306925284, guid: 0c568ffc520959b49b321f543e4fd90c,
+    type: 3}
   _stoneFallingWaitTime: 1
 --- !u!114 &1849446764095502528
 MonoBehaviour:
