@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class AbilityB : BaseBossAbility
 {
+    public Transform FirePt;
+
+
     public GameObject projectileB;
     public Vector2 direction;
     public float speed;
@@ -19,7 +22,11 @@ public class AbilityB : BaseBossAbility
 
     private void LaunchAbilityBProjectile(Vector2 _direction)
     {
-        var baseEnemyProj = Instantiate(projectileB, this.transform.position, Quaternion.identity).GetComponent<ProjectileB_Primary>();
+        var zProjectile = 0;
+        var pos = FirePt.transform.position;
+        var newPos = new Vector3(pos.x, pos.y, zProjectile);
+
+        var baseEnemyProj = Instantiate(projectileB, newPos, Quaternion.identity).GetComponent<ProjectileB_Primary>();
         baseEnemyProj.GetComponent<Rigidbody2D>().velocity = _direction * speed;
         baseEnemyProj.child_speed = child_speed;
         baseEnemyProj.child_damage = baseEnemyProj.GetComponent<Common.AffectorAmount>().Amount / (baseEnemyProj.pointsForChildProjectils.Count);

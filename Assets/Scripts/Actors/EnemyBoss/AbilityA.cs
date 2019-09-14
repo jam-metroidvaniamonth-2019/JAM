@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AbilityA : BaseBossAbility
 {
+    public Transform FirePt;
+
     [SerializeField]
     private int currentCounter;
 
@@ -36,7 +38,11 @@ public class AbilityA : BaseBossAbility
     }
     private void LaunchAbilityAProjectile(Vector2 _direction)
     {
-        var baseEnemyProj = Instantiate(projectileA, this.transform.position, Quaternion.identity).GetComponent<Projectiles.BaseProjectile>();
+        var zProjectile = 0;
+        var pos = FirePt.transform.position;
+        var newPos = new Vector3(pos.x, pos.y, zProjectile);
+
+        var baseEnemyProj = Instantiate(projectileA, newPos, Quaternion.identity).GetComponent<Projectiles.BaseProjectile>();
         baseEnemyProj.GetComponent<Rigidbody2D>().velocity = _direction * speed;
     }
 }

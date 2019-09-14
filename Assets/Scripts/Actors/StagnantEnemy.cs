@@ -170,14 +170,18 @@ public class StagnantEnemy : BaseNPC
         CurrentState = JamSpace.EState.IDLE;
         yield return new WaitForSeconds(_waitBeforeAnim);
 
+        var zProjectile = 0;
+        var pos = bulletPosition.position;
+        var newPos = new Vector3(pos.x, pos.y, zProjectile);
+
         if (rightDirection)
         {
-            baseEnemyProj = Instantiate(projectilePrefab, bulletPosition.position, Quaternion.Euler(0, -180, 0)).GetComponent<Projectiles.BaseProjectile>();
+            baseEnemyProj = Instantiate(projectilePrefab, newPos, Quaternion.Euler(0, -180, 0)).GetComponent<Projectiles.BaseProjectile>();
             baseEnemyProj.GetComponent<Rigidbody2D>().velocity = speed * baseEnemyProj.transform.right;
         }
         else
         {
-            baseEnemyProj = Instantiate(projectilePrefab, bulletPosition.position, Quaternion.Euler(0, 0, 0)).GetComponent<Projectiles.BaseProjectile>();
+            baseEnemyProj = Instantiate(projectilePrefab, newPos, Quaternion.Euler(0, 0, 0)).GetComponent<Projectiles.BaseProjectile>();
             baseEnemyProj.GetComponent<Rigidbody2D>().velocity = speed * baseEnemyProj.transform.right;
         }
     }

@@ -523,6 +523,7 @@ MonoBehaviour:
   _playerShooter: {fileID: 0}
   _playerRb: {fileID: 1621930640}
   _movementThreshold: 0.1
+  _playerTrailParticleSystem: {fileID: 0}
   _runningSounds: []
 --- !u!1 &57547541
 GameObject:
@@ -92172,8 +92173,9 @@ MonoBehaviour:
   _autoShootWait: 3
   _timeSlowAmount: 0.3
   _shotWaitTime: 0.5
-  _bulletObject: {fileID: 9094691206825400465, guid: c18700d619899f745ae7e54f996f7905,
-    type: 3}
+  _arrowPrefab: {fileID: 0}
+  _playerAntidoteArrowPrefab: {fileID: 0}
+  _stonePrefab: {fileID: 0}
   _bulletHolder: {fileID: 864256353}
   _bowShootingPoint: {fileID: 0}
   _slingShotShootingPoint: {fileID: 0}
@@ -92194,6 +92196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 619dcc3d8754ef94aa9bb828abaa0f5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playercontroller: {fileID: 0}
   _movementSpeed: 750
   _linearDrag: 50
   _linearDragThresholdVelocity: 0.5
@@ -92237,7 +92240,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 0.7853982
+  m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -92271,7 +92274,7 @@ Transform:
   m_GameObject: {fileID: 1621930636}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.59, y: 0.74, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children:
   - {fileID: 40024240}
   - {fileID: 363327199}

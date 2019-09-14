@@ -1,4 +1,5 @@
 ﻿using Common;
+using Scenes.GameOver;
 using Scenes.Main;
 using UI;
 using UnityEngine;
@@ -51,6 +52,7 @@ namespace Player.General
             if (_playerDeadCountdown <= 0)
             {
                 _sceneSwitchActive = true;
+                GameOverSceneData.didPlayerWin = false;
                 MainSceneController.Instance.FadeAndSwitchScene();
             }
         }

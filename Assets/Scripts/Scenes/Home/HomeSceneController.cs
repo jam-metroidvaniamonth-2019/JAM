@@ -28,8 +28,6 @@ namespace Scenes.Home
 
             _currentLineIndex = 0;
             _fader.StartFadeIn();
-
-            UpdateControllerLines();
         }
 
         private void OnDestroy()
@@ -132,6 +130,14 @@ namespace Scenes.Home
             {
                 textFader.StartFadeOut();
             }
+
+            _imageFaders[0].OnFadeOutComplete += DisplayUnderLine;
+        }
+
+        private void DisplayUnderLine()
+        {
+            _imageFaders[0].OnFadeOutComplete -= DisplayUnderLine;
+            UpdateControllerLines();
         }
 
         private void HideControls() => _controlsPanel.SetActive(false);

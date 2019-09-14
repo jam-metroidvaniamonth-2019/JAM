@@ -128,20 +128,24 @@ public class FlyingRange : BaseNPC
 
     public void FireProjectileBlast(Vector3 _playerPosition)
     {
+        var zProjectile = 0;
+        var pos = this.transform.position;
+        var newPos = new Vector3(pos.x, pos.y, zProjectile);
+
         var orbDirection = (_playerPosition - this.transform.position).normalized;
-        var baseEnemyProj = Instantiate(projectilePrefab, this.transform.position, Quaternion.identity).GetComponent<Projectiles.BaseProjectile>();
+        var baseEnemyProj = Instantiate(projectilePrefab, newPos, Quaternion.identity).GetComponent<Projectiles.BaseProjectile>();
         baseEnemyProj.GetComponent<Rigidbody2D>().velocity =  orbDirection * speed;
 
         orbDirection = Quaternion.Euler(0, 180, 0) * orbDirection;
-        baseEnemyProj = Instantiate(projectilePrefab, this.transform.position, Quaternion.identity).GetComponent<Projectiles.BaseProjectile>();
+        baseEnemyProj = Instantiate(projectilePrefab, newPos, Quaternion.identity).GetComponent<Projectiles.BaseProjectile>();
         baseEnemyProj.GetComponent<Rigidbody2D>().velocity = orbDirection * speed;
 
         orbDirection = Quaternion.Euler(0, 180, 0) * orbDirection;
-        baseEnemyProj = Instantiate(projectilePrefab, this.transform.position, Quaternion.identity).GetComponent<Projectiles.BaseProjectile>();
+        baseEnemyProj = Instantiate(projectilePrefab, newPos, Quaternion.identity).GetComponent<Projectiles.BaseProjectile>();
         baseEnemyProj.GetComponent<Rigidbody2D>().velocity = orbDirection * -speed;
 
         orbDirection = Quaternion.Euler(0, 180, 0) * orbDirection;
-        baseEnemyProj = Instantiate(projectilePrefab, this.transform.position, Quaternion.identity).GetComponent<Projectiles.BaseProjectile>();
+        baseEnemyProj = Instantiate(projectilePrefab, newPos, Quaternion.identity).GetComponent<Projectiles.BaseProjectile>();
         baseEnemyProj.GetComponent<Rigidbody2D>().velocity = orbDirection * -speed;
     }
 

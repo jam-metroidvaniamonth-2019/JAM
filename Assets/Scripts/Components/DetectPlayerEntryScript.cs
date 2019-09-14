@@ -7,16 +7,18 @@ public class DetectPlayerEntryScript : MonoBehaviour
     [SerializeField]
     private FinalBoss finalBoss;
 
+    private bool battleStartedAlready = false;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        var playerCol = collision.GetComponent<Player.Movement.PlayerCollision>();
-        if (playerCol)
         {
-            finalBoss.playerCol = playerCol;
-            // add everything on detecting player by boss
-            // later call finalBoss in action
-            finalBoss.StartBossBattle();
-
+            var playerCol = collision.GetComponent<Player.Movement.PlayerCollision>();
+            if (playerCol)
+            {
+                finalBoss.playerCol = playerCol;
+                finalBoss.StartBossBattle();
+                this.GetComponent<Collider2D>().enabled = false;
+            }
         }
     }
 
