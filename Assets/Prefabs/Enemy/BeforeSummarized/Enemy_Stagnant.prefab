@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1902416987}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.551, y: 0.087, z: 0}
+  m_LocalPosition: {x: -0.551, y: 0.033, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7636368976659358769}
@@ -102,7 +102,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2353232403819844861}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.48, y: -1.1200001, z: 202.20312}
+  m_LocalPosition: {x: -12.48, y: -1.8, z: 202.20312}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 7636368976659358769}
@@ -120,7 +120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2353232404037591048}
   - component: {fileID: 2353232404037591046}
-  - component: {fileID: 2353232404037591047}
+  - component: {fileID: 2199211097251641493}
   m_Layer: 10
   m_Name: EnemySkin
   m_TagString: Untagged
@@ -155,9 +155,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
-  enemyCollider: {fileID: 2353232404037591047}
---- !u!58 &2353232404037591047
-CircleCollider2D:
+  enemyCollider: {fileID: 2199211097251641493}
+--- !u!60 &2199211097251641493
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -169,9 +169,27 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.0193851}
-  serializedVersion: 2
-  m_Radius: 0.30227017
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.1471508, y: 0.51077366}
+      - {x: -0.21203461, y: 0.2741882}
+      - {x: -0.27075768, y: 0.10029159}
+      - {x: -0.19200058, y: -0.1349678}
+      - {x: -0.5432976, y: -0.45757085}
+      - {x: -0.33497506, y: -0.6866893}
+      - {x: 0.26157838, y: -0.6703787}
+      - {x: 0.12107239, y: -0.14528966}
+      - {x: 0.4128151, y: 0.16222385}
 --- !u!1 &6405980421946437209
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,7 +251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canDealDamage: 0
   _maxHealth: 30
-  _currentHealth: 0
+  _currentHealth: 30
 --- !u!58 &12317016004345480
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -244,12 +262,12 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.01, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.31636512
 --- !u!1 &7636368976659358768
 GameObject:
   m_ObjectHideFlags: 0

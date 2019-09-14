@@ -183,11 +183,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9094691206825400467}
     m_Modifications:
-    - target: {fileID: 7080622587621740468, guid: e1228b16445a3794b996e63cbe139be1,
-        type: 3}
-      propertyPath: m_Name
-      value: Stone Trail
-      objectReference: {fileID: 0}
     - target: {fileID: 7080622587621740467, guid: e1228b16445a3794b996e63cbe139be1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -242,6 +237,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7080622587621740468, guid: e1228b16445a3794b996e63cbe139be1,
+        type: 3}
+      propertyPath: m_Name
+      value: Stone Trail
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1228b16445a3794b996e63cbe139be1, type: 3}
