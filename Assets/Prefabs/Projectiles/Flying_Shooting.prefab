@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -8448805043360296908}
   - component: {fileID: 8191631056767821294}
   m_Layer: 12
-  m_Name: StagnantEnemyBullet
+  m_Name: Flying_Shooting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,8 +97,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 351029721
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 601800609be90f7468bddcfc2d03b933, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
