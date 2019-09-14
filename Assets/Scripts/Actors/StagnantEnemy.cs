@@ -185,7 +185,7 @@ public class StagnantEnemy : BaseNPC
     private void Start()
     {
         myAnimator = this.GetComponent<Animator>();
-        this.gameObject.GetComponent<CircleCollider2D>().radius = rangeRadius;
+        //this.gameObject.GetComponent<CircleCollider2D>().radius = rangeRadius;
     }
 
     void ExecuteState(JamSpace.EState _enemyState)
