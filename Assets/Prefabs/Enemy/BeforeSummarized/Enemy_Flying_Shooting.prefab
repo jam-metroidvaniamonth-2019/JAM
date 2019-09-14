@@ -462,7 +462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canDealDamage: 0
-  _maxHealth: 100
+  _maxHealth: 50
   _currentHealth: 0
 --- !u!58 &7629689746977734443
 CircleCollider2D:
