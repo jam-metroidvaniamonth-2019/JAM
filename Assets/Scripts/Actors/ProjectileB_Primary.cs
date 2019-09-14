@@ -23,9 +23,15 @@ public class ProjectileB_Primary : BaseEnemyProjectile
 
     public void BlastProjectileToReleaseSecondaryProjectile()
     {
-        for(int i0 = 0; i0 < pointsForChildProjectils.Count; i0++)
+
+
+        for (int i0 = 0; i0 < pointsForChildProjectils.Count; i0++)
         {
-            var baseEnemyProj = Instantiate(childProjectile, pointsForChildProjectils[i0].position, Quaternion.identity).GetComponent<Projectiles.BaseProjectile>();
+            var zProjectile = 5;
+            var pos = pointsForChildProjectils[i0].position;
+            var newPos = new Vector3(pos.x, pos.y, zProjectile);
+
+            var baseEnemyProj = Instantiate(childProjectile, pos, Quaternion.identity).GetComponent<Projectiles.BaseProjectile>();
             baseEnemyProj.GetComponent<Common.AffectorAmount>().SetDamage(child_damage);
             baseEnemyProj.GetComponent<Rigidbody2D>().velocity = this.GetComponent<Rigidbody2D>().velocity * -3;
         }
