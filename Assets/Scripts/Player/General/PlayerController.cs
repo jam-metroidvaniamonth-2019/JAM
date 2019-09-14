@@ -19,11 +19,11 @@ namespace Player.General
         private bool _playerHasBag;
         private bool _playerHasBow;
         private bool _playerHasDash;
+        private bool _playerHasAntidote;
 
         private bool _playerDead;
         private bool _sceneSwitchActive;
         private float _playerDeadCountdown;
-
 
         #region Unity Functions
 
@@ -79,11 +79,15 @@ namespace Player.General
 
         public void PlayerCollectDash() => _playerHasDash = true;
 
+        public void PlayerCollectAntidote() => _playerHasAntidote = true;
+
         public bool PlayerHasBag => _playerHasBag;
 
         public bool PlayerHasBow => _playerHasBow;
 
         public bool PlayerHasDash => _playerHasDash;
+
+        public bool PlayerHasAntidote => _playerHasAntidote;
 
         #endregion
 

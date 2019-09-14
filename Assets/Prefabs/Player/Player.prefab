@@ -463,6 +463,8 @@ MonoBehaviour:
   _shotWaitTime: 0.5
   _arrowPrefab: {fileID: 9094691206825400465, guid: c18700d619899f745ae7e54f996f7905,
     type: 3}
+  _playerAntidoteArrowPrefab: {fileID: 9094691206825400465, guid: a78e1e079730bf54983e111bfa13e037,
+    type: 3}
   _stonePrefab: {fileID: 9094691206825400465, guid: 6b5fc073aa44ad14fb631c031c487c81,
     type: 3}
   _bulletHolder: {fileID: 0}

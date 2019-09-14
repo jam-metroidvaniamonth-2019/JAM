@@ -25,6 +25,7 @@ namespace Player.Shooting
         [Header("Bullet")]
         [SerializeField] private float _shotWaitTime = 0.5f;
         [SerializeField] private GameObject _arrowPrefab;
+        [SerializeField] private GameObject _playerAntidoteArrowPrefab;
         [SerializeField] private GameObject _stonePrefab;
         [SerializeField] private Transform _bulletHolder;
         [SerializeField] private Transform _bowShootingPoint;
@@ -255,7 +256,7 @@ namespace Player.Shooting
                 ? _bowShootingPoint.position
                 : _slingShotShootingPoint.position;
 
-            GameObject bulletPrefab = _playerController.PlayerHasBow ? _arrowPrefab : _stonePrefab;
+            GameObject bulletPrefab = _playerController.PlayerHasBow ? _playerController.PlayerHasAntidote ? _playerAntidoteArrowPrefab : _arrowPrefab : _stonePrefab;
             GameObject bulletInstance = Instantiate(bulletPrefab, shootingPosition, Quaternion.identity);
 
             float launchSpeed = bulletInstance.GetComponent<BaseProjectile>().LaunchSpeed;

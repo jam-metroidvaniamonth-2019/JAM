@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Antidote : MonoBehaviour
 {
@@ -16,8 +14,8 @@ public class Antidote : MonoBehaviour
         var collider = collision.GetComponent<Player.General.PlayerController>();
         if (collider)
         {
+            collider.PlayerCollectAntidote();
             OnObtainingAntidote?.Invoke();
         }
     }
-
 }
