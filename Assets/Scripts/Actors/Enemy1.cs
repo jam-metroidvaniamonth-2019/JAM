@@ -46,8 +46,9 @@ public class Enemy1 : BaseNPC
         }
     }
 
-    void Start()
+   public override void Start()
     {
+        base.Start();
         targetPoint = point2.position;
         EvaluateRotation();
         //transform.eulerAngles = new Vector3(0, -rotationEulerAngle, 0);

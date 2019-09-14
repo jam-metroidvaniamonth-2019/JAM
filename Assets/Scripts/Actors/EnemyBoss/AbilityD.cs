@@ -14,44 +14,42 @@ public class AbilityD : BaseBossAbility
 
     public Transform[] verticesOfTheAreaInWhichToSpawnMinions;
     private const float minimuimDelayBeforeSpawn = 0.01f;
-    [SerializeField]
-    private List<GameObject> minionPrefabs;
-    [SerializeField]
-    private float delayBeforeEverySpawn;
-    [SerializeField]
-    private int numberOfMinonsToSpawn;
+    [SerializeField] private List<GameObject> minionPrefabs;
+    [SerializeField] private float delayBeforeEverySpawn;
+    [SerializeField] private int numberOfMinonsToSpawn;
 
-    [SerializeField]
-    public List<BaseNPC> allSpawnedNPCs;
+    [SerializeField] public List<BaseNPC> allSpawnedNPCs;
+
+    private bool _abilityTriggered;
 
     private GameObject GetRandomMinionPrefab()
     {
         return minionPrefabs[Random.Range(0, minionPrefabs.Count)];
     }
+
     private Vector2 GetRandomPosition()
     {
         return MinionSpawnPosition.position;
     }
+
     public override void Trigger(Vector2 _direction)
     {
+        if (_abilityTriggered)
+        {
+            return;
+        }
+
         base.Trigger(_direction);
         //StartCoroutine(spawnEnemies());
         StartCoroutine(spawnEnemies());
         NotifyAbilityCompleted();
-
+        _abilityTriggered = true;
     }
 
     private void EnemyDiedAt(BaseNPC _enemyScript)
     {
-        if (allSpawnedNPCs.Contains(_enemyScript))
-        {
-            allSpawnedNPCs.Remove(_enemyScript);
-            if(allSpawnedNPCs.Count == 0)
-            {
-                // all dead spawn antidote here
-                SpawnAntidote(_enemyScript.transform.position);
-            }
-        }
+        // all dead spawn antidote here
+        SpawnAntidote(_enemyScript.transform.position);
     }
 
     private IEnumerator spawnEnemies()
@@ -60,7 +58,7 @@ public class AbilityD : BaseBossAbility
         yield return new WaitForSeconds(delayBeforeEverySpawn);
         --numberOfMinonsToSpawn;
         var enemyMinion = GameObject.Instantiate(GetRandomMinionPrefab(), GetRandomPosition(), Quaternion.identity);
-        var NPCScript = enemyMinion.GetComponent<BaseNPC>();
+        var NPCScript = enemyMinion.GetComponentInChildren<BaseNPC>();
         NPCScript.OnEnemyDeathPosition += EnemyDiedAt;
         allSpawnedNPCs.Add(NPCScript);
 
@@ -69,5 +67,4 @@ public class AbilityD : BaseBossAbility
             StartCoroutine(spawnEnemies());
         }
     }
-
 }

@@ -278,7 +278,6 @@ MonoBehaviour:
   _enemyHealthSetter: {fileID: 2368352332011687255}
   _enemyDeathEffect: {fileID: 3020915752580415014, guid: e008edcfe54af6145bc8e34744e94bf3,
     type: 3}
-  _effectSpawnPosition: {fileID: 1283988411213227768}
   _enemyBody: {fileID: 2092757206419595227}
 --- !u!1001 &9166136893288256793
 PrefabInstance:
@@ -287,21 +286,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6044834358841464399}
     m_Modifications:
-    - target: {fileID: 7079200563552269303, guid: 64973169d61982845a403a0d05b18441,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7079200563552269303, guid: 64973169d61982845a403a0d05b18441,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7079200563552269303, guid: 64973169d61982845a403a0d05b18441,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 7079200563728730818, guid: 64973169d61982845a403a0d05b18441,
         type: 3}
       propertyPath: m_Name
@@ -382,11 +366,46 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7079200563863420688, guid: 64973169d61982845a403a0d05b18441,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.0074683726
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079200563863420688, guid: 64973169d61982845a403a0d05b18441,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0.094601884
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079200563863420688, guid: 64973169d61982845a403a0d05b18441,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.6894018
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079200563863420688, guid: 64973169d61982845a403a0d05b18441,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.43211058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079200563552269303, guid: 64973169d61982845a403a0d05b18441,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079200563552269303, guid: 64973169d61982845a403a0d05b18441,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079200563552269303, guid: 64973169d61982845a403a0d05b18441,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7079200563728730821, guid: 64973169d61982845a403a0d05b18441,
         type: 3}
       propertyPath: enemyHealthObject
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4455021867823475209}
     - target: {fileID: 7079200563728730821, guid: 64973169d61982845a403a0d05b18441,
         type: 3}
       propertyPath: isGroundCharging
@@ -492,26 +511,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7079200563863420688, guid: 64973169d61982845a403a0d05b18441,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: -0.0074683726
-      objectReference: {fileID: 0}
-    - target: {fileID: 7079200563863420688, guid: 64973169d61982845a403a0d05b18441,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: 0.094601884
-      objectReference: {fileID: 0}
-    - target: {fileID: 7079200563863420688, guid: 64973169d61982845a403a0d05b18441,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 0.6894018
-      objectReference: {fileID: 0}
-    - target: {fileID: 7079200563863420688, guid: 64973169d61982845a403a0d05b18441,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 0.43211058
       objectReference: {fileID: 0}
     - target: {fileID: 7079200563863420689, guid: 64973169d61982845a403a0d05b18441,
         type: 3}

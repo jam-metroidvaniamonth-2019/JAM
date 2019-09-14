@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1849446762512076790}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.23, y: -1.19, z: 0}
+  m_LocalPosition: {x: -1.31, y: -1.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1849446764095502533}
@@ -101,6 +101,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finalBoss: {fileID: 1849446764095502531}
+  _teleporter: {fileID: 0}
+  _cameraController: {fileID: 0}
+  _offset: {x: 8, y: 3, z: 0}
 --- !u!1 &1849446762607153873
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,7 +158,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1849446763432596513}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.22, y: -1.27, z: 0}
+  m_LocalPosition: {x: -1.27, y: -1.38, z: 0}
   m_LocalScale: {x: 6.464, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1849446764095502533}
@@ -254,12 +257,14 @@ MonoBehaviour:
   myAnimator: {fileID: 0}
   cutSceneImg: {fileID: 21300000, guid: 880b7bf3fc4b16244982b612a548642e, type: 3}
   cutSceneDuration: 3
+  cameraOffset: {x: 0, y: 3, z: 0}
+  cameraController: {fileID: 0}
   projectileAFiringPt: {fileID: 1849446763432596958}
   projectileBFiringPt: {fileID: 1849446762512076791}
   abilityD: {fileID: 1849446764095502528}
   currentBossAbility: {fileID: 0}
   playerCol: {fileID: 0}
-  attackSequence: 010000000200000003000000
+  attackSequence: 01000000020000000200000003000000
   counter: -1
   CollectionOfAttachedAbilities:
   - {fileID: 1849446764095502530}
@@ -279,15 +284,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackType: 1
-  cooldown: 3
+  cooldown: 1
   FirePt: {fileID: 1849446763432596958}
+  playerTransform: {fileID: 0}
   currentCounter: 0
-  delayPerProjectile: 0.8
-  counter: 8
+  delayPerProjectile: 1.6
+  counter: 3
   projectileA: {fileID: 7823771168321983583, guid: f0978c2108c4bdf4fac0aab666cef163,
     type: 3}
   direction: {x: 0, y: 0}
-  speed: 3
+  speed: 8
 --- !u!114 &1849446764095502590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,9 +312,9 @@ MonoBehaviour:
   projectileB: {fileID: 7823771168321983583, guid: ac1bb5d90fcb0bf43b4868f4651c6b7d,
     type: 3}
   direction: {x: 0, y: 0}
-  speed: 3
-  child_speed: 10
-  blastTimeSinceSpawn: 0
+  speed: 7
+  child_speed: 3
+  blastTimeSinceSpawn: 6
 --- !u!114 &1849446764095502529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -322,9 +328,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackType: 3
-  cooldown: 3
-  _stoneFallingHolderPrefab: {fileID: 1721921256505444197, guid: ddf19228907163649a17681e2add7b45,
-    type: 3}
+  cooldown: 4
+  _stoneFallingHolderPrefab:
+  - {fileID: 1721921256505444197, guid: ddf19228907163649a17681e2add7b45, type: 3}
+  - {fileID: 1721921256505444197, guid: 2736cd3fb0b436841a3652c85bbc0af5, type: 3}
   _stoneSpawnEffect: {fileID: 6221017944306925284, guid: 0c568ffc520959b49b321f543e4fd90c,
     type: 3}
   _stoneFallingWaitTime: 1
@@ -344,12 +351,13 @@ MonoBehaviour:
   cooldown: 3
   antidotePrefab: {fileID: 3840854672065454277, guid: b04bb5c2eb1bd9a45be8a3bfdb77a0b2,
     type: 3}
+  MinionSpawnPosition: {fileID: 0}
   verticesOfTheAreaInWhichToSpawnMinions: []
   minionPrefabs:
   - {fileID: 3005043080488531011, guid: d0a5ab262fbdeb440a69676519c57310, type: 3}
   - {fileID: 8532530951159011663, guid: 93f89b947c2fc324098db25496ecc1a8, type: 3}
   delayBeforeEverySpawn: 1
-  numberOfMinonsToSpawn: 5
+  numberOfMinonsToSpawn: 1
   allSpawnedNPCs: []
 --- !u!212 &1849446764095502591
 SpriteRenderer:
@@ -479,7 +487,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canDealDamage: 0
-  _maxHealth: 100
+  _maxHealth: 1000
   _currentHealth: 0
 --- !u!60 &1706827599
 PolygonCollider2D:
@@ -561,4 +569,4 @@ MonoBehaviour:
   _enemyHealthSetter: {fileID: 5523130314286602164}
   _enemyDeathEffect: {fileID: 3020915752580415014, guid: e008edcfe54af6145bc8e34744e94bf3,
     type: 3}
-  _enemyBody: {fileID: 0}
+  _enemyBody: {fileID: 1849446764095502532}

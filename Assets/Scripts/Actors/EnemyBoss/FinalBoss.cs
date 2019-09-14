@@ -131,11 +131,12 @@ public class FinalBoss : BaseNPC
         CutSceneDisplay.Instance.DisplayCutScene(cutSceneImg, cutSceneDuration);
     }
 
-    private void CallHealthReduceAnimation(float _redVal1, float _redVal2) {
+    private void CallHealthReduceAnimation(float _redVal1, float _redVal2)
+    {
         CallAnimator(ANIMATION_HIT);
         if(_redVal1 <= 0.5 * _redVal2)
         {
-                this.GetComponent<AbilityD>().Trigger(new Vector2(0,0);
+                this.GetComponent<AbilityD>().Trigger(new Vector2(0,0));
         }
     }
 

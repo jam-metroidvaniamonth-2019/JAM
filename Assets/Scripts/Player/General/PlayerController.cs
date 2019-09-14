@@ -32,6 +32,7 @@ namespace Player.General
         {
             _playerHasBag = true;
             _playerHasDash = false;
+            _playerHasBow = true;
 
             _playerHealthSetter.OnHealthChanged += HandleHealthChange;
             _playerHealthSetter.OnHealthZero += HandleHealthZero;
