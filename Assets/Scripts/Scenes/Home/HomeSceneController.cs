@@ -9,6 +9,7 @@ namespace Scenes.Home
     {
         [SerializeField] private Fader _fader;
         [SerializeField] private GameObject _controlsPanel;
+        [SerializeField] private TextTyper[] _textTypers;
 
         private bool _controlPanelOpen;
 
@@ -16,7 +17,9 @@ namespace Scenes.Home
 
         private void Start()
         {
+            _fader.OnFadeInComplete += HandleSceneFadeIn;
             _fader.OnFadeOutComplete += SwitchScene;
+
             _fader.StartFadeIn();
         }
 
@@ -46,6 +49,16 @@ namespace Scenes.Home
         #endregion
 
         #region Utility Functions
+
+        private void HandleSceneFadeIn()
+        {
+            _fader.OnFadeInComplete -= HandleSceneFadeIn;
+
+            foreach (TextTyper textTyper in _textTypers)
+            {
+                textTyper.StartTyping();
+            }
+        }
 
         private void HideControls() => _controlsPanel.SetActive(false);
 

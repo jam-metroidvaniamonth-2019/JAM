@@ -148,7 +148,7 @@ MonoBehaviour:
   _projectileLaunchEffect: {fileID: 0}
   _projectileDestroyEffect: {fileID: 0}
   _launchSpeed: 20
-  _lifetime: 3
+  _lifetime: 1
 --- !u!114 &5933047179482118506
 MonoBehaviour:
   m_ObjectHideFlags: 0
