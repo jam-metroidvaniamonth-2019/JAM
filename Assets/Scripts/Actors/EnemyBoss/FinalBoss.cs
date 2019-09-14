@@ -61,10 +61,10 @@ public class FinalBoss : BaseNPC
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            abilityD.Trigger(Vector2.zero);
-        }
+        //if (Input.GetKeyDown(KeyCode.H))
+        //{
+        //    abilityD.Trigger(Vector2.zero);
+        //}
     }
 
 
@@ -133,6 +133,10 @@ public class FinalBoss : BaseNPC
 
     private void CallHealthReduceAnimation(float _redVal1, float _redVal2) {
         CallAnimator(ANIMATION_HIT);
+        if(_redVal1 <= 0.5 * _redVal2)
+        {
+                this.GetComponent<AbilityD>().Trigger(new Vector2(0,0);
+        }
     }
 
     public override void Start()
