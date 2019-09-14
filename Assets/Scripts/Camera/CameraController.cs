@@ -32,6 +32,8 @@ namespace CustomCamera
 
         public void RemoveTargetFromCamera(int index) => _targets.RemoveAt(index);
 
+        public void UpdatePlayerOffset(Vector3 offsetPosition) => _playerFollowOffset = offsetPosition;
+
         #endregion
 
         #region Utility Functions

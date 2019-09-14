@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using CustomCamera;
 using UI.CutScene;
 using UnityEngine;
 
@@ -17,6 +18,8 @@ public class FinalBoss : BaseNPC
     [Header("CutSceneAfterDeath")]
     public Sprite cutSceneImg;
     public float cutSceneDuration;
+    public Vector3 cameraOffset;
+    public CameraController cameraController;
 
     public Transform projectileAFiringPt;
     public Transform projectileBFiringPt;
@@ -100,8 +103,17 @@ public class FinalBoss : BaseNPC
 
         if (_triggerAbility)
         {
-            currentBossAbility = _triggerAbility;
-            _triggerAbility.Trigger(GetDirecitonForAbilityAttack(_attackType));
+            if(_attackType == EAttackType.Ability_A)
+            {
+                currentBossAbility = _triggerAbility;
+                _triggerAbility.GetComponent<AbilityA>().TriggerA(playerCol.transform);
+                //_triggerAbility.Trigger(GetDirecitonForAbilityAttack(_attackType));
+            }
+            else
+            {
+                currentBossAbility = _triggerAbility;
+                _triggerAbility.Trigger(GetDirecitonForAbilityAttack(_attackType));
+            }
         }
     }
     private IEnumerator TriggerAbilityRoutine(float _wait)
@@ -131,8 +143,8 @@ public class FinalBoss : BaseNPC
 
         CallAnimator(ANIMATION_IDLE);
         enemyHealthObject.enemyHealthSetter.OnHealthChanged += CallHealthReduceAnimation;
-
         enemyHealthObject.enemyHealthSetter.OnHealthZero += DsiplayCutscene;
+        cameraController.UpdatePlayerOffset(cameraOffset);
 
         foreach (var element in CollectionOfAttachedAbilities)
         {
