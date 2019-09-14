@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e262b8c49f8e324db129b1b5299d0ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _amount: 30
+  _amount: 40
 --- !u!114 &2353033154868181364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,11 +183,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9094691206825400467}
     m_Modifications:
-    - target: {fileID: 7080622587621740468, guid: 957e781c0aaf02343b2a0904b10dea26,
-        type: 3}
-      propertyPath: m_Name
-      value: Arrow Trail
-      objectReference: {fileID: 0}
     - target: {fileID: 7080622587621740467, guid: 957e781c0aaf02343b2a0904b10dea26,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -242,6 +237,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7080622587621740468, guid: 957e781c0aaf02343b2a0904b10dea26,
+        type: 3}
+      propertyPath: m_Name
+      value: Arrow Trail
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 957e781c0aaf02343b2a0904b10dea26, type: 3}
