@@ -230,7 +230,7 @@ namespace Player.Shooting
             _shootBowDirectionDisplay.rotation = Quaternion.Euler(0, 0, _directionLockedAngle);
             _shootSlingShotDirectionDisplay.rotation = Quaternion.Euler(0, 0, _directionLockedAngle);
 
-            Instantiate(_weaponDisplayEffectPrefab, _shootBowDirectionDisplay.position, Quaternion.identity);
+            // Instantiate(_weaponDisplayEffectPrefab, _shootBowDirectionDisplay.position, Quaternion.identity);
 
             _playerMovement.DisableMovement();
 
