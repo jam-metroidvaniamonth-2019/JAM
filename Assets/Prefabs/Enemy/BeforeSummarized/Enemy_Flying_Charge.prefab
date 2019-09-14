@@ -29,6 +29,7 @@ Transform:
   m_Children:
   - {fileID: 3005043080682176141}
   - {fileID: 5443252869839171932}
+  - {fileID: 5511350097170740145}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -159,6 +160,54 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &8714645823436287455
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5511350097170740145}
+  - component: {fileID: 4168396663478347540}
+  m_Layer: 0
+  m_Name: Enemy Death Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5511350097170740145
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8714645823436287455}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.018, y: -0.55, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3005043080488531008}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4168396663478347540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8714645823436287455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c157c69d820f8ac429bbe841e4b561d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyHealthSetter: {fileID: 1109814572379476776}
+  _enemyDeathEffect: {fileID: 3020915752580415014, guid: e008edcfe54af6145bc8e34744e94bf3,
+    type: 3}
+  _effectSpawnPosition: {fileID: 5511350097170740145}
+  _enemyBody: {fileID: 5443252869839171930}
 --- !u!1 &8777461490573736387
 GameObject:
   m_ObjectHideFlags: 0
