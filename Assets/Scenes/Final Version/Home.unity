@@ -671,11 +671,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fader: {fileID: 1803662316}
   _controlsPanel: {fileID: 1412559307}
-  _textTypers:
-  - {fileID: 1034636631}
+  _gameName: {fileID: 1034636631}
+  _imageFaders:
   - {fileID: 764922517}
-  - {fileID: 783383795}
-  - {fileID: 1555208323}
+  - {fileID: 783383796}
+  - {fileID: 1555208324}
 --- !u!1 &443904740
 GameObject:
   m_ObjectHideFlags: 0
@@ -1183,7 +1183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1203,7 +1203,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: Start
 --- !u!222 &764922516
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1221,12 +1221,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 764922513}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 896925868f2449fdbbe3c633d77711ed, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f65353139574c7e95db8afb76e8aa06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _displayText: Start
-  _characterDelay: 0.1
-  _displayObject: {fileID: 764922515}
+  _fadeInRate: 75
+  _fadeOutRate: 100
 --- !u!1 &783383791
 GameObject:
   m_ObjectHideFlags: 0
@@ -1239,6 +1238,7 @@ GameObject:
   - component: {fileID: 783383794}
   - component: {fileID: 783383793}
   - component: {fileID: 783383795}
+  - component: {fileID: 783383796}
   m_Layer: 5
   m_Name: Controls Text
   m_TagString: Untagged
@@ -1278,7 +1278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1298,7 +1298,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: Controls
 --- !u!222 &783383794
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1322,6 +1322,20 @@ MonoBehaviour:
   _displayText: Controls
   _characterDelay: 0.1
   _displayObject: {fileID: 783383793}
+--- !u!114 &783383796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783383791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f65353139574c7e95db8afb76e8aa06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fadeInRate: 75
+  _fadeOutRate: 100
 --- !u!1 &790939940
 GameObject:
   m_ObjectHideFlags: 0
@@ -1761,7 +1775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 896925868f2449fdbbe3c633d77711ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _displayText: A Tale of Yu-jin
+  _displayText: The tale of Yu-jin
   _characterDelay: 0.07
   _displayObject: {fileID: 1034636632}
 --- !u!114 &1034636632
@@ -2488,6 +2502,7 @@ GameObject:
   - component: {fileID: 1555208322}
   - component: {fileID: 1555208321}
   - component: {fileID: 1555208323}
+  - component: {fileID: 1555208324}
   m_Layer: 5
   m_Name: Close Text
   m_TagString: Untagged
@@ -2527,7 +2542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2547,7 +2562,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: Quit
 --- !u!222 &1555208322
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2571,6 +2586,20 @@ MonoBehaviour:
   _displayText: Quit
   _characterDelay: 0.1
   _displayObject: {fileID: 1555208321}
+--- !u!114 &1555208324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555208319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f65353139574c7e95db8afb76e8aa06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fadeInRate: 75
+  _fadeOutRate: 100
 --- !u!1 &1595485161
 GameObject:
   m_ObjectHideFlags: 0

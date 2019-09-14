@@ -9,7 +9,8 @@ namespace Scenes.Home
     {
         [SerializeField] private Fader _fader;
         [SerializeField] private GameObject _controlsPanel;
-        [SerializeField] private TextTyper[] _textTypers;
+        [SerializeField] private TextTyper _gameName;
+        [SerializeField] private TextFader[] _imageFaders;
 
         private bool _controlPanelOpen;
 
@@ -54,9 +55,15 @@ namespace Scenes.Home
         {
             _fader.OnFadeInComplete -= HandleSceneFadeIn;
 
-            foreach (TextTyper textTyper in _textTypers)
+            _gameName.StartTyping();
+            _gameName.OnTypingCompleted += HandleTextTypingComplete;
+        }
+
+        private void HandleTextTypingComplete()
+        {
+            foreach (TextFader textFader in _imageFaders)
             {
-                textTyper.StartTyping();
+                textFader.StartFadeOut();
             }
         }
 
