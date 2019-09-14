@@ -6,16 +6,21 @@ public class AbilityA : BaseBossAbility
 {
     public Transform FirePt;
 
+    public Transform playerTransform;
+
     [SerializeField]
     private int currentCounter;
 
-    private IEnumerator FireProjectileRoutine(Vector2 _direction)
+    private IEnumerator FireProjectileRoutine()
     {
+        var _direction = new Vector3(0, 0, 0);
+        _direction = (playerTransform.position - FirePt.position).normalized;
+
         LaunchAbilityAProjectile(_direction);
         yield return new WaitForSeconds(delayPerProjectile);
         if (currentCounter > 0)
         {
-            StartCoroutine(FireProjectileRoutine(_direction));
+            StartCoroutine(FireProjectileRoutine());
             --currentCounter;
         }
         else {
@@ -30,11 +35,17 @@ public class AbilityA : BaseBossAbility
     public Vector2 direction;
     public float speed;
 
+    public void TriggerA(Transform _transform)
+    {
+        currentCounter = counter;
+        playerTransform = _transform;
+        StartCoroutine(FireProjectileRoutine());
+    }
+
     public override void Trigger(Vector2 _direction)
     {
         base.Trigger(_direction);
-        currentCounter = counter;
-        StartCoroutine(FireProjectileRoutine(_direction));
+        
     }
     private void LaunchAbilityAProjectile(Vector2 _direction)
     {
