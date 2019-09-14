@@ -13,6 +13,7 @@ namespace Player.General
         [SerializeField] private ImageFader _lowHealthFader;
 
         public delegate void PlayerBagStatusChanged(bool playerHasBag);
+
         public PlayerBagStatusChanged OnPlayerBagStatusChanged;
 
         private bool _playerHasBag;
@@ -34,6 +35,7 @@ namespace Player.General
             _playerHealthSetter.OnHealthChanged += HandleHealthChange;
             _playerHealthSetter.OnHealthZero += HandleHealthZero;
 
+            _lowHealthFader.StopFading();
             NotifyBagStatusChanged();
         }
 

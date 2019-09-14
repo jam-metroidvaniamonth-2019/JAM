@@ -148,16 +148,15 @@ namespace Player.Shooting
                 _shootSlingShotDirectionDisplayRenderer.enabled = false;
                 return;
             }
-
-            // Disabled as Animations directly from the Player is being used
-//            if (_playerController.PlayerHasBow)
-//            {
-//                _shootBowDirectionDisplayRenderer.enabled = true;
-//            }
-//            else
-//            {
-//                _shootSlingShotDirectionDisplayRenderer.enabled = true;
-//            }
+            
+            if (_playerController.PlayerHasBow)
+            {
+                _shootBowDirectionDisplayRenderer.enabled = true;
+            }
+            else
+            {
+                _shootSlingShotDirectionDisplayRenderer.enabled = true;
+            }
 
             float xMovement = Input.GetAxis(ControlConstants.HorizontalShootAxis);
             float yMovement = Input.GetAxis(ControlConstants.VerticalShootAxis);

@@ -67,8 +67,10 @@ namespace UI
         public void StopFading(bool resetAlpha = true)
         {
             _isFadingActive = false;
+
             Color imageColor = _affectorImage.color;
             imageColor.a = 0;
+            _affectorImage.color = imageColor;
         }
 
         #endregion
