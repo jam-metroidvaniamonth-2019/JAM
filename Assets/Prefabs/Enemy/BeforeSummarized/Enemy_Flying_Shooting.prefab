@@ -244,12 +244,12 @@ MonoBehaviour:
   enemyHealthObject: {fileID: 6008260992491568357}
   detectionDelay: 0
   damageOnTouch: 0
-  speed: 6
+  speed: 8
   baseAnim_Atttack_Time: 0.4677
   baseAnim_Monitoring_Time: 0.4
   baseAnim_Idle_Time: 0.4
   isInCooldown: 0
-  cooldownTimer: 1
+  cooldownTimer: 2
   cooldownCounter: 0
   normalSpeed: 2
   moveSpeed: 2

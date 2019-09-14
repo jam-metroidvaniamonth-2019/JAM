@@ -258,6 +258,10 @@ public class Enemy1 : BaseNPC
             {
                 CurrentState = JamSpace.EState.COOLDOWN;
             }
+            else
+            {
+                CurrentState = JamSpace.EState.IDLE;
+            }
         }
         else
         {

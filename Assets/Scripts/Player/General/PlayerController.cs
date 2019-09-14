@@ -18,8 +18,8 @@ namespace Player.General
 
         private bool _playerHasBag;
         private bool _playerHasBow;
-        private bool _playerHasDash;
         private bool _playerHasAntidote;
+        public bool _playerHasDash;
 
         private bool _playerDead;
         private bool _sceneSwitchActive;
