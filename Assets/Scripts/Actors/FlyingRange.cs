@@ -125,8 +125,6 @@ public class FlyingRange : BaseNPC
 
     [SerializeField]
     public GameObject projectilePrefab;
-    [SerializeField]
-    private float speed;
 
     public void FireProjectileBlast(Vector3 _playerPosition)
     {
