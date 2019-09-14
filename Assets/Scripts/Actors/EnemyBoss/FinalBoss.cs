@@ -86,8 +86,10 @@ public class FinalBoss : BaseNPC
     {
         StartCoroutine(TriggerAbilityRoutine(_abilityCooldownDuration));
     }
-    private void Start()
+    public override void Start()
     {
+        base.Start();
+
         foreach (var element in CollectionOfAttachedAbilities)
         {
             element.OnAbilityCompleted += TriggerAbilityCooldown;

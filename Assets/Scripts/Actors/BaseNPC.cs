@@ -12,8 +12,12 @@ public class BaseNPC : MonoBehaviour
         enemyHealthObject.enemyCollider = this.GetComponent<Collider2D>();
     }
 
-    private void EnemyDead()
+    public delegate void EnemyDeathPosition(BaseNPC _baseEnemy);
+    public EnemyDeathPosition OnEnemyDeathPosition;
+
+    public void EnemyDead()
     {
+        OnEnemyDeathPosition(this);
         // this character is dead
     }
 

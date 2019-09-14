@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class AbilityD : BaseBossAbility
 {
+    public GameObject antidotePrefab;
+
+    private void SpawnAntidote(Vector2 _position)
+    {
+        GameObject.Instantiate(antidotePrefab, _position, Quaternion.identity);
+    }
+
     public Transform[] verticesOfTheAreaInWhichToSpawnMinions;
     private const float minimuimDelayBeforeSpawn = 0.01f;
     [SerializeField]
@@ -12,6 +19,9 @@ public class AbilityD : BaseBossAbility
     private float delayBeforeEverySpawn;
     [SerializeField]
     private int numberOfMinonsToSpawn;
+
+    [SerializeField]
+    public List<BaseNPC> allSpawnedNPCs;
 
     private GameObject GetRandomMinionPrefab()
     {
@@ -25,18 +35,34 @@ public class AbilityD : BaseBossAbility
     {
         base.Trigger(_direction);
         //StartCoroutine(spawnEnemies());
-
         StartCoroutine(spawnEnemies());
-
         NotifyAbilityCompleted();
 
     }
+
+    private void EnemyDiedAt(BaseNPC _enemyScript)
+    {
+        if (allSpawnedNPCs.Contains(_enemyScript))
+        {
+            allSpawnedNPCs.Remove(_enemyScript);
+            if(allSpawnedNPCs.Count == 0)
+            {
+                // all dead spawn antidote here
+                SpawnAntidote(_enemyScript.transform.position);
+            }
+        }
+    }
+
     private IEnumerator spawnEnemies()
     {
         delayBeforeEverySpawn = Mathf.Max(delayBeforeEverySpawn, minimuimDelayBeforeSpawn);
         yield return new WaitForSeconds(delayBeforeEverySpawn);
         --numberOfMinonsToSpawn;
-        GameObject.Instantiate(GetRandomMinionPrefab(), GetRandomPosition(), Quaternion.identity);
+        var enemyMinion = GameObject.Instantiate(GetRandomMinionPrefab(), GetRandomPosition(), Quaternion.identity);
+        var NPCScript = enemyMinion.GetComponent<BaseNPC>();
+        NPCScript.OnEnemyDeathPosition += EnemyDiedAt;
+        allSpawnedNPCs.Add(NPCScript);
+
         if (numberOfMinonsToSpawn > 0)
         {
             StartCoroutine(spawnEnemies());

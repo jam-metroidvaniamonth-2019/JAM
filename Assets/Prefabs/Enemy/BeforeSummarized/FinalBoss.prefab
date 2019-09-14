@@ -315,6 +315,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackType: 3
   cooldown: 3
+  _stoneFallingHolderPrefab: {fileID: 0}
+  _stoneSpawnEffect: {fileID: 0}
+  _stoneFallingWaitTime: 1
 --- !u!114 &1849446764095502528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,12 +332,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackType: 4
   cooldown: 3
+  antidotePrefab: {fileID: 3840854672065454277, guid: b04bb5c2eb1bd9a45be8a3bfdb77a0b2,
+    type: 3}
   verticesOfTheAreaInWhichToSpawnMinions: []
   minionPrefabs:
   - {fileID: 3005043080488531011, guid: d0a5ab262fbdeb440a69676519c57310, type: 3}
   - {fileID: 8532530951159011663, guid: 93f89b947c2fc324098db25496ecc1a8, type: 3}
   delayBeforeEverySpawn: 1
   numberOfMinonsToSpawn: 5
+  allSpawnedNPCs: []
 --- !u!212 &1849446764095502591
 SpriteRenderer:
   m_ObjectHideFlags: 0
