@@ -206,6 +206,7 @@ GameObject:
   - component: {fileID: 1849446764095502529}
   - component: {fileID: 1849446764095502528}
   - component: {fileID: 1849446764095502591}
+  - component: {fileID: 6396408233292232309}
   m_Layer: 0
   m_Name: FinalBoss
   m_TagString: Untagged
@@ -222,7 +223,7 @@ Transform:
   m_GameObject: {fileID: 1849446764095502532}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 2.4950585, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1849446762538927230}
   - {fileID: 1849446763432596958}
@@ -249,6 +250,9 @@ MonoBehaviour:
   detectionDelay: 0
   damageOnTouch: 0
   speed: 0
+  myAnimator: {fileID: 0}
+  cutSceneImg: {fileID: 0}
+  cutSceneDuration: 0
   projectileAFiringPt: {fileID: 1849446763432596958}
   projectileBFiringPt: {fileID: 1849446762512076791}
   abilityD: {fileID: 1849446764095502528}
@@ -260,6 +264,7 @@ MonoBehaviour:
   - {fileID: 1849446764095502530}
   - {fileID: 1849446764095502590}
   - {fileID: 1849446764095502529}
+  _waitBeforeFire: 2
 --- !u!114 &1849446764095502530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,7 +386,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7d8cda48c729c46329cd9d3c69a3a4e6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8f87e8e0549112948bf1323c81995ae3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -392,6 +397,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &6396408233292232309
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849446764095502532}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: af47aa1481e8f4040aaf47ace0477c1b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5338870048245616949
 GameObject:
   m_ObjectHideFlags: 0

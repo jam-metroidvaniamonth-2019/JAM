@@ -6,6 +6,14 @@ using UnityEngine;
 
 public class FinalBoss : BaseNPC
 {
+    public Animator myAnimator;
+
+    public const string ANIMATION_IDLE = "ANIMATION_IDLE";
+    public const string ANIMATION_BITE = "ANIMATION_BITE";
+    public const string ANIMATION_HIT = "ANIMATION_HIT";
+
+    private void CallAnimator(string _animTag)=> myAnimator.SetTrigger(_animTag);
+
     [Header("CutSceneAfterDeath")]
     public Sprite cutSceneImg;
     public float cutSceneDuration;
@@ -31,7 +39,12 @@ public class FinalBoss : BaseNPC
 
     [SerializeField]
     private BaseBossAbility[] CollectionOfAttachedAbilities;
-    private void CallNextAbility() => TriggerAbility(attackSequence[CycleAbilityCounter()]);
+
+    [Header("Wait Before Fire")]
+    [SerializeField]
+    private float _waitBeforeFire;
+
+    private void CallNextAbility() => StartCoroutine(ArtificialWaitOnAttack(attackSequence[CycleAbilityCounter()],_waitBeforeFire));
     private int CycleAbilityCounter()
     {
         ++counter;
@@ -72,6 +85,13 @@ public class FinalBoss : BaseNPC
         }
     }
 
+    private IEnumerator ArtificialWaitOnAttack(EAttackType _attackType, float _wait)
+    {
+        CallAnimator(ANIMATION_BITE);
+        yield return new WaitForSeconds(_wait);
+        TriggerAbility(_attackType);
+    }
+
     private void TriggerAbility(EAttackType _attackType)
     {
         var _triggerAbility = Array.Find(CollectionOfAttachedAbilities, element => element.attackType == _attackType);
@@ -97,9 +117,18 @@ public class FinalBoss : BaseNPC
         CutSceneDisplay.Instance.DisplayCutScene(cutSceneImg, cutSceneDuration);
     }
 
+    private void CallHealthReduceAnimation(float _redVal1, float _redVal2) {
+        CallAnimator(ANIMATION_HIT);
+    }
+
     public override void Start()
     {
         base.Start();
+
+        myAnimator = GetComponent<Animator>();
+
+        CallAnimator(ANIMATION_IDLE);
+        enemyHealthObject.enemyHealthSetter.OnHealthChanged += CallHealthReduceAnimation;
 
         enemyHealthObject.enemyHealthSetter.OnHealthZero += DsiplayCutscene;
 
