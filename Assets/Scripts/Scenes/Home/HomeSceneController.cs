@@ -10,11 +10,9 @@ namespace Scenes.Home
         [SerializeField] private Fader _fader;
         [SerializeField] private GameObject _controlsPanel;
         [SerializeField] private TextTyper _gameName;
+        [SerializeField] private float _controlThreshold = 0.5f;
         [SerializeField] private TextFader[] _imageFaders;
         [SerializeField] private GameObject[] _underlines;
-        [SerializeField] private float _gamepadThreshold = 0.5f;
-
-        private bool _controlPanelOpen;
 
         private int _currentLineIndex;
         private bool _controllerDownState;
@@ -42,8 +40,8 @@ namespace Scenes.Home
                 HideControls();
             }
 
-            float verticalY = Input.GetAxis(ControlConstants.VerticalAxis);
-            if (Mathf.Abs(verticalY) > _gamepadThreshold)
+            float verticalY = Input.GetAxisRaw(ControlConstants.VerticalAxis);
+            if (Mathf.Abs(verticalY) > _controlThreshold)
             {
                 if (!_controllerDownState)
                 {
@@ -68,7 +66,7 @@ namespace Scenes.Home
                     UpdateControllerLines();
                 }
             }
-            else if (Mathf.Abs(verticalY) < _gamepadThreshold)
+            else if (Mathf.Abs(verticalY) < _controlThreshold)
             {
                 _controllerDownState = false;
             }

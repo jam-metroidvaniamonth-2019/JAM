@@ -672,6 +672,7 @@ MonoBehaviour:
   _fader: {fileID: 1803662316}
   _controlsPanel: {fileID: 1412559307}
   _gameName: {fileID: 1034636631}
+  _controlThreshold: 0.75
   _imageFaders:
   - {fileID: 764922517}
   - {fileID: 783383796}
@@ -680,7 +681,6 @@ MonoBehaviour:
   - {fileID: 1438625634}
   - {fileID: 809809939}
   - {fileID: 642072281}
-  _gamepadThreshold: 0.5
 --- !u!1 &443904740
 GameObject:
   m_ObjectHideFlags: 0
