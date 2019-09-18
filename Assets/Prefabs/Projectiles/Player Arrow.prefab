@@ -146,7 +146,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _projectileLaunchEffect: {fileID: 0}
-  _projectileDestroyEffect: {fileID: 0}
+  _projectileDestroyEffect: {fileID: 2605110171238243216, guid: b51c3b41704991045b0d29b87e94cd7f,
+    type: 3}
   _launchSpeed: 20
   _lifetime: 1
 --- !u!114 &5933047179482118506
@@ -183,6 +184,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9094691206825400467}
     m_Modifications:
+    - target: {fileID: 7080622587621740468, guid: 957e781c0aaf02343b2a0904b10dea26,
+        type: 3}
+      propertyPath: m_Name
+      value: Arrow Trail
+      objectReference: {fileID: 0}
     - target: {fileID: 7080622587621740467, guid: 957e781c0aaf02343b2a0904b10dea26,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -237,11 +243,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7080622587621740468, guid: 957e781c0aaf02343b2a0904b10dea26,
-        type: 3}
-      propertyPath: m_Name
-      value: Arrow Trail
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 957e781c0aaf02343b2a0904b10dea26, type: 3}
