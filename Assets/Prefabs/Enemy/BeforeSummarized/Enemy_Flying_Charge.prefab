@@ -238,7 +238,6 @@ MonoBehaviour:
   _enemyHealthSetter: {fileID: 1109814572379476776}
   _enemyDeathEffect: {fileID: 3020915752580415014, guid: e008edcfe54af6145bc8e34744e94bf3,
     type: 3}
-  _effectSpawnPosition: {fileID: 5511350097170740145}
   _enemyBody: {fileID: 5443252869839171930}
 --- !u!1 &8777461490573736387
 GameObject:
@@ -481,17 +480,6 @@ PrefabInstance:
       propertyPath: point2
       value: 
       objectReference: {fileID: 3005043081912817244}
-    - target: {fileID: 7079200563728730823, guid: 64973169d61982845a403a0d05b18441,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7079200563728730823, guid: 64973169d61982845a403a0d05b18441,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 42b475821c76e044497136ba9ffea9f9,
-        type: 3}
     - target: {fileID: 7079200563728730822, guid: 64973169d61982845a403a0d05b18441,
         type: 3}
       propertyPath: m_Enabled
@@ -507,6 +495,17 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 1.385
       objectReference: {fileID: 0}
+    - target: {fileID: 7079200563728730823, guid: 64973169d61982845a403a0d05b18441,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079200563728730823, guid: 64973169d61982845a403a0d05b18441,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 42b475821c76e044497136ba9ffea9f9,
+        type: 3}
     - target: {fileID: 7079200563863420686, guid: 64973169d61982845a403a0d05b18441,
         type: 3}
       propertyPath: m_Layer
@@ -522,7 +521,8 @@ PrefabInstance:
       propertyPath: enemyCollider
       value: 
       objectReference: {fileID: 8106946460175022216}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7079200563863420691, guid: 64973169d61982845a403a0d05b18441, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 64973169d61982845a403a0d05b18441, type: 3}
 --- !u!1 &5443252869839171930 stripped
 GameObject:

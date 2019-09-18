@@ -149,7 +149,7 @@ namespace Player.Shooting
                 _shootSlingShotDirectionDisplayRenderer.enabled = false;
                 return;
             }
-            
+
             if (_playerController.PlayerHasBow)
             {
                 _shootBowDirectionDisplayRenderer.enabled = true;
@@ -243,12 +243,13 @@ namespace Player.Shooting
             _timeSlowFired = false;
             Time.timeScale = 1;
 
+            _playerMovement.EnableMovement();
+            OnPlayerShot?.Invoke(_playerController.PlayerHasBow);
+
             if (_timeBeforeLastShot < _shotWaitTime)
             {
                 return;
             }
-
-            OnPlayerShot?.Invoke(_playerController.PlayerHasBow);
 
             _timeBeforeLastShot = 0;
 
@@ -268,8 +269,6 @@ namespace Player.Shooting
 
             bulletInstance.GetComponent<Rigidbody2D>().velocity = launchSpeed * launchDirection.normalized;
             bulletInstance.transform.SetParent(_bulletHolder);
-
-            _playerMovement.EnableMovement();
         }
 
         #endregion

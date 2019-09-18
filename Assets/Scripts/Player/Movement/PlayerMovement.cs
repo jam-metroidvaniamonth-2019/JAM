@@ -46,6 +46,14 @@ namespace Player.Movement
         // Movement Controls
         private bool _movementEnabled;
 
+        // Control Buttons
+        private float _moveX;
+        private float _moveXRaw;
+        private float _moveYRaw;
+        private bool _jumpButtonPressed;
+        private bool _jumpButtonJustPressed;
+        private bool _dashButtonPressed;
+
         // Delegates
         public delegate void PlayerJumped();
         public PlayerJumped OnPlayerJumped;
@@ -62,9 +70,21 @@ namespace Player.Movement
 
         private void Update()
         {
+            _moveX = Input.GetAxis(ControlConstants.HorizontalAxis);
+            _moveXRaw = Input.GetAxisRaw(ControlConstants.HorizontalAxis);
+
+            _moveYRaw = Input.GetAxisRaw(ControlConstants.VerticalAxis);
+
+            _jumpButtonPressed = Input.GetButton(ControlConstants.JumpButton);
+            _jumpButtonJustPressed = Input.GetButtonDown(ControlConstants.JumpButton);
+
+            _dashButtonPressed = Input.GetButtonDown(ControlConstants.DashButton);
+        }
+
+        private void FixedUpdate()
+        {
             UpdateMovementVariables();
 
-            // TODO: Find a better way to enable and disable movements
             if (_movementEnabled)
             {
                 HandleDash();
@@ -85,10 +105,7 @@ namespace Player.Movement
 
         private void HandleHorizontalMovement()
         {
-            float moveX = Input.GetAxis(ControlConstants.HorizontalAxis);
-            float moveXRaw = Input.GetAxisRaw(ControlConstants.HorizontalAxis);
-
-            if (Math.Abs(moveXRaw) < _movementTolerance && _playerCollision.IsOnGround)
+            if (Math.Abs(_moveXRaw) < _movementTolerance && _playerCollision.IsOnGround)
             {
                 _playerRb.drag = _linearDrag;
             }
@@ -97,7 +114,7 @@ namespace Player.Movement
                 _playerRb.drag = 0;
             }
 
-            _playerRb.velocity = new Vector2(_movementSpeed * moveX * Time.deltaTime, _playerRb.velocity.y);
+            _playerRb.velocity = new Vector2(_movementSpeed * _moveX * Time.fixedDeltaTime, _playerRb.velocity.y);
             UpdateSpriteBasedOnVelocity();
         }
 
@@ -123,7 +140,7 @@ namespace Player.Movement
 
         private void HandleJump()
         {
-            if (Input.GetButtonDown(ControlConstants.JumpButton) && !_jumped && _playerCollision.IsOnGround)
+            if (_jumpButtonJustPressed && !_jumped && _playerCollision.IsOnGround)
             {
                 _playerRb.drag = 0;
                 _playerRb.velocity = new Vector2(_playerRb.velocity.x, _jumpVelocity);
@@ -140,7 +157,7 @@ namespace Player.Movement
                     _playerRb.drag = 0;
                 }
 
-                _playerRb.velocity += Time.deltaTime * Physics2D.gravity.y * (_fallMultiplier - 1) * Vector2.up;
+                _playerRb.velocity += Time.fixedDeltaTime * Physics2D.gravity.y * (_fallMultiplier - 1) * Vector2.up;
             }
             else if (_playerRb.velocity.y > 0)
             {
@@ -149,13 +166,13 @@ namespace Player.Movement
                     _playerRb.drag = 0;
                 }
 
-                if (!Input.GetButton(ControlConstants.JumpButton))
+                if (!_jumpButtonPressed)
                 {
-                    _playerRb.velocity += Time.deltaTime * Physics2D.gravity.y * (_lowJumpMultiplier - 1) * Vector2.up;
+                    _playerRb.velocity += Time.fixedDeltaTime * Physics2D.gravity.y * (_lowJumpMultiplier - 1) * Vector2.up;
                 }
                 else
                 {
-                    _playerRb.velocity -= Time.deltaTime * _jumpDecelearationRate * Vector2.up;
+                    _playerRb.velocity -= Time.fixedDeltaTime * _jumpDecelearationRate * Vector2.up;
                 }
             }
         }
@@ -166,15 +183,12 @@ namespace Player.Movement
 
         private void HandleDash()
         {
-            if (_dashUsed || !Input.GetButtonDown(ControlConstants.DashButton) || !_playercontroller.PlayerHasDash)
+            if (_dashUsed || !_dashButtonPressed || !_playercontroller.PlayerHasDash)
             {
                 return;
             }
 
-            float xAxisRaw = Input.GetAxisRaw(ControlConstants.HorizontalAxis);
-            float yAxisRaw = Input.GetAxisRaw(ControlConstants.VerticalAxis);
-
-            Dash(xAxisRaw, yAxisRaw);
+            Dash(_moveXRaw, _moveYRaw);
         }
 
         private void Dash(float xDirection, float yDirection)
