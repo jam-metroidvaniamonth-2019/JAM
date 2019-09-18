@@ -35,6 +35,17 @@ namespace Scenes.Main
         [SerializeField] private PlayerShooter _playerShooter;
         [SerializeField] private Transform _player;
 
+        [Header("Enemy Controls")]
+        [SerializeField] private BoxCollider2D _enemyDetectorCollider;
+        [SerializeField] private Vector2 _enemyInitialColliderSize;
+        [SerializeField] private Vector2 _enemyFinalColliderSize;
+        [SerializeField] private Transform _enemyLeftMovementTransformBoundary;
+        [SerializeField] private Transform _enemyRightMovementTransformBoundary;
+        [SerializeField] private Vector2 _leftPointInitialLocalPosition;
+        [SerializeField] private Vector2 _rightPointInitialLocalPosition;
+        [SerializeField] private Vector2 _leftPointFinalLocalPosition;
+        [SerializeField] private Vector2 _rightPointFinalLocalPosition;
+
         [Header("Fireflies")]
         [SerializeField] private int _fireflySpawnCount = 5;
         [SerializeField] private CollisionNotifier _firefliesExitNotifier;
@@ -48,14 +59,29 @@ namespace Scenes.Main
             _fireflyIndices = new List<int>();
             _fallingStone.isKinematic = true;
 
-            _playerHealthSetter.OnHealthChanged += HandlePlayerHealthChange;
             _firefliesExitNotifier.OnTriggerEntered += HandlePlayerEnteredFireflyExit;
             _bossSceneActivator.OnTriggerEntered += ActivateBossScene;
+
+            MakeEnemyRestricted();
         }
 
         #endregion
 
         #region Utility Functions
+
+        private void MakeEnemyRestricted()
+        {
+            _enemyDetectorCollider.size = _enemyInitialColliderSize;
+            _enemyLeftMovementTransformBoundary.localPosition = _leftPointInitialLocalPosition;
+            _enemyRightMovementTransformBoundary.localPosition = _rightPointInitialLocalPosition;
+        }
+
+        private void RestoreOriginalEnemyValues()
+        {
+            _enemyDetectorCollider.size = _enemyFinalColliderSize;
+            _enemyLeftMovementTransformBoundary.localPosition = _leftPointFinalLocalPosition;
+            _enemyRightMovementTransformBoundary.localPosition = _rightPointFinalLocalPosition;
+        }
 
         private void HandlePlayerHealthChange(float currentHealth, float maxHealth)
         {
@@ -111,6 +137,10 @@ namespace Scenes.Main
             {
                 _fallingStone.isKinematic = false;
                 _fallingStone.mass = _fallingStoneMass;
+
+                RestoreOriginalEnemyValues();
+
+                _playerHealthSetter.OnHealthChanged += HandlePlayerHealthChange;
                 _bossSceneActivator.OnTriggerEntered -= ActivateBossScene;
             }
         }

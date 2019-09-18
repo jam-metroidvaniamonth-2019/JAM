@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI
@@ -7,7 +8,10 @@ namespace UI
     {
         [SerializeField] [TextArea] private string _displayText;
         [SerializeField] private float _characterDelay;
+
+        [Header("Display Text (Use Either)")]
         [SerializeField] private Text _displayObject;
+        [SerializeField] private TextMeshProUGUI _textMeshDisplayObject;
 
         public delegate void TypingCompleted();
         public TypingCompleted OnTypingCompleted;
@@ -28,7 +32,7 @@ namespace UI
             _currentTypingTimer -= Time.deltaTime;
             if (_currentTypingTimer <= 0)
             {
-                _displayObject.text += _displayText[_currentCharacterIndex];
+                AddText(_displayText[_currentCharacterIndex]);
                 _currentTypingTimer = _characterDelay;
 
                 _currentCharacterIndex += 1;
@@ -45,7 +49,7 @@ namespace UI
 
         public void StartTyping()
         {
-            _displayObject.text = "";
+            SetText("");
             _isTyping = true;
             _currentTypingTimer = 0;
             _currentCharacterIndex = 0;
@@ -53,7 +57,7 @@ namespace UI
 
         public void ForceComplete()
         {
-            _displayObject.text = _displayText;
+            SetText(_displayText);
             StopTyping();
         }
 
@@ -70,6 +74,42 @@ namespace UI
         }
 
         private void NotifyTypingCompleted() => OnTypingCompleted?.Invoke();
+
+        private void SetText(string text)
+        {
+            if (_displayObject != null)
+            {
+                _displayObject.text = text;
+            }
+            else
+            {
+                _textMeshDisplayObject.text = text;
+            }
+        }
+
+        private void AddText(string text)
+        {
+            if (_displayObject != null)
+            {
+                _displayObject.text += text;
+            }
+            else
+            {
+                _textMeshDisplayObject.text += text;
+            }
+        }
+
+        private void AddText(char character)
+        {
+            if (_displayObject != null)
+            {
+                _displayObject.text += character;
+            }
+            else
+            {
+                _textMeshDisplayObject.text += character;
+            }
+        }
 
         #endregion
     }
