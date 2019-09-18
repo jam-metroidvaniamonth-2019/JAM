@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Final Version/Letter.unity
     guid: fdb185b78ad2189438a6c5416e81f02c
   - enabled: 1
+    path: Assets/Scenes/Final Version/Loading.unity
+    guid: 146e1633e709000469a5f3699f5afc9d
+  - enabled: 1
     path: Assets/Scenes/Final Version/Main.unity
     guid: 092305c731e866b4bb127b2ed7c3ab59
   - enabled: 1

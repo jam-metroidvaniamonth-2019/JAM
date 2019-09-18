@@ -71,7 +71,7 @@ namespace Scenes.Home
                 _controllerDownState = false;
             }
 
-            if (Input.GetButtonDown(ControlConstants.StartButton))
+            if (Input.GetButtonDown(ControlConstants.StartButton) || Input.GetButtonDown(ControlConstants.SubmitButton))
             {
                 switch (_currentLineIndex)
                 {
