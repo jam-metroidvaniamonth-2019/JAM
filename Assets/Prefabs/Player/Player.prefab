@@ -835,7 +835,7 @@ GameObject:
   - component: {fileID: 1833136741041804361}
   - component: {fileID: 5045321327311228956}
   m_Layer: 5
-  m_Name: Speed Text
+  m_Name: Speech Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -925,12 +925,12 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 36
+  m_fontSize: 0.7
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0
-  m_fontSizeMax: 72
+  m_fontSizeMax: 0.7
   m_fontStyle: 0
   m_textAlignment: 257
   m_characterSpacing: 0
@@ -1002,7 +1002,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _displayText: 
-  _characterDelay: 0.7
+  _characterDelay: 0.07
   _displayObject: {fileID: 0}
   _textMeshDisplayObject: {fileID: 1833136741041804361}
 --- !u!1 &1251254003937057354
