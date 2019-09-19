@@ -35,8 +35,15 @@ namespace Player.Display
 
         #region Utility Functions
 
-        private void HandlePlayShooting(bool playerHasBow) =>
+        private void HandlePlayShooting(bool playerHasBow, bool isValidShot)
+        {
+            if (!isValidShot)
+            {
+                return;
+            }
+
             SfxAudioManager.Instance.PlaySound(playerHasBow ? _playerShotBowArrowClip : _playerSlingShotClip);
+        }
 
         private void HandlePlayerJumped()
         {

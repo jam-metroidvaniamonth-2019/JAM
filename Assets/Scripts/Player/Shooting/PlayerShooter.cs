@@ -13,7 +13,7 @@ namespace Player.Shooting
         [SerializeField] private GameObject _playerSlingShotDisplay;
         [SerializeField] private Transform _playerTransform;
         [SerializeField] private Camera _mainCamera;
-        [SerializeField] private GameObject _weaponDisplayEffectPrefab;
+        [SerializeField] private PlayerCollision _playerCollision;
         [SerializeField] private PlayerController _playerController;
 
         [Header("Extra Controls")]
@@ -38,7 +38,7 @@ namespace Player.Shooting
         [SerializeField] private SpriteRenderer _playerBagSprite;
         [SerializeField] private PlayerMovement _playerMovement;
 
-        public delegate void PlayerShot(bool playerHasBow);
+        public delegate void PlayerShot(bool playerHasBow, bool isValidShot);
         public PlayerShot OnPlayerShot;
 
         public delegate void PlayerShootInPosition(bool playerHasBow);
@@ -218,7 +218,7 @@ namespace Player.Shooting
 
         private void SetupBulletShooting()
         {
-            if (_disableShooting)
+            if (_disableShooting || !_playerCollision.IsOnGround)
             {
                 return;
             }
@@ -244,11 +244,15 @@ namespace Player.Shooting
             Time.timeScale = 1;
 
             _playerMovement.EnableMovement();
-            OnPlayerShot?.Invoke(_playerController.PlayerHasBow);
 
             if (_timeBeforeLastShot < _shotWaitTime)
             {
+                OnPlayerShot?.Invoke(_playerController.PlayerHasBow, false);
                 return;
+            }
+            else
+            {
+                OnPlayerShot?.Invoke(_playerController.PlayerHasBow, true);
             }
 
             _timeBeforeLastShot = 0;

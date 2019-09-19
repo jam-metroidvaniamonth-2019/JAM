@@ -19,9 +19,8 @@ namespace Player.Display
         private static readonly int BowIdleParam = Animator.StringToHash("Bow");
         private static readonly int SlingShotIdleParam = Animator.StringToHash("SlingShot");
 
-        [Header("Controllers")] [SerializeField]
-        private PlayerCollision _playerCollision;
-
+        [Header("Controllers")]
+        [SerializeField] private PlayerCollision _playerCollision;
         [SerializeField] private PlayerMovement _playerMovement;
         [SerializeField] private HealthSetter _playerHealthSetter;
         [SerializeField] private PlayerShooter _playerShooter;
@@ -29,7 +28,8 @@ namespace Player.Display
         [SerializeField] private float _movementThreshold;
         public ParticleSystem _playerTrailParticleSystem;
 
-        [Header("Player Animation Audio")] [SerializeField]
+        [Header("Player Animation Audio")]
+        [SerializeField]
         private List<GameObject> _runningSounds;
 
         private Animator _playerAnimator;
@@ -123,7 +123,7 @@ namespace Player.Display
         private void HandlePlayerInShootPosition(bool playerHasBow) =>
             _playerAnimator.SetBool(playerHasBow ? BowIdleParam : SlingShotIdleParam, true);
 
-        private void HandlePlayerShot(bool playerHasBow) =>
+        private void HandlePlayerShot(bool playerHasBow, bool isValidShot) =>
             _playerAnimator.SetBool(playerHasBow ? BowIdleParam : SlingShotIdleParam, false);
 
         #endregion

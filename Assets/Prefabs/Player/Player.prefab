@@ -358,8 +358,7 @@ MonoBehaviour:
   _playerSlingShotDisplay: {fileID: 8422008751842715934}
   _playerTransform: {fileID: 490690758219448607}
   _mainCamera: {fileID: 0}
-  _weaponDisplayEffectPrefab: {fileID: 6905591882997995792, guid: 9f392c392f3a12143bcdc2e1a4aa0c08,
-    type: 3}
+  _playerCollision: {fileID: 490690758219448578}
   _playerController: {fileID: 7410804983857183026}
   _rotationOffset: 0
   _timeSlowActiveWait: 0.3
