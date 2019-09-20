@@ -9,11 +9,32 @@ namespace Collectibles
         [SerializeField] private CollisionNotifier _collectibleNotifier;
         public ParticleSystem _collectorEffect;
 
+        private bool _deActiveCollector;
+
         #region Unity Functions
 
         private void Start()
         {
+            if (_deActiveCollector)
+            {
+                return;
+            }
+
             _collectibleNotifier.OnTriggerEntered += HandlePlayerCollision;
+        }
+
+        #endregion
+
+        #region External Functions
+
+        public void ClearCollectibleItems()
+        {
+            _collectibleNotifier.OnTriggerEntered -= HandlePlayerCollision;
+
+            Destroy(_collectibleNotifier.gameObject);
+            _collectorEffect.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+
+            _deActiveCollector = true;
         }
 
         #endregion
@@ -24,12 +45,8 @@ namespace Collectibles
         {
             if (other.CompareTag(TagManager.Player))
             {
-                _collectibleNotifier.OnTriggerEntered -= HandlePlayerCollision;
-
-                Destroy(_collectibleNotifier.gameObject);
-                _collectorEffect.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+                ClearCollectibleItems();
             }
-
         }
 
         #endregion

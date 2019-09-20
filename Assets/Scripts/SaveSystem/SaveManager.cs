@@ -28,6 +28,7 @@ namespace SaveSystem
         private void Start()
         {
             Initialize();
+
             if (_clearOnStart)
             {
                 ClearData();

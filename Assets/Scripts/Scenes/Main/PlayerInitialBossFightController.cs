@@ -5,6 +5,7 @@ using Interactibles.Followers;
 using Player.General;
 using Player.Movement;
 using Player.Shooting;
+using SaveSystem;
 using SpeechSystem;
 using UI.CutScene;
 using UnityEngine;
@@ -35,6 +36,11 @@ namespace Scenes.Main
         [SerializeField] private PlayerShooter _playerShooter;
         [SerializeField] private Transform _player;
 
+        [Header("Save Structure")]
+        [SerializeField] private Transform _playerSafePosition;
+        [SerializeField] private PlayerSaveHelper _playerSaveHelper;
+        [SerializeField] private GameObject[] _nearestEnemies;
+
         [Header("Enemy Controls")]
         [SerializeField] private BoxCollider2D _enemyDetectorCollider;
         [SerializeField] private Vector2 _enemyInitialColliderSize;
@@ -63,11 +69,36 @@ namespace Scenes.Main
             _bossSceneActivator.OnTriggerEntered += ActivateBossScene;
 
             MakeEnemyRestricted();
+            CheckAndLoadData();
         }
 
         #endregion
 
         #region Utility Functions
+
+        private void CheckAndLoadData()
+        {
+            bool firstBossFightCompleted = SaveManager.Instance.SaveStructure.firstBossBattleCompleted;
+            if (!firstBossFightCompleted)
+            {
+                return;
+            }
+
+            _bossSceneActivator.OnTriggerEntered -= ActivateBossScene;
+
+            _rightBoundaryLocker.MakeChildrenExplode();
+            _playerController.PlayerLoseBag();
+
+            _fallingStone.isKinematic = false;
+            _fallingStone.mass = _fallingStoneMass;
+
+            Destroy(_bossEnemy);
+
+            for (int i = 0; i < _nearestEnemies.Length; i++)
+            {
+                Destroy(_nearestEnemies[i]);
+            }
+        }
 
         private void MakeEnemyRestricted()
         {
@@ -99,6 +130,7 @@ namespace Scenes.Main
 
             _rightBoundaryLocker.MakeChildrenExplode();
             _playerController.PlayerLoseBag();
+
             Destroy(_bossEnemy);
 
             for (int i = 0; i < _fireflySpawnCount; i++)
@@ -114,7 +146,12 @@ namespace Scenes.Main
 
             _playerMovement.EnableMovement();
             _playerShooter.EnableShooting();
+
             SimpleSpeechController.Instance.DisplayDialogues(_dialogues);
+
+            _playerSaveHelper.SavePlayerWithSafePosition(_playerSafePosition.position);
+            SaveManager.Instance.SaveStructure.firstBossBattleCompleted = true;
+            SaveManager.Instance.SaveData();
         }
 
         private void HandlePlayerEnteredFireflyExit(Collider2D other)

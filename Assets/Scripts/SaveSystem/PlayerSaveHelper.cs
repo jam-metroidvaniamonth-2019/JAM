@@ -8,20 +8,12 @@ namespace SaveSystem
     {
         [SerializeField] private Transform _player;
         [SerializeField] private HealthSetter _playerHealthSetter;
-        [SerializeField] private GameObject _saveEffect;
-        [SerializeField] private float _saveEffectZPosition;
 
         #region Unity Functions
 
-        private void Start()
-        {
-            SaveManager.Instance.OnLoadComplete += HandleLoadData;
-        }
+        private void Start() => SaveManager.Instance.OnLoadComplete += HandleLoadData;
 
-        private void OnDestroy()
-        {
-            SaveManager.Instance.OnLoadComplete -= HandleLoadData;
-        }
+        private void OnDestroy() => SaveManager.Instance.OnLoadComplete -= HandleLoadData;
 
         private void Update()
         {
@@ -32,6 +24,26 @@ namespace SaveSystem
                     SavePlayerData();
                 }
             }
+        }
+
+        #endregion
+
+        #region External Functions
+
+        public void SavePlayerWithSafePosition(Vector2 safePosition)
+        {
+            if (_playerHealthSetter.CurrentHealth <= 0)
+            {
+                return;
+            }
+
+            float playerHealth = _playerHealthSetter.CurrentHealth;
+
+            SaveManager.Instance.SaveStructure.playerHealth = playerHealth;
+            SaveManager.Instance.SaveStructure.playerXPosition = safePosition.x;
+            SaveManager.Instance.SaveStructure.playerYPosition = safePosition.y;
+
+            SaveManager.Instance.SaveData();
         }
 
         #endregion
@@ -63,9 +75,6 @@ namespace SaveSystem
             SaveManager.Instance.SaveStructure.playerYPosition = playerPosition.y;
 
             SaveManager.Instance.SaveData();
-
-            Vector3 spawnPosition = new Vector3(_player.position.x, _player.position.y, _player.position.z + _saveEffectZPosition);
-            Instantiate(_saveEffect, spawnPosition, Quaternion.identity);
         }
 
         #endregion

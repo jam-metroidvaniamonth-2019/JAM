@@ -10,11 +10,12 @@ namespace SaveSystem
         public float playerYPosition;
         public float playerHealth;
 
-        // Boss Battles
-        public bool firstBossFightCompleted;
-        public bool finalBossFightCompleted;
 
-        // Firefly
-        public bool fireflySceneCompleted;
+        // Boss Battle
+        public bool firstBossBattleCompleted;
+
+        // Collectibles
+        public bool bowCollected;
+        public bool dashCollected;
     }
 }
