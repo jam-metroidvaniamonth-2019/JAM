@@ -4,6 +4,7 @@ namespace SaveSystem
 {
     public class SaveManager : MonoBehaviour
     {
+        [Header("Debug")]
         [SerializeField] private bool _clearOnStart;
 
         private const string SavePref = "MtJam";
@@ -13,6 +14,8 @@ namespace SaveSystem
 
         public SaveComplete OnSaveComplete;
         public LoadComplete OnLoadComplete;
+
+        private bool _gameSavedAtLeastOnce;
 
         private SaveStructure _saveStructure;
         private bool _disableSaving;
@@ -53,6 +56,8 @@ namespace SaveSystem
             string jsonData = JsonUtility.ToJson(_saveStructure);
             PlayerPrefs.SetString(SavePref, jsonData);
             OnSaveComplete?.Invoke();
+
+            _gameSavedAtLeastOnce = true;
         }
 
         public void ClearData()
@@ -81,6 +86,8 @@ namespace SaveSystem
         public void EnableSaving() => _disableSaving = false;
 
         public bool IsSavingDisabled() => _disableSaving;
+
+        public bool GameSavedAtLeastOnce => _gameSavedAtLeastOnce;
 
         #endregion
 

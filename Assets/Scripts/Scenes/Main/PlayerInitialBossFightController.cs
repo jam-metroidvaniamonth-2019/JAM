@@ -36,10 +36,11 @@ namespace Scenes.Main
         [SerializeField] private PlayerShooter _playerShooter;
         [SerializeField] private Transform _player;
 
-        [Header("Save Structure")]
+        [Header("Save And Load")]
         [SerializeField] private Transform _playerSafePosition;
         [SerializeField] private PlayerSaveHelper _playerSaveHelper;
         [SerializeField] private GameObject[] _nearestEnemies;
+        [SerializeField] private SpeechTrigger[] _speechTriggers;
 
         [Header("Enemy Controls")]
         [SerializeField] private BoxCollider2D _enemyDetectorCollider;
@@ -97,6 +98,11 @@ namespace Scenes.Main
             for (int i = 0; i < _nearestEnemies.Length; i++)
             {
                 Destroy(_nearestEnemies[i]);
+            }
+
+            for (int i = 0; i < _speechTriggers.Length; i++)
+            {
+                _speechTriggers[i].DisableSpeechTrigger();
             }
         }
 

@@ -1,6 +1,10 @@
 ﻿using Common;
 using Player.Display;
+using Player.Movement;
+using Player.Shooting;
 using SaveSystem;
+using Scenes.GameOver;
+using Scenes.Main;
 using UI;
 using UnityEngine;
 
@@ -14,6 +18,8 @@ namespace Player.General
         [SerializeField] private ImageFader _lowHealthFader;
 
         [Header("Player Death")]
+        [SerializeField] private PlayerMovement _playerMovement;
+        [SerializeField] private PlayerShooter _playerShooter;
         [SerializeField] private Fader _playerDeadFader;
         [SerializeField] private PlayerAnimator _playerNormalAnimator;
         [SerializeField] private PlayerAnimator _playerBagAnimator;
@@ -92,7 +98,19 @@ namespace Player.General
             }
         }
 
-        private void HandleHealthZero() => _playerDeadFader.StartFadeOut();
+        private void HandleHealthZero()
+        {
+            bool gameSavedAtLeastOnce = SaveManager.Instance.GameSavedAtLeastOnce;
+            if (gameSavedAtLeastOnce)
+            {
+                _playerDeadFader.StartFadeOut(true);
+            }
+            else
+            {
+                GameOverSceneData.didPlayerWin = false;
+                MainSceneController.Instance.FadeAndSwitchScene();
+            }
+        }
 
         private void HandlePlayerDeadFadeOut()
         {
@@ -110,6 +128,9 @@ namespace Player.General
             _playerBagAnimator.RevivePlayer();
 
             _playerDeadFader.StartFadeIn();
+
+            _playerMovement.EnableMovement();
+            _playerShooter.EnableShooting();
         }
 
         private void NotifyBagStatusChanged() => OnPlayerBagStatusChanged?.Invoke(_playerHasBag);

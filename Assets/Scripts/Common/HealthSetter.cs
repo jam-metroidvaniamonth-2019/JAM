@@ -58,6 +58,9 @@ namespace Common
             }
 
             _currentHealth = currentHealth;
+            _zeroHealthNotified = false;
+
+            NotifyHealthChanged();
         }
 
         public void ReduceHealth(float reductionAmount)

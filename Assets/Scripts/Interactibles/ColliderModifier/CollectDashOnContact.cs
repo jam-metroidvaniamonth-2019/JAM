@@ -1,6 +1,7 @@
 using Collectibles;
 using Player.General;
 using SaveSystem;
+using SpeechSystem;
 using UnityEngine;
 using Utils;
 
@@ -14,6 +15,7 @@ namespace Interactibles.ColliderModifier
         [SerializeField] private PlayerController _playerController;
         [SerializeField] private PlayerSaveHelper _playerSaveHelper;
         [SerializeField] private GameObject[] _nearestEnemies;
+        [SerializeField] private SpeechTrigger[] _speechTriggers;
 
         #region Unity Functions
 
@@ -48,6 +50,11 @@ namespace Interactibles.ColliderModifier
             for (int i = 0; i < _nearestEnemies.Length; i++)
             {
                 Destroy(_nearestEnemies[i]);
+            }
+
+            for (int i = 0; i < _speechTriggers.Length; i++)
+            {
+                _speechTriggers[i].DisableSpeechTrigger();
             }
 
             _playerController.PlayerCollectDash();

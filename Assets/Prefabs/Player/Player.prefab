@@ -409,6 +409,8 @@ MonoBehaviour:
   _playerHealthSetter: {fileID: 4985062292742912031}
   _lowHealthActivationRatio: 0.3
   _lowHealthFader: {fileID: 0}
+  _playerMovement: {fileID: 490690758219448579}
+  _playerShooter: {fileID: 490690758219448576}
   _playerDeadFader: {fileID: 0}
   _playerNormalAnimator: {fileID: 490690759808437055}
   _playerBagAnimator: {fileID: 1637530348326871209}

@@ -35,6 +35,14 @@ namespace SpeechSystem
 
         #endregion
 
+        #region External Functions
+
+        public void DisableSpeechTrigger() => _speechActivated = true;
+
+        public void ReActiveSpeechTrigger() => _speechActivated = false;
+
+        #endregion
+
         #region Utility Functions
 
         private void HandleSpeechBubbleClose()
