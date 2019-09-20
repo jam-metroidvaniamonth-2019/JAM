@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Scenes.Common
 {
@@ -28,6 +29,12 @@ namespace Scenes.Common
             Time.timeScale = 1;
 
             OnPauseDisabled?.Invoke();
+        }
+
+        public void QuitToMenu()
+        {
+            Time.timeScale = 1;
+            SceneManager.LoadScene(0);
         }
 
         #region Singleton

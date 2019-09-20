@@ -407,9 +407,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerHealthSetter: {fileID: 4985062292742912031}
-  _deadWaitTime: 3
   _lowHealthActivationRatio: 0.3
   _lowHealthFader: {fileID: 0}
+  _playerDeadFader: {fileID: 0}
+  _playerNormalAnimator: {fileID: 490690759808437055}
+  _playerBagAnimator: {fileID: 1637530348326871209}
   _playerHasDash: 1
 --- !u!1 &490690758999993684
 GameObject:

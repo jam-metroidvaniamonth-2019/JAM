@@ -1,6 +1,6 @@
 ﻿using Common;
-using Scenes.GameOver;
-using Scenes.Main;
+using Player.Display;
+using SaveSystem;
 using UI;
 using UnityEngine;
 
@@ -8,23 +8,23 @@ namespace Player.General
 {
     public class PlayerController : MonoBehaviour
     {
+        [Header("Player Health")]
         [SerializeField] private HealthSetter _playerHealthSetter;
-        [SerializeField] private float _deadWaitTime;
         [SerializeField] [Range(0, 1)] private float _lowHealthActivationRatio;
         [SerializeField] private ImageFader _lowHealthFader;
 
-        public delegate void PlayerBagStatusChanged(bool playerHasBag);
+        [Header("Player Death")]
+        [SerializeField] private Fader _playerDeadFader;
+        [SerializeField] private PlayerAnimator _playerNormalAnimator;
+        [SerializeField] private PlayerAnimator _playerBagAnimator;
 
+        public delegate void PlayerBagStatusChanged(bool playerHasBag);
         public PlayerBagStatusChanged OnPlayerBagStatusChanged;
 
         private bool _playerHasBag;
         private bool _playerHasBow;
         private bool _playerHasAntidote;
         public bool _playerHasDash;
-
-        private bool _playerDead;
-        private bool _sceneSwitchActive;
-        private float _playerDeadCountdown;
 
         #region Unity Functions
 
@@ -35,26 +35,10 @@ namespace Player.General
 
             _playerHealthSetter.OnHealthChanged += HandleHealthChange;
             _playerHealthSetter.OnHealthZero += HandleHealthZero;
+            _playerDeadFader.OnFadeOutComplete += HandlePlayerDeadFadeOut;
 
             _lowHealthFader.StopFading();
             NotifyBagStatusChanged();
-        }
-
-        private void Update()
-        {
-            if (!_playerDead || _sceneSwitchActive)
-            {
-                return;
-            }
-
-            _playerDeadCountdown -= Time.deltaTime;
-
-            if (_playerDeadCountdown <= 0)
-            {
-                _sceneSwitchActive = true;
-                GameOverSceneData.didPlayerWin = false;
-                MainSceneController.Instance.FadeAndSwitchScene();
-            }
         }
 
         #endregion
@@ -108,12 +92,24 @@ namespace Player.General
             }
         }
 
-        private void HandleHealthZero()
-        {
-            _playerHealthSetter.OnHealthZero -= HandleHealthZero;
+        private void HandleHealthZero() => _playerDeadFader.StartFadeOut();
 
-            _playerDead = true;
-            _playerDeadCountdown = _deadWaitTime;
+        private void HandlePlayerDeadFadeOut()
+        {
+            float savedHealth = SaveManager.Instance.SaveStructure.playerHealth;
+            _playerHealthSetter.SetCurrentHealth(savedHealth);
+
+            Vector2 playerSafePosition = new Vector2(
+                SaveManager.Instance.SaveStructure.playerXPosition,
+                SaveManager.Instance.SaveStructure.playerYPosition
+            );
+
+            transform.position = playerSafePosition;
+
+            _playerNormalAnimator.RevivePlayer();
+            _playerBagAnimator.RevivePlayer();
+
+            _playerDeadFader.StartFadeIn();
         }
 
         private void NotifyBagStatusChanged() => OnPlayerBagStatusChanged?.Invoke(_playerHasBag);

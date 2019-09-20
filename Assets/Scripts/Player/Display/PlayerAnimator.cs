@@ -98,6 +98,23 @@ namespace Player.Display
 
         #endregion
 
+        #region External Functions
+
+        public void RevivePlayer()
+        {
+            _playerAnimator.SetBool(DeadParam, false);
+
+            _playerAnimator.SetBool(JumpParam, false);
+            _playerAnimator.SetBool(FallParam, false);
+
+            _playerAnimator.SetBool(MoveParam, false);
+
+            _playerAnimator.SetBool(BowIdleParam, false);
+            _playerAnimator.SetBool(SlingShotIdleParam, false);
+        }
+
+        #endregion
+
         #region Animation Control
 
         private void HandlePlayerJumped()
