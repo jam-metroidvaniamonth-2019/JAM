@@ -11,15 +11,9 @@ namespace Interactibles.ColliderModifier
     public class CollectBowOnContact : MonoBehaviour
     {
         [SerializeField] private Transform _playerSafePosition;
-        [SerializeField] private CollectiblesCollector _collectiblesCollector;
-        [SerializeField] private PlayerController _playerController;
         [SerializeField] private PlayerSaveHelper _playerSaveHelper;
-        [SerializeField] private GameObject[] _nearestEnemies;
-        [SerializeField] private SpeechTrigger[] _speechTriggers;
 
         #region Unity Functions
-
-        private void Start() => CheckAndLoadData();
 
         private void OnTriggerEnter2D(Collider2D other)
         {
@@ -33,34 +27,6 @@ namespace Interactibles.ColliderModifier
 
                 GetComponent<Collider2D>().enabled = false;
             }
-        }
-
-        #endregion
-
-        #region Utility Functions
-
-        private void CheckAndLoadData()
-        {
-            bool bowCollected = SaveManager.Instance.SaveStructure.bowCollected;
-            if (!bowCollected)
-            {
-                return;
-            }
-
-            for (int i = 0; i < _nearestEnemies.Length; i++)
-            {
-                Destroy(_nearestEnemies[i]);
-            }
-
-            for (int i = 0; i < _speechTriggers.Length; i++)
-            {
-                _speechTriggers[i].DisableSpeechTrigger();
-            }
-
-            _playerController.PlayerCollectBow();
-
-            GetComponent<Collider2D>().enabled = false;
-            _collectiblesCollector.ClearCollectibleItems();
         }
 
         #endregion

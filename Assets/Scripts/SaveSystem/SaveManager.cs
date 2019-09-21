@@ -4,11 +4,6 @@ namespace SaveSystem
 {
     public class SaveManager : MonoBehaviour
     {
-        [Header("Debug")]
-        [SerializeField] private bool _clearOnStart;
-
-        private const string SavePref = "MtJam";
-
         public delegate void SaveComplete();
         public delegate void LoadComplete();
 
@@ -28,19 +23,7 @@ namespace SaveSystem
 
         #region Unity Functions
 
-        private void Start()
-        {
-            Initialize();
-
-            if (_clearOnStart)
-            {
-                ClearData();
-            }
-            else
-            {
-                LoadData();
-            }
-        }
+        private void Start() => Initialize();
 
         #endregion
 
@@ -53,28 +36,9 @@ namespace SaveSystem
                 return;
             }
 
-            string jsonData = JsonUtility.ToJson(_saveStructure);
-            PlayerPrefs.SetString(SavePref, jsonData);
-            OnSaveComplete?.Invoke();
-
             _gameSavedAtLeastOnce = true;
-        }
 
-        public void ClearData()
-        {
-            if (PlayerPrefs.HasKey(SavePref))
-            {
-                PlayerPrefs.DeleteKey(SavePref);
-            }
-        }
-
-        private void LoadData()
-        {
-            if (PlayerPrefs.HasKey(SavePref))
-            {
-                _saveStructure = JsonUtility.FromJson<SaveStructure>(PlayerPrefs.GetString(SavePref));
-                OnLoadComplete?.Invoke();
-            }
+            OnSaveComplete?.Invoke();
         }
 
         #endregion

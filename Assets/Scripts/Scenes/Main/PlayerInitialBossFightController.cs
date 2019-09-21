@@ -39,8 +39,6 @@ namespace Scenes.Main
         [Header("Save And Load")]
         [SerializeField] private Transform _playerSafePosition;
         [SerializeField] private PlayerSaveHelper _playerSaveHelper;
-        [SerializeField] private GameObject[] _nearestEnemies;
-        [SerializeField] private SpeechTrigger[] _speechTriggers;
 
         [Header("Enemy Controls")]
         [SerializeField] private BoxCollider2D _enemyDetectorCollider;
@@ -70,41 +68,11 @@ namespace Scenes.Main
             _bossSceneActivator.OnTriggerEntered += ActivateBossScene;
 
             MakeEnemyRestricted();
-            CheckAndLoadData();
         }
 
         #endregion
 
         #region Utility Functions
-
-        private void CheckAndLoadData()
-        {
-            bool firstBossFightCompleted = SaveManager.Instance.SaveStructure.firstBossBattleCompleted;
-            if (!firstBossFightCompleted)
-            {
-                return;
-            }
-
-            _bossSceneActivator.OnTriggerEntered -= ActivateBossScene;
-
-            _rightBoundaryLocker.MakeChildrenExplode();
-            _playerController.PlayerLoseBag();
-
-            _fallingStone.isKinematic = false;
-            _fallingStone.mass = _fallingStoneMass;
-
-            Destroy(_bossEnemy);
-
-            for (int i = 0; i < _nearestEnemies.Length; i++)
-            {
-                Destroy(_nearestEnemies[i]);
-            }
-
-            for (int i = 0; i < _speechTriggers.Length; i++)
-            {
-                _speechTriggers[i].DisableSpeechTrigger();
-            }
-        }
 
         private void MakeEnemyRestricted()
         {

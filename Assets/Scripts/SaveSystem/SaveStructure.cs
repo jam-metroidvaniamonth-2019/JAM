@@ -14,6 +14,9 @@ namespace SaveSystem
         // Boss Battle
         public bool firstBossBattleCompleted;
 
+        // Bag Enemy
+        public bool bagDroppedEnemy;
+
         // Collectibles
         public bool bowCollected;
         public bool dashCollected;

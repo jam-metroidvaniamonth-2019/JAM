@@ -50,9 +50,6 @@ namespace Player.Movement
         private float _moveX;
         private float _moveXRaw;
         private float _moveYRaw;
-        private bool _jumpButtonPressed;
-        private bool _jumpButtonJustPressed;
-        private bool _dashButtonPressed;
 
         // Delegates
         public delegate void PlayerJumped();
@@ -75,10 +72,17 @@ namespace Player.Movement
 
             _moveYRaw = Input.GetAxisRaw(ControlConstants.VerticalAxis);
 
-            _jumpButtonPressed = Input.GetButton(ControlConstants.JumpButton);
-            _jumpButtonJustPressed = Input.GetButtonDown(ControlConstants.JumpButton);
+            HandleBetterJump();
 
-            _dashButtonPressed = Input.GetButtonDown(ControlConstants.DashButton);
+            if (_movementEnabled)
+            {
+                HandleDash();
+
+                if (!_dashActive)
+                {
+                    HandleJump();
+                }
+            }
         }
 
         private void FixedUpdate()
@@ -87,12 +91,9 @@ namespace Player.Movement
 
             if (_movementEnabled)
             {
-                HandleDash();
-
                 if (!_dashActive)
                 {
                     HandleHorizontalMovement();
-                    HandleJump();
                 }
             }
         }
@@ -140,7 +141,9 @@ namespace Player.Movement
 
         private void HandleJump()
         {
-            if (_jumpButtonJustPressed && !_jumped && _playerCollision.IsOnGround)
+            bool jumpButtonJustPressed = Input.GetButtonDown(ControlConstants.JumpButton);
+
+            if (jumpButtonJustPressed && !_jumped && _playerCollision.IsOnGround)
             {
                 _playerRb.drag = 0;
                 _playerRb.velocity = new Vector2(_playerRb.velocity.x, _jumpVelocity);
@@ -149,6 +152,11 @@ namespace Player.Movement
 
                 OnPlayerJumped?.Invoke();
             }
+        }
+
+        private void HandleBetterJump()
+        {
+            bool jumpButtonPressed = Input.GetButton(ControlConstants.JumpButton);
 
             if (_playerRb.velocity.y < 0)
             {
@@ -166,12 +174,17 @@ namespace Player.Movement
                     _playerRb.drag = 0;
                 }
 
-                if (!_jumpButtonPressed)
+                if (!jumpButtonPressed)
                 {
                     _playerRb.velocity += Time.fixedDeltaTime * Physics2D.gravity.y * (_lowJumpMultiplier - 1) * Vector2.up;
                 }
                 else
                 {
+                    if (!_movementEnabled)
+                    {
+                        return;
+                    }
+
                     _playerRb.velocity -= Time.fixedDeltaTime * _jumpDecelearationRate * Vector2.up;
                 }
             }
@@ -183,7 +196,9 @@ namespace Player.Movement
 
         private void HandleDash()
         {
-            if (_dashUsed || !_dashButtonPressed || !_playercontroller.PlayerHasDash)
+            bool dashButtonPressed = Input.GetButtonDown(ControlConstants.DashButton);
+
+            if (_dashUsed || !dashButtonPressed || !_playercontroller.PlayerHasDash)
             {
                 return;
             }
