@@ -124,6 +124,12 @@ namespace Player.General
 
             transform.position = playerSafePosition;
 
+            EnemyController[] enemyControllers = SaveManager.Instance.SaveStructure.enemyControllers;
+            for (int i = 0; i < enemyControllers.Length; i++)
+            {
+                enemyControllers[i].ReviveEnemy();
+            }
+
             _playerNormalAnimator.RevivePlayer();
             _playerBagAnimator.RevivePlayer();
 

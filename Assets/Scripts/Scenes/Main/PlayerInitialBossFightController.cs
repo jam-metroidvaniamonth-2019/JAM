@@ -39,6 +39,7 @@ namespace Scenes.Main
         [Header("Save And Load")]
         [SerializeField] private Transform _playerSafePosition;
         [SerializeField] private PlayerSaveHelper _playerSaveHelper;
+        [SerializeField] private EnemyController[] _enemyControllers;
 
         [Header("Enemy Controls")]
         [SerializeField] private BoxCollider2D _enemyDetectorCollider;
@@ -125,6 +126,7 @@ namespace Scenes.Main
 
             _playerSaveHelper.SavePlayerWithSafePosition(_playerSafePosition.position);
             SaveManager.Instance.SaveStructure.firstBossBattleCompleted = true;
+            SaveManager.Instance.SaveStructure.enemyControllers = _enemyControllers;
             SaveManager.Instance.SaveData();
         }
 

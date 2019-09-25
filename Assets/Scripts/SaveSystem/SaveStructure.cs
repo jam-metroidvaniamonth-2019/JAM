@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace SaveSystem
 {
-    [System.Serializable]
     public class SaveStructure
     {
         // Player Data
@@ -20,5 +19,8 @@ namespace SaveSystem
         // Collectibles
         public bool bowCollected;
         public bool dashCollected;
+
+        // Enemies to Revive
+        public EnemyController[] enemyControllers;
     }
 }

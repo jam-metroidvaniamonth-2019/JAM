@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Scenes.Main.Enemy
 {
-    public class EnemyDeathBagDrop : EnemyDeathController
+    public class EnemyDeathBagDrop : EnemyController
     {
         [Header("Enemy CutScene Data")]
         [SerializeField] private Rigidbody2D _bag;

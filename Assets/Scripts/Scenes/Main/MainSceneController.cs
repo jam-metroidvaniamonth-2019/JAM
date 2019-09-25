@@ -47,7 +47,7 @@ namespace Scenes.Main
 
         private void Update()
         {
-            if (!Input.GetButtonDown(ControlConstants.CloseButton))
+            if (!Input.GetButtonDown(ControlConstants.CloseButton) && !Input.GetButtonDown(ControlConstants.BackButton))
             {
                 return;
             }

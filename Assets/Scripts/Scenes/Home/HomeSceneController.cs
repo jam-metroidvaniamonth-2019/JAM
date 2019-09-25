@@ -35,7 +35,7 @@ namespace Scenes.Home
 
         private void Update()
         {
-            if (Input.GetButtonDown(ControlConstants.CloseButton))
+            if (Input.GetButtonDown(ControlConstants.CloseButton) || Input.GetButtonDown(ControlConstants.BackButton))
             {
                 HideControls();
             }

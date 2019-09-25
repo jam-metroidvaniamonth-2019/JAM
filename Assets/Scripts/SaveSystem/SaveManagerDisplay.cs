@@ -9,6 +9,7 @@ namespace SaveSystem
         [SerializeField] private TextFader _saveFader;
         [SerializeField] private Text _saveFaderText;
         [SerializeField] private float _fadeOutWaitTime;
+        [SerializeField] private string _saveText = "Checkpoint Reached";
 
         private float _currentWaitTime;
         private bool _gameSaveCountDownActive;
@@ -49,7 +50,7 @@ namespace SaveSystem
             _currentWaitTime = _fadeOutWaitTime;
             _gameSaveCountDownActive = true;
 
-            _saveFaderText.text = "Game Saved";
+            _saveFaderText.text = _saveText;
             _saveFader.StartFadeOut(true);
         }
 

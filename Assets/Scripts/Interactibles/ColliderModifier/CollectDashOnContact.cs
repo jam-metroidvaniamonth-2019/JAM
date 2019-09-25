@@ -1,7 +1,5 @@
-using Collectibles;
 using Player.General;
 using SaveSystem;
-using SpeechSystem;
 using UnityEngine;
 using Utils;
 
@@ -12,6 +10,7 @@ namespace Interactibles.ColliderModifier
     {
         [SerializeField] private Transform _safePosition;
         [SerializeField] private PlayerSaveHelper _playerSaveHelper;
+        [SerializeField] private EnemyController[] _enemyControllers;
 
         #region Unity Functions
 
@@ -23,6 +22,7 @@ namespace Interactibles.ColliderModifier
 
                 _playerSaveHelper.SavePlayerWithSafePosition(_safePosition.position);
                 SaveManager.Instance.SaveStructure.dashCollected = true;
+                SaveManager.Instance.SaveStructure.enemyControllers = _enemyControllers;
                 SaveManager.Instance.SaveData();
 
                 GetComponent<Collider2D>().enabled = false;

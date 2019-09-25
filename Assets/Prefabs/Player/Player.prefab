@@ -361,7 +361,7 @@ MonoBehaviour:
   _playerCollision: {fileID: 490690758219448578}
   _playerController: {fileID: 7410804983857183026}
   _rotationOffset: 0
-  _timeSlowActiveWait: 0.3
+  _timeSlowActiveWait: 0.7
   _autoShootWait: 3
   _timeSlowAmount: 0.3
   _shotWaitTime: 1
@@ -928,10 +928,10 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 0.7
-  m_fontSizeBase: 36
+  m_fontSize: 0.4
+  m_fontSizeBase: 0.4
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 0
   m_fontSizeMax: 0.7
   m_fontStyle: 0

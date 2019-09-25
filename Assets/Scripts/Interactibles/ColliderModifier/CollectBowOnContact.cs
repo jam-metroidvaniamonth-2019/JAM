@@ -12,6 +12,7 @@ namespace Interactibles.ColliderModifier
     {
         [SerializeField] private Transform _playerSafePosition;
         [SerializeField] private PlayerSaveHelper _playerSaveHelper;
+        [SerializeField] private EnemyController[] _enemyControllers;
 
         #region Unity Functions
 
@@ -23,6 +24,7 @@ namespace Interactibles.ColliderModifier
 
                 _playerSaveHelper.SavePlayerWithSafePosition(_playerSafePosition.position);
                 SaveManager.Instance.SaveStructure.bowCollected = true;
+                SaveManager.Instance.SaveStructure.enemyControllers = _enemyControllers;
                 SaveManager.Instance.SaveData();
 
                 GetComponent<Collider2D>().enabled = false;

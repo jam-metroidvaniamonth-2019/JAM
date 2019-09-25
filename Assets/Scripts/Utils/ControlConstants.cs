@@ -22,5 +22,6 @@ namespace Utils
         public const string SubmitButton = "Submit";
         public const string SaveButton = "Save";
         public const string CloseButton = "Close";
+        public const string BackButton = "Back";
     }
 }
