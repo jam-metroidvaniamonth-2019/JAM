@@ -11,6 +11,8 @@ public class EnemyController : MonoBehaviour
 
     private void Start() => _enemyHealthSetter.OnHealthZero += HandleEnemyHealthZero;
 
+    private void OnDestroy() => _enemyHealthSetter.OnHealthZero -= HandleEnemyHealthZero;
+
     #endregion
 
     #region External Functions
@@ -29,16 +31,11 @@ public class EnemyController : MonoBehaviour
 
     private void HandleEnemyHealthZero()
     {
-        _enemyHealthSetter.OnHealthZero -= HandleEnemyHealthZero;
-
         RunEffectOnZero();
-    }
-
-    protected virtual void RunEffectOnZero()
-    {
-        Instantiate(_enemyDeathEffect, _enemyBody.transform.position, Quaternion.identity);
         _enemyBody.SetActive(false);
     }
+
+    protected virtual void RunEffectOnZero() => Instantiate(_enemyDeathEffect, _enemyBody.transform.position, Quaternion.identity);
 
     #endregion
 }

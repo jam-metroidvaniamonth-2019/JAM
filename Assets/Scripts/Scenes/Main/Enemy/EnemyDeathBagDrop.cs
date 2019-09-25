@@ -13,6 +13,7 @@ namespace Scenes.Main.Enemy
         [Header("Save")]
         [SerializeField] private Transform _safePosition;
         [SerializeField] private PlayerSaveHelper _playerSaveHelper;
+        [SerializeField] private EnemyController[] _enemyControllers;
 
         protected override void RunEffectOnZero()
         {
@@ -25,6 +26,7 @@ namespace Scenes.Main.Enemy
 
             _playerSaveHelper.SavePlayerWithSafePosition(_safePosition.position);
             SaveManager.Instance.SaveStructure.bagDroppedEnemy = true;
+            SaveManager.Instance.SaveStructure.enemyControllers = _enemyControllers;
             SaveManager.Instance.SaveData();
         }
     }
